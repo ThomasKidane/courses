@@ -1,0 +1,168 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{Homework \#3\\ \small Collaborators:- None}
+\author{Thomas Kidane}
+% \large Collaborators:- None
+\usepackage{amsmath}
+\date{Feb 2025}
+
+\begin{document}
+
+\maketitle
+
+% \section{}
+
+\textbf{Exercise 1.7.40}.
+
+Consider the following game: player I flips a fair coin n+1 times;
+player II flips a fair coin n times. Show that the probability that player I has more
+heads than player B, is equal to $ \frac{1}{2}$. Is this counterintuitive, given the fact that
+player I flips the coin one extra time?
+\\
+
+\textbf{Solution}
+
+Since the number of coins in each pile, are different by 1, then either player 1 has more heads 
+or more tails, and the two events are mutually excusive. By symmetry, the probability of having 
+more heads is the same as the probability of having more tails, and therefore the probability is
+half for both.
+
+\textbf{Exercise 1.7.41}\\
+Consider two events A and B, both with positive probability.
+When is it the case that P(A$\vert$B) = P(B$\vert$A)?
+
+\textbf{Solution}\\
+From Bayes update we can see that equality of the two expressions hold if, $P(A)=P(B)$.\\
+
+\textbf{Exercise 2.1.12}\\ Show that the probabilities of the negative binomial distribution sum up to 1.
+\\
+
+\begin{align}
+    \sum_{k = r}^{\infty} \binom{k-1}{r-1} p^r (1-p)^{k-r} \\
+    \frac{p^r}{(r-1)} \sum_{k=r}^{\infty} \frac{(k-1)! (1-p)^k}{(k-r)!}
+\end{align}
+
+But $\sum_{k=0}^{\infty} \frac{(k+r-1)! (1-p)^{k}}{k!} = \frac{(r-1)!}{(1-(1-p))^r} = \frac{(r-1)!}{p^r}$ because
+of its taylor expansion. So the sum just equals 1.
+\pagebreak
+
+\textbf{Exercise 2.7.6. }
+
+An urn contains 8 white, 4 black, and two red balls. We win 2 euro
+for each black ball that we draw, and lose 1 euro for each white ball that we draw.
+We choose three balls from the urn, and X denote our winnings. Write down the
+probability mass function of $X$.\\
+
+\textbf{Solution}
+
+\begin{align}
+    P(X=-3)=&\frac{8*7*6}{14*13*12}\\
+    P(X=-2)=&3* \frac{2*7*8}{14*13*12}\\
+    P(X=-1)=&3* \frac{2*1*8}{14*13*12}\\
+    P(X=0)=&3* \frac{4*8*7}{14*13*12}\\
+    P(X=1)=&6* \frac{4*8*2}{14*13*12}\\
+    P(X=2)=&3* \frac{1*2*8}{14*13*12}\\
+    P(X=3)=&3* \frac{8*4*3}{14*13*12}\\
+    P(X=4)=&3* \frac{2*4*3}{14*13*12}\\
+    P(X=5)=&0\\
+    P(X=6)=&\frac{4*2*3}{14*13*12}\\
+\end{align}
+\\
+
+\pagebreak
+\textbf{Exercise 2.7.9}
+
+Suppose we throw a die twice. Let X be the product of the two
+outcomes.
+\\
+(a) Compute the probability mass function of X.\\
+(b) Compute P(X= $k\vert$D), where D is the event that the sum of the outcomes is
+equal to 7.
+
+\textbf{Solution}
+
+\begin{align}
+    p(1)=\frac{1}{36}\\
+    p(2)=\frac{2}{36}\\
+    p(3)=\frac{2}{36}\\
+    p(4)=\frac{3}{36}\\
+    p(5)=\frac{2}{36}\\
+    p(6)=\frac{4}{36}\\
+    p(8)=\frac{2}{36}\\
+    p(9)=\frac{1}{36}\\
+    p(10)=\frac{2}{36}\\
+    p(12)=\frac{4}{36}\\
+    p(15)=\frac{2}{36}\\
+    p(16)=\frac{1}{36}\\
+    p(18)=\frac{2}{36}\\
+    p(20)=\frac{2}{36}\\
+    p(24)=\frac{2}{36}\\
+    p(25)=\frac{1}{36}\\
+    p(30)=\frac{2}{36}\\
+    p(36)=\frac{1}{36}\\
+\end{align}
+
+\pagebreak
+
+For second problem.\\
+P(\textit{X}=6)=1/3\\
+$\:$P(\textit{X}=10)=1/3\\
+$\:$P(\textit{X}=12)=1/3
+
+\textbf{Exercise 2.7.10.}
+\\
+Let X be a random variable with probability mass function given
+by $p(-4)$=$p(4)$=1/16 and $p(2)$=$p(-2)$= 7/16. Let Y= aX + b, for certain a and
+b.\\
+(a) For what values of a and b does Y take values in \{0, 1, 2, 3, 4\}?\\
+(b) Compute the probability mass function of Y for these choices of a and b.\\
+\\
+\textbf{Solution}\\
+(a) For Y to take values in {0,1,2,3,4}, we need to have $aX+b \in \{0,1,2,3,4\}$. Therefore the min is 0 and the max is 4, therefore the values of a and b are 1/2 and 2(I got it by just setting 0 to $-4X + b$ and figuring out the coeffients), respectively, it could also be -1/2 and 2 because it symmetric with respect to the origin.\\
+(b) Since Y is linear and therefore an injective function, we can just map the pmf of X to its values in Y. Therefore the pmf of Y is given by:
+
+\begin{align*}
+    p(0)&=1/16\\
+    p(1)&=7/16\\
+    p(2)&=0\\
+    p(3)&=7/16\\
+    p(4)&=1/16\\
+\end{align*}
+
+\pagebreak
+
+\textbf{Exercise 2.7.12.}
+\\
+We throw a fair die twice. Let X be the sum of the outcomes,
+and let Y be the highest outcome that we see. Finally, A is the event that the
+outcome of the first throw is higher than the outcome of the second.\\ \\
+(a) Compute the probability mass function of Y and compute E(Y ).\\
+(b) Are X and Y independent?\\
+(c) Are \{X = 5\} and A independent events?\\
+
+\textbf{Solution}
+\\
+\begin{align*}
+    p(1)&=1/36\\
+    p(2)&=3/36\\
+    p(3)&=5/36\\
+    p(4)&=7/36\\
+    p(5)&=9/36\\
+    p(6)&=11/36\\
+    E(Y)&= \sum_{k=1}^{6} k*p(k)= 158/36\\ 
+\end{align*}
+
+For question b, just from commen sense if the sum is 6, the highest value can't be 2. 
+Therefore $P(X=6,Y=2) \neq P(X=6) * P(Y=2)$, and therefore they are not independent.
+
+\{X=5\} and A aren't independet, because $P(A\vert X=5)=1/2 \neq P(A) = 15/36$. Therefore they 
+aren't independent.
+
+
+
+
+
+
+
+\end{document}

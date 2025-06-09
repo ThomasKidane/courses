@@ -1,0 +1,338 @@
+%hw-5.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%            Math 403 Homework \#5, Spring 2025            %%%%%%
+%%%%%%                                                          %%%%%%
+%%%%%%                 Instructor: Ezra Miller                  %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+
+\oddsidemargin=17pt \evensidemargin=17pt
+\headheight=9pt     \topmargin=26pt
+\textheight=564pt   \textwidth=433.8pt
+\parskip=1ex        %voffset=-6ex
+
+\usepackage{amsmath,amssymb,graphicx,color,enumitem}%,setspace%,mathrsfs%,hyperref
+\setlist[enumerate]{parsep=1.5ex plus 4pt,topsep=0ex plus 4pt,itemsep=0ex}
+  \setlist[itemize]{parsep=1.5ex plus 4pt,topsep=-1ex plus 4pt,itemsep=-1.33ex}
+
+\leftmargini=5.5ex
+\leftmarginii=3.5ex
+
+%for \marginpar to fit optimally
+%hoffset=-1.02in
+\setlength\marginparwidth{2.2in}
+\setlength\marginparsep{1mm}
+\newcommand\red[1]{\marginpar{\linespread{.85}\sf%
+		   \vspace{-1.4ex}\footnotesize{\color{red}#1}}}
+\newcommand\score[1]{\marginpar{\vspace{-2ex}\color{blue}{#1/3}}\hspace{-1ex}}
+\newcommand\extra[1]{\marginpar{\color{blue}{#1/1}}\hspace{-1ex}}
+\newcommand\total[2]{\marginpar{\colorbox{yellow}{\huge #1/#2}}}
+\newcommand\collab[1]{\marginpar{\vspace{-11ex}\colorbox{yellow}{#1/3}}\hspace{-1ex}}
+\newcommand\magenta[1]{\colorbox{magenta}{\!\!#1\!\!}}
+\newcommand\yellow[1]{\colorbox{yellow}{\!\!#1\!\!}}
+\newcommand\green[1]{\colorbox{green}{\!\!#1\!\!}}
+\newcommand\cyan[1]{\colorbox{cyan}{\!\!#1\!\!}}
+\newcommand\rmagenta[2][0ex]{\red{\vspace{#1}\magenta{\phantom{:}}\,: #2}}
+\newcommand\ryellow[2][0ex]{\red{\vspace{#1}\yellow{\phantom{:}}\,: #2}}
+\newcommand\rgreen[2][0ex]{\red{\vspace{#1}\green{\phantom{:}}\,: #2}}
+\newcommand\rcyan[2][0ex]{\red{\vspace{#1}\cyan{\phantom{:}}\,: #2}}
+
+%For separated lists with consecutive numbering
+\newcounter{separated}
+
+\newcommand{\excise}[1]{}
+\newcommand{\comment}[1]{{$\star$\sf\textbf{#1}$\star$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                 %
+% TO ENABLE GRADING, DO NOT ALTER ABOVE THIS LINE %
+%                                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%new math symbols taking no arguments
+\newcommand\0{\mathbf{0}}
+\newcommand\CC{\mathbb{C}}
+\newcommand\FF{\mathbb{F}}
+\newcommand\NN{\mathbb{N}}
+\newcommand\QQ{\mathbb{Q}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\bb{\mathbf{b}}
+\newcommand\kk{\Bbbk}
+\newcommand\mm{\mathfrak{m}}
+\newcommand\vv{\mathbf{v}}
+\newcommand\xx{\mathbf{x}}
+\newcommand\yy{\mathbf{y}}
+\newcommand\GL{\mathit{GL}}
+\newcommand\FL{{\mathcal F}{\ell}_n}
+\newcommand\into{\hookrightarrow}
+\newcommand\minus{\smallsetminus}
+\newcommand\goesto{\rightsquigarrow}
+\newcommand\cc{\otimes}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+
+%redefined math symbols taking no arguments
+\newcommand\<{\langle}
+\renewcommand\>{\rangle}
+\renewcommand\iff{\Leftrightarrow}
+\renewcommand\implies{\Rightarrow}
+
+%to explain about LaTeX commands:
+\newcommand\command[1]{\texttt{$\backslash$#1}}
+
+%new math symbols taking arguments
+\newcommand\ol[1]{{\overline{#1}}}
+
+%redefined math symbols taking arguments
+\renewcommand\mod[1]{\ (\mathrm{mod}\ #1)}
+
+%roman font math operators
+\DeclareMathOperator\im{im}
+
+%for easy 2 x 2 matrices
+\newcommand\twobytwo[1]{\left[\begin{array}{@{}cc@{}}#1\end{array}\right]}
+
+%for easy column vectors of size 2
+\newcommand\tworow[1]{\left[\begin{array}{@{}c@{}}#1\end{array}\right]}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{\mbox{}\\[-8ex]Rough draft regarding Tensor Decomposition\\\normalsize}
+\author{Written by: \\Tymon Hendershott \& Thomas Kidane\\[1ex]}
+\date{Wednesday, March 26, 2025}
+
+\maketitle
+
+\noindent
+\begin{enumerate}[itemsep=-1ex]\setcounter{enumi}{0}
+\item%1
+Inciting Problem
+\item%2
+Notation
+\item%3
+Canonical Polyadic Decomposition (CPD)
+\item%4
+ Tucker Decomposition
+\item%5
+ Applications
+\end{enumerate}
+
+\noindent
+\textsc{Inciting Problem}\\
+Tensor decomposition comes up in many different problems. To ground our investigation in a concrete example, consider a black-and-white video. Suppose we want to encode the video's incformation in as little information as possible. Intuitively, we understand that certain 
+
+The structure of the video itself can be viewed as a three-dimensional tensor: each frame has a 2D grid of pixels, and each pixel has a certain luminosity (it follows that color would be a 4D tensor, but for pedagogical clarity we'll look at the simpler black-and-white case), which can be represented as some number between 0 and 1. It naturally follows that there may be redundant information across frames or parts of each frame, giving way to the ability to reduce the amount of infomration needed to recreate the original video, and motivating tensor decomposition. With this, we can 
+\textsc{Tensor Rank}}\\
+Tensor rank is the minimum number of rank-1 vectors needed to produce  as their sum.
+ 
+A key property of tensors is their uniqueness.  Which comes from the fact that a decomposition 
+has to fulfill more stringent requirements that from the fact that each layer of the tensor is itself another tensor, therefore the is a strong relationship between the layers of the tensor making it so that any rank one vector in some decomposition has to work for every slice of the tensor.
+
+By restricting ourselves to low-rank approximations of the matrix, we get to understand the latent structure of the relationships. 
+
+Below, we have different generalizations of SVD to tensors, but it is important to note that there is no single generalization. Rather, depending on the purpose, certain decompositions are preferable over others. For example, it is advised to use CPD for latent parameter estimation and Tucker for subspace estimation, compression, and dimensionality reduction.
+
+
+\textsc{Notation}\\
+
+The concept of the outer product is defined as $X=a\otimes b=ab^T$, producing the matrix X. This can be viewed as a two-dimensional version of the general tensor product:
+$$X=a^{(1)}\otimes a^{(2)}\otimes\cdots\otimes a^{(n)}\text{ with } x_{i_1 i_2 \cdots i_n}=a^{(1)}_{i_1}a^{(2)}_{i_2}\cdots a^{(n)}_{i_n}$$
+
+The rank of a tensor $\mathcal{X}$ is the minimum number of rank-one tensors needed to produce $\mathcal{X}$ as its sum. For a general rank-n tensor, this takes the following form:
+
+$$\mathcal{X}=\sum_{i=1}^n \lambda_n a_i^{(1)} \otimes \cdots \otimes a_i^{(n)}=[[\lambda;A^{(1)},\cdots,A^{(n)}]]$$
+    
+Where $\lambda$ contains all the coefficients.
+
+There are different ways of indexing a tensor, one way which we will use extensively in this paper is by fixing some of the indexes of the tensor and varying the others, creating different subarrays and fields of the tensor. In the simplest case we have fibers, which we get by fixing all but one index, slabs are made by fixing all but 2 indexes.
+
+We define the order of tensor as the number of its dimension, so an order 2 tensor is just a matrix and an order 1 tensor is just a vector. For a 3rd order tensor, we can index its fibers as $\mathcal{X_{\text{:jk}}}$(columns), $\mathcal{X}_{i:k}$(row) and $\mathcal{X}_{ij:}$(tube). In general we refer to the $n$-mode fiber of a tensor by fixing all but the $n^{th}$ index.
+
+\subsection{Tensor Reorderings}
+
+We can turn a tensor into a matrix, and we will use this technique extensively in our algorithms.
+There are many of reordering a tensor into a matrix, but we will only look at the mode-$n$ matricization.
+
+The mode $n$ matricization of a tensor turns $\mathcal{X}\in \RR^{I_1\times I_2 \times \cdots \times I_{N}}$, denoted $\bf{X}_{(n)}\in \RR^{I_{n} \cdot \cdots I_{n-1} \cdot I_{n+1} \cdots I_{N}}$, turns the mode-$n$ fibers into columns.
+  
+
+\textsc{Canonical Polyadic Decomposition (CPD)}\\
+
+The first type of tensor decomposition is rank decomposition, which is essentially expressing 
+a tensor as a finite sum of rank 1 tensors. The most prominent decompositions are canonical decomposition position(CANDECOMP) and parallel factors(PARAFAC) decomposition. These two methods boil down to the same principles, therefore we will refer to them as just CPD.
+
+The 3-way CPD case is as follows.
+
+\begin{align*}
+\underset{\hat{X}}{min} \text{ where } \hat{X} = \sum_{r=1}^{R}a_{r} \otimes b_{r} \otimes c_{r} = [[A,B,C]]
+\end{align*}
+
+If they are the same $\hat X$ is an exact low rank approximation to X. Which is the same as:
+
+\begin{align*}
+    \hat X_{(1)}=(C \odot B)A^{T}\\
+    \hat X_{(2)}=(C \odot A)B^{T}\\
+    \hat X_{(3)}=(B \odot A)C^{T}\\
+\end{align*}
+
+For the general case we have
+
+\begin{align*}
+\hat X = \sum_{r=1}^{R} \lambda_r a_r^{(1)}\otimes a_r^{(2)} \otimes \cdots a_r^{(n)}
+= [[\lambda; A^{(1)}, A^{(2)},\cdots , A^{(n)}]]
+\end{align*}
+
+\begin{align*}
+\hat X_{(n)} = \Lambda(A^{(N)} \odot \cdots \odot A^{(n+1)} \odot A^{(N-1)} \odot \cdots \odot A^{(1)} )A^{(n)T}
+\end{align*}
+
+Where $\Lambda$ = Diag($\lambda$)
+
+We will look at 1 CPD algorithm called the Alternating Least Squares Algorithm
+
+\subsection{Alternating Least Squares(ALS)}
+
+This decomposition is the most widely used type of decomposition out in the real world, and the key 
+idea behind it is just to iteratively fix one matrix and apply least squares algorithm(which is very well understood) to decrease the error while holding all the other matrices fixed, and do this as many times until some halting condition is reached. This algorithm works for a fixed rank, so 
+you have to set the required rank of the tensor to use the algorithm.
+
+In the case of a 3-way tensor, the decomposition would repeat the below steps.
+
+\begin{align*}
+    A\leftarrow arg\;min_{A} || X_{(1)}- (C \otimes B) A^{T}||\\
+    B\leftarrow arg\;min_{B} || X_{(2)}- (C \otimes B) A^{T}||\\
+    C\leftarrow arg\;min_{C} || X_{(3)}- (C \otimes B) A^{T}||
+\end{align*}
+
+Now if you squint your eyes at the equation you will see why it is called alternating least squares, since the solution to these problems is the same as solving the least squares problem for one case and then alternatingly solving it for the other ones. 
+
+\subsubsection{Developing the Algorithm}
+
+Well first step would be to define what our inputs would. Since are trying to approximate the tensor, we first of all need what we are going to approximate, denote the tensor with $\mathcal{X}$.\\
+
+\begin{algorithm}
+\begin{algorithmic}
+\Procedure{ALS}{$\mathcal{X}$}
+\State $do something$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+We also need the rank $R$. But here lies a question, what should $R$ be? Without seeing the tensor at all, there is nothing much we can say about what the rank should be, but it is computationally expensive to try to optimize a large number of matrices, so in the event that our algorithm doesn't have a set rank, we should start at 1, and progressively increase it, until we get the desired result. But another question is when do we decide to increase the rank? This question is very situation dependent, so we will include a small section that checks this condition for increasing the rank.
+
+\begin{algorithm}
+\begin{algorithmic}
+\Procedure{ALS}{$\mathcal{X}$,R=1}
+\State $do something$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+Now we also need to initialize the set of matrices we are going to be working on. 
+
+
+\begin{algorithm}
+\begin{algorithmic}
+\Procedure{ALS}{$\mathcal{X}$,R=1}
+\If{$R\;not\;set$}
+    \For{$i \gets 1$ \textbf{to} $\infty$}
+        \State ALS(X,i)
+    \EndFor
+\Else
+    \State do something
+\EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\begin{algorithmic}
+\Procedure{ALS}{$\mathcal{X}$,R=1}
+\If{$R\;not\;set$}
+    \For{$i \gets 1$ \textbf{to} $\infty$}
+        \State ALS(X,i)
+    \EndFor
+\Else
+    \State $initialize \bf A^{(n)} \in \RR^{I_{n}\times R}\;for\;n=1,\cdots, N$
+\EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+Next we need to define a loop that will iterate over the different matrices, and minimize the loss, for this we will do a mode $n$, matricization.
+
+\begin{algorithm}
+\begin{algorithmic}
+\Procedure{ALS}{$\mathcal{X}$,R=1}
+\If{$R\;not\;set$}
+    \For{$i \gets 1$ \textbf{to} $\infty$}
+        \State $ALS(\mathcal{X},i)$
+    \EndFor
+    
+\Else
+    \State $initialize \bf A^{(n)} \in \RR^{I_{n}\times R}\;for\;n=1,\cdots, N$
+    \While{not reached stopping condition}
+    \For{$n = 1,\cdots, N $}
+         \State $V \gets A^{(1)T}A^{(1)}*\cdots* A^{(n-1)TA^{}(n-1)}*A^{(n+1)}A^{(n+1)}*\cdots*A^{(N)T}A^{(N)}$
+         \State $A^{(n)}\gets \mathcal{X}_{(n)}(A^{(N)}\otimes \cdots \otimes A^{(n+1)} \otimes A^{(n-1)}\otimes \cdots \otimes A^{(1)})V^{\dagger}$
+    \EndFor
+    \EndWhile
+\EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\textsc{Tucker Decomposition}
+    
+To begin, let us review Singular Value Decomposition (SVD). Tucker Decomposition builds upon the generalized properties of SVD, extending them into higher dimensions. SVD decomposes a vector into 3 matrices: \begin{itemize}
+    \item U, a (generally) singular matrix containing the orthonormal eigenvectors of $AA^T$,
+    \item $\Sigma$, a diagonal matrix of singular values, and
+    \item V, a (generally) singular matrix containing the orthonormal eigenvectors of $A^TA$.
+\end{itemize}
+
+With 2-dimensional Tucker decomposition, or "matrix SVD", generally U and V are not of the forms $m \times 1$ (which would be a vector). This follows intuitively from the fact that most matrices cannot be represented as an outer product of two vectors. This point is emphasized to explain the idea behind the "rank" of decomposed tensors; it is usually not possible to represent a tensor as the decomposition of just one rank-1 tensor. Thus, the crux of Tucker decomposition lies in finding the smallest number of tensors to add together to get our original tensor (or, to approximate it to some controlled degree of error). 
+
+In n dimensions, Tucker decomposition manifests itself as n factor matrices and an n-dimensional hypercube tensor (see below image):
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Screenshot 2025-04-13 at 11.48.25 PM.png}
+    \caption{Tucker Decomposition (from Introduction to Tensor Decompositions and their
+Applications in Machine Learning, Rabanser et al)}
+    \label{fig:enter-label}
+\end{figure}
+In the above figure, $\mathcal{G}$ is the core tensor, where $\mathcal{G}\in \RR^{R_1 \times R_2 \times R_3}$ (note to self, $R_2$ is the purple one), and the factor matrices are: $$U^{(1)}\in \RR^{I\times R_1}, U^{(2)}\in \RR^{J \times R_2}, U^{(3)}\in \RR^{K \times R_3}$$ The core tensor $\mathcal{G}$ dnesly expresses the extent to which (and how) different tensor elements interact with each other. Meanwhile, the factor matrices represent the "parts we are compressing". The aim of Tucker decomposition is to capture latent multi-way relationships between variables while minimizing the memory allocation required.
+
+Naturally, the question arises: where do $R_1, R_2, \text{ and } R_3$ come from? Depending upon our application, the truthful answer is that they depend. When tensors are small, and there are few dimensions (as in the diagram above) we can easily compute the decomposition in full. However, for far larger applications, in which tensors can encompass terabytes of data, and in which the dimension can be far larger than 2 or 3, it becomes necessary to approximate Tucker decomposition to some degree of error in order to be able to meaningfully compute it (more on this later).
+
+For the above 3-dimensional case, Tucker decomposition looks like this:
+$$\min_{\hat{\mathcal{X}}}||X-\hat{\mathcal{X}}||\text{, where } \hat{\mathcal{X}}=\sum_{u_1=1}^{U^{(1)}}\sum_{u_2=1}^{U^{(2)}}\sum_{u_3=1}^{U^{(3)}}\mathcal{g}_{u_1 u_2 u_3}(a^{(1)}_{u_1} \otimes a^{(2)}_{u_1}\otimes a^{(3)}_{u_1})$$
+$$=\mathcal{G}\times_1 A^{(1)}\times_2 A^{(2)}\times_3 A^{(3)}=[[A^{(1)},A^{(2)},A^{(3)}]]$$
+
+More generally, the n-case looks as follows:
+
+$$\min_{\hat{\mathcal{X}}}||X-\hat{\mathcal{X}}||\text{, where } \hat{\mathcal{X}}=\sum_{u_1=1}^{U^{(1)}}\cdots\sum_{u_N=1}^{U^{(N)}}\mathcal{g}_{u_1 \cdots u_N}(a^{(1)}_{i_1 u_1} \otimes \cdots\otimes a^{(N)}_{i_N u_N})$$
+
+$$=\mathcal{G}\times_1 A^{(1)}\times_2 \cdots\times_N A^{(N)}=[[A^{(1)},\cdots,A^{(N)}]]$$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% Various Emacs customizations:
+%%% Local Variables:
+%%% fill-column: 70
+%%% indent-tabs-mode: t
+%%% TeX-electric-sub-and-superscript: nil
+%%% TeX-brace-indent-level: 0
+%%% LaTeX-indent-level: 0
+%%% LaTeX-item-indent: 0
+%%% TeX-master: t
+%%% End:

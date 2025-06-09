@@ -1,0 +1,650 @@
+%hw-1.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%            Math 403 Homework \#1, Spring 2025            %%%%%%
+%%%%%%                                                          %%%%%%
+%%%%%%                 Instructor: Ezra Miller                  %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+
+
+\oddsidemargin=17pt \evensidemargin=17pt
+\headheight=9pt     \topmargin=26pt
+\textheight=564pt   \textwidth=433.8pt
+%voffset=-6ex
+
+\usepackage{amsmath,amssymb,graphicx,color,enumitem}%,setspace,mathrsfs}%,hyperref
+\setlist[enumerate]{parsep=1.5ex plus 4pt,topsep=-1ex plus 4pt,itemsep=0ex}
+  \setlist[itemize]{parsep=1.5ex plus 4pt,topsep=-1ex plus 4pt,itemsep=-1.33ex}
+
+\leftmargini=5.5ex
+\leftmarginii=3.5ex
+
+%for \marginpar to fit optimally
+\hoffset=-1.02in
+\setlength\marginparwidth{2.2in}
+\setlength\marginparsep{1mm}
+\newcommand\red[1]{\marginpar{\linespread{.85}\sf%
+		   \vspace{-1.4ex}\footnotesize{\color{red}#1}}}
+\newcommand\score[1]{\marginpar{\vspace{-2ex}\color{blue}{#1/3}}\hspace{-1ex}}
+\newcommand\extra[1]{\marginpar{\color{blue}{#1/1}}\hspace{-1ex}}
+\newcommand\total[2]{\marginpar{\colorbox{yellow}{\huge #1/#2}}}
+\newcommand\collab[1]{\marginpar{\vspace{-11ex}\colorbox{yellow}{#1/3}}\hspace{-1ex}}
+\newcommand\magenta[1]{\colorbox{magenta}{\!\!#1\!\!}}
+\newcommand\yellow[1]{\colorbox{yellow}{\!\!#1\!\!}}
+\newcommand\green[1]{\colorbox{green}{\!\!#1\!\!}}
+\newcommand\cyan[1]{\colorbox{cyan}{\!\!#1\!\!}}
+\newcommand\rmagenta[2][0ex]{\red{\vspace{#1}\magenta{\phantom{:}}\,: #2}}
+\newcommand\ryellow[2][0ex]{\red{\vspace{#1}\yellow{\phantom{:}}\,: #2}}
+\newcommand\rgreen[2][0ex]{\red{\vspace{#1}\green{\phantom{:}}\,: #2}}
+\newcommand\rcyan[2][0ex]{\red{\vspace{#1}\cyan{\phantom{:}}\,: #2}}
+
+%For separated lists with consecutive numbering
+\newcounter{separated}
+
+\newcommand{\excise}[1]{}
+\newcommand{\comment}[1]{{$\star$\sf\textbf{#1}$\star$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                 %
+% TO ENABLE GRADING, DO NOT ALTER ABOVE THIS LINE %
+%                                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%new math symbols taking no arguments
+\usepackage{quiver}
+\usepackage{commath}
+\usepackage{amsmath}
+\newcommand\0{\mathbf{0}}
+\newcommand\CC{\mathbb{C}}
+\newcommand\NN{\mathbb{N}}
+\newcommand\QQ{\mathbb{Q}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\bb{\mathbf{b}}
+\newcommand\kk{\Bbbk}
+\newcommand\mm{\mathfrak{m}}
+\newcommand\xx{\mathbf{x}}
+\newcommand\yy{\mathbf{y}}
+\newcommand\minus{\smallsetminus}
+\newcommand\goesto{\rightsquigarrow}
+
+%redefined math symbols taking no arguments
+\newcommand\<{\langle}
+\renewcommand\>{\rangle}
+\renewcommand\iff{\Leftrightarrow}
+\renewcommand\implies{\Rightarrow}
+
+%to explain about LaTeX commands:
+\newcommand\command[1]{\texttt{$\backslash$#1}}
+
+%new math symbols taking arguments
+\newcommand\ol[1]{{\overline{#1}}}
+
+%redefined math symbols taking arguments
+\renewcommand\mod[1]{\ (\mathrm{mod}\ #1)}
+
+%roman font math operators
+\DeclareMathOperator\im{im}
+
+%for easy 2 x 2 matrices
+\newcommand\twobytwo[1]{\left[\begin{array}{@{}cc@{}}#1\end{array}\right]}
+
+%for easy column vectors of size 2
+\newcommand\tworow[1]{\left[\begin{array}{@{}c@{}}#1\end{array}\right]}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{\mbox{}\\[-8ex]Math 403 Homework \#1, Spring 2025\\\normalsize
+	Instructor: Ezra Miller\\[-2.5ex]}
+\author{Solutions by: Thomas Kidane\\[1ex]
+Collaborators: Tymon Hendershott, Holly Keegan, Ben Greene, Ricardo Prado Cunha\\
+(1 point for each of up to 3 collaborators who also list you)}
+\date{Due: 11:59pm Saturday 25 January 2025}
+
+\maketitle
+
+\vspace{-5ex}\collab{3}%
+
+\noindent
+\textsc{Reading assignments}\total{52}{57}% cover Lectures 1 - 7
+\hfill
+(item numbers are lecture numbers as in PDF lecture notes)
+\begin{enumerate}[itemsep=-1ex]
+\item% 1.
+for Thu.~9 January
+  \begin{itemize}
+  \item{}%
+  [Hefferon, p.153--154] field axioms
+  \item{}%
+  [Cornell, ``Fields'' (about 1/3 of the way through
+  \texttt{4330-week1.pdf})]: more on fields%
+  \item{}%
+  [Climenhaga, \S 7.2, \S 9.1] isomorphism, rank-nullity
+  \end{itemize}
+
+\item% 2.
+for Tue.~14 January
+  \begin{itemize}
+  \item{}%
+  [Lax, Chapter~1] quotients
+  \item{}%
+  [Climenhaga, \S 5.1] quotients
+  \item{}%
+  [Cornell, ``Quotient Spaces'' (\texttt{4330-week5.pdf})] universal properties
+  \item{}%
+  [Cornell, ``Exact Sequences'' (about halfway through \texttt{4330-week5.pdf})]
+  \end{itemize}
+
+\item% 3.
+for Thu.~16 January
+  \begin{itemize}
+  \item{}%
+  [Lax, Chapter~2] duality
+  \item{}%
+  [Climenhaga, \S 5.1, \S 8.2] duality, transpose
+  \item{}%
+  [Treil, \S 5.1--5.5] Hermitian inner products, ajoints; \S
+  5.2--5.4 should be mostly review
+  \end{itemize}
+
+\item% 4.
+for Tue.~21 January
+  \begin{itemize}
+  \item{}%
+  [Lax, Appendix 15] Jordan canonical form (very short proof)
+  \item{}%
+  [Hefferon, \S 5.IV.1] characteristic polynomial and minimal polynomial
+  \item{}%
+  [Treil, \S 9.3 and \S 9.5] generalized eigenspaces and Jordan canonical form
+  \end{itemize}
+
+\item% 5.
+for Thu.~23 January
+  \begin{itemize}
+  \item{}%
+  [Lax, Chapter 14, p.214--221] norms, equivalence, continuity, local compactness
+  \item{}%
+  [Stewart--Sun, \S II.1] norms, equivalence, Hahn--Banach theorem
+  \end{itemize}
+
+\item% 6.
+for Tue.~28 January
+  \begin{itemize}
+  \item{}%
+  [Lax, Chap.12, p.187--190] Convex sets
+  \end{itemize}
+
+\item% 7.
+for Thu.~30 January
+  \begin{itemize}
+  \item{}%
+  [Serge Lang, \emph{Linear Algebra}, Chapter XII, \S1--\S2]
+  separating hyperplanes
+  \item{}%
+  [Serge Lang, \emph{Linear Algebra}, Chapter XII, \S3--\S4]
+  support hyperplane, extreme~point$\!\!$
+  \end{itemize}
+\end{enumerate}
+  
+\pagebreak
+
+\noindent
+\textsc{Exercises}% cover Lectures 1 - 4
+
+\begin{enumerate}
+\item\ \score{3}%1.
+(Freshman's Dream): The \emph{characteristic} of a field~$F$ is the
+smallest positive integer $p$ such that the sum $1 + \cdots + 1$ of
+$p$ multiplicative identities is $0$ in~$F$.  Prove that $p$ is prime
+if it is finite.  If $F$ has characteristic~$p$, show that $(a + b)^p
+= a^p + b^p$ for $a,b \in F$.
+
+\textbf{Solution}
+\linebreak
+For the sake of notional ease take the symbol 2 to mean 1+1.
+\begin{align*} 
+    2:&=1+1 \\ 
+    3:&=1+1+1 \\
+    4:&=1+1+1+1\\
+    \dots\\
+    p:&=0=1+1+1\dots
+\end{align*}
+
+From now on all the operations, identities, and all the inverses are from the field $F$.
+
+We first see that by using the axioms of a field, multiplication with this notation is like modulo multiplication.
+
+Armed with our notation, let's attack the \magenta{question}.\rmagenta{Everything up to and including this sentence is unnecessary.}
+
+Assume $F$ is finite and its characteristic is a composite then there are two integeres $a,b$ such that $p = a*b$. Thne you
+can find two elements $a^{\prime}, b^{\prime}$ such they are 1 just added $a$ and $b$ times respectively.\red{There's no reason to call $a$ and $b$ something other than what they are.}
+
+
+But this also implies that 0 would have an inverse because $a^{\prime} * b^{\prime}* b^{\prime-1}=a^{\prime}=0*b^{\prime-1}=0$, so this implies 0=$b^{\prime-1}$. But this is obviously nonsense.
+
+So if $F$ is finite $p$ has to be prime.
+
+Going to the second question, we can use the binomial theorem to get that
+\begin{align}
+    (a'+b')^p=\sum_{k=0}^{p} {  \binom{p}{k}}(a')^{p}(b')^{p-k}
+\end{align}
+If we look at the terms with $k\neq 0$ and $k \neq p$, we get that ${p \choose k}= p*((p-1)!/(p-k)!k!)$, since $p$=0, then all these terms evalute to 0 giving $(a'+b')^{p}=(a')^p+(b')^p$
+
+\pagebreak
+
+
+\item\ \score{0}%2.
+Fix a vector space $V$ and a subspace $W \subseteq V$ over a
+field~$F$.  Let $\pi: V \to V/W$ be the \emph{projection homomorphism}
+given by $\pi(v) = v + W$.  Write $X$ for the set of all subspaces
+of~$V$ that contain~$W$, and write $Y$ for the set of all subspaces
+of~$V/W$.  Prove that $\pi$ induces a bijection between these two \red{This is extremely hard to read.}
+sets, with
+\begin{align*}
+X &\to Y
+\\
+L &\mapsto \pi(L) = \{\pi(v) \mid v \in L\}\\
+\intertext{and}\\[-8.75ex]
+Y &\to X
+\\
+M &\mapsto \pi^{-1}(M) = \{v \in V \mid \pi(v) \in M\}.
+\end{align*}
+\textbf{Solution} \\\\
+Let \textit{L} $\in X$, then $W$ $\subseteq$ $L$.
+
+Then $dim(L)\geq dim(W)$. So assume $dim(L)$ = $x$ and $dim(W)=y$, $\Rightarrow x\geq y$.
+$\to$ $v_1, ... , v_x $ span $L$.
+
+Change this vectors so that $v_1, ... , v_y $ span $W$ and the $y-x$ other vectors span the complement of $W$ in $L$. Now if you take the subspace spanned by $[v_{y+1}],[v_{y+2}],[v_{y+3}],...,[v_{x}]$, they are a subspace of $V/W$, and this subspace and $L$ are the equivalent(upto isomorphism), because the basis of this space is the basis for $W$ plus the other $x-y$ vectors, which is the same as $L$.\red{This doesn't show surjectivity of $\pi$. All you've shown here is that the image of $\pi$ is a vector space of the same dimension.}
+
+Take $M\in Y$, then it has a basis of say $x$ vectors. If you take the union of the elements in the basis(one elment from the coset) and the basis for $W$, you get an element in $Y$. So $\pi^{-1}$ is surjective.\red{This doesn't show surjectivity of $\pi^{-1}$ and I'm not quite sure what you're saying. You have to start with something in $X$ and construct something in $Y$ mapping to it.} \\ \\
+We have proved that $\pi$ and $\pi^{-1}$ are surjective, but we also need to prove that they are also injective.
+
+For $\pi$, assume $L_1$ and $L_2$ both map to $M\in Y$. Now look at the basis for $M$, they are the basis for $W$ plus $v_1$ up to $v_y$ assuming $dim(M)=y$. Since $M=L_1$ and $M=L_2$, then $L_1=L_2$ because they have the same set of basis, therefore are the same subspace.\red{More is needed for injectivity here.}
+
+For $\pi^{-1}$, assume $M_1$ and $M_2$, both map to $L\in Y$. Since $M_1=L$ and $M_2=L$, then $M_1=M_2$, by the same reasoning as above. Henceforth, the function is bijective.
+
+\newpage
+
+\item\ \score{3}%3.
+Show that giving an exact sequence $\cdots \to V_{i-1} \to V_i \to
+V_{i+1} \to \cdots$ is the same as giving a collection of short exact
+sequences $0 \to K_i \to V_i \to K_{i+1} \to 0$, one for each~$i$.
+(The long exact sequence is said to be constructed by \emph{splicing}
+the short exact sequences together.)
+
+For the sake of simplicity, I will use the diagram below.
+
+% https://q.uiver.app/#q=WzAsMTQsWzAsMCwiMCJdLFsxLDEsIktfaSJdLFsyLDIsIlZfaSJdLFszLDMsIktfe2krMX0iXSxbNCw0LCIwIl0sWzIsNCwiMCJdLFs0LDIsIlZfe2krMX0iXSxbNSwxLCJLX3tpKzJ9Il0sWzQsMCwiMCJdLFs2LDAsIjAiXSxbNiwyLCJWX3tpKzJ9Il0sWzIsMCwiMCJdLFswLDIsIi4uLiJdLFs3LDMsIi4uLiJdLFswLDFdLFsyLDMsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFszLDRdLFs1LDNdLFszLDYsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzEsMiwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNiw3LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbNyw4XSxbNyw5XSxbNywxMCwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMSwxMV0sWzEyLDFdLFsxMCwxMywiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV1d
+\[\begin{tikzcd}
+	0 && 0 && 0 && 0 \\
+	& {K_i} &&&& {K_{i+2}} \\
+	{...} && {V_i} && {V_{i+1}} && {V_{i+2}} \\
+	&&& {K_{i+1}} &&&& {...} \\
+	&& 0 && 0
+	\arrow[from=1-1, to=2-2]
+	\arrow[from=2-2, to=1-3]
+	\arrow[hook, from=2-2, to=3-3]
+	\arrow[from=1-5, to=2-6]
+	\arrow[from=2-6, to=1-7]
+	\arrow[hook, from=2-6, to=3-7]
+	\arrow[from=3-1, to=2-2]
+	\arrow[two heads, from=3-3, to=4-4]
+	\arrow[two heads, from=3-5, to=2-6]
+	\arrow[two heads, from=3-7, to=4-8]
+	\arrow[hook, from=4-4, to=3-5]
+	\arrow[from=4-4, to=5-5]
+	\arrow[from=5-3, to=4-4]
+\end{tikzcd}\]
+
+
+I highlighted that the mapping between $K_i$ and $V_i$ is injective and that the mapping between $V_i$ and $K_{i+1}$ is surjective. Now consider what being an exact sequence entails, it just means that the you can make a mapping satisfying $img(\varphi_i)=ker(\varphi_{i+1})$. So if we can construct a mapping between the vector spaces that satisfies this property, then the aforementioned exact sequence does in fact exist.
+
+First step let's make $\varphi_i$, such that its domain is $V_i$ and its codomain is $V_{i+1}$. We can do this by first observing that there exists a surjective mapping between $V_i$ and $K_i$. Next we can also observe that there is an injective mapping between $K_{i}$ and $V_{i+1}$. If we compose these to mappings, we get a mapping whose domain is $V_i$ and its codomain is $V_{i+1}$.
+
+Next let's make $\varphi_{i+1}$ whose domain is $V_{i+1}$ and whose codomain is $V_{i+2}$, such that its kernel is the image of the previous mapping. We know that from the smaller chain consisting of $V_{i+1}$ that there is a mapping from $V_{i+1}$ to $K_{i+2}$, such that it sends all the elements that have a preimage in $K_{i+1}$ to \textbf{0}. We also now that there is an injective mapping between $K_{i+2}$ and $V_{i+2}$. If we compose this two mappings, we get a mapping whose domain is $V_{i+1}$ and whose codomain is $V_{i+2}$, such that its kernel is the image of $K_{i+1}$ in $V_{i+1}$.
+
+So now we have that the $img(\varphi_{i}) \subseteq ker(\varphi_{i+1})$, let's now prove that every element in the kernel of $\varphi_{i+1}$ has a preimage in $V_i$, thereby completing the proof.
+
+We know from the chain consisting of $V_{i+1}$, that the kernel of the mapping between $V_{i+1}$ and $K_{i+2}$, is $K_{i+1}$ by definition of exactness. We also now that each element in $K_{i+1}$ has a preimage in $V_i$, so to conclude the kernel of the mapping between $K_{i+2}$ and $V_{i+2}$ is $K_{i+1}$ and every element in $K_{i+1}$ has a preimage in $V_i$. So $ker(\varphi_{i+1}) = img(\varphi_i)$. So given a collection of short sequences, you
+can make a longe chain. To do the reverse, take each the kernel of the homomorphism beteween $V_{i}$ and $V_{i+1}$ and define it as $K_{i+1}$. Now if you constrain
+homomorphism to this codomain, you get the short sequences again. Therefore a collection of short sequences is the same as one big long sequence.
+
+\newpage
+\item\ \score{3}\label{rn}%4.
+Rank-nullity theorem for exact sequences: Given an exact sequence
+$$%$$ $
+  0 \to V_0 \to V_1 \to \cdots \to V_r \to 0,
+$$%$$ $
+prove that $\sum_{i=0}^r (-1)^i \dim V_i = 0$.
+
+\textbf{Solution}
+
+For the sake of simplicity I will extend the exact sequence on the right by adding another \textbf{0}, and I will relabel the sequences as shown below.
+
+\[\begin{tikzcd}
+	0 & {V_0} & {V_1} & {...} & {V_r} & 0 & 0
+	\arrow["{\varphi_0}", from=1-1, to=1-2]
+	\arrow["{\varphi_1}", from=1-2, to=1-3]
+	\arrow["{\varphi_2}", from=1-3, to=1-4]
+	\arrow["{\varphi_{r}}", from=1-4, to=1-5]
+	\arrow["{\varphi_{r+1}}", from=1-5, to=1-6]
+	\arrow["{\varphi_{r+2}}", from=1-6, to=1-7]
+\end{tikzcd}\]
+
+\begin{align*}
+    dim(V_i)&=img(\varphi_{i+1}) + ker(\varphi_{i+1})\\
+    dim(V_i)&=ker(\varphi_{i+2})+ker(\varphi_{i+1})\\ \\
+    dim(V_0)&=ker(\varphi_2)+ker(\varphi_1)\\
+    (-1)dim(V_1)&=(-1)(ker(\varphi_3)+ker(\varphi_2))\\
+    ...\\
+    (-1)^r dim(V_r)&=(-1)^r(ker(\varphi_{r+2})+ker(\varphi_{r+1}))\\
+    \sum_{i}^{r}dim(V_i)&=ker(\varphi_1)+(-1)^{r}ker(\varphi_{r+2})
+\end{align*}
+
+But $ker(\varphi_1)=0$ and $ker(\varphi_{r+2})=0$, so their sum is 0, thereby completing the proof.
+
+\pagebreak
+
+\item\ \score{3}%5.
+Rank-nullity for arbitrary complexes: Given a complex $0 \to V_0 \to
+V_1 \to \cdots \to V_r \to 0$, write $B_i = \im(V_{i-1} \to V_i)$ and
+$Z_i = \ker(V_i \to V_{i+1})$.  Prove that
+$$%$$ $
+  \sum_{i=0}^r (-1)^i \dim V_i = \sum_i (-1)^i \dim H_i,
+$$%$$ $
+where $H_i = Z_i/B_i$ is the $i^\text{th}$ homology of the complex.
+[In Exercise~\ref{rn}, $B_i = Z_i = K_i$, so $H_i = Z_i/B_i = 0$ for
+all~$i$.]
+
+\textbf{Solution}
+
+From corollary of lecutre 2, $dim(H_i)=dim(Z_i)-dim(B_i)$.
+
+\begin{align*}
+  \sum_{i=0}^{r}(-1)^{i}V_i&=dim(Z_0)+dim(B_1)\\
+  &-dim(Z_1)-dim(B_2)\\
+  \dots\\
+  &+(-1)^{r}(dim(Z_r)+dim(B_{r+1}))
+\end{align*}
+
+\begin{align*}
+  \sum_{i=0}^{r}(-1)^{i}H_i&=dim(Z_0)-dim(B_0)\\
+  &-dim(Z_1)+dim(B_1)\\
+  \dots\\
+  &+(-1)^{r}(dim(Z_r)-dim(B_{r}))
+\end{align*}
+
+\begin{align*}
+  \sum_{i=0}^{r}(-1)^{i}V_i-\sum_{i=0}^{r}(-1)^{i}H_i &= (dim(Z_0)-dim(Z_0))
+   +(dim(B_1)-dim(B_1)) + dim(B_0) \\ &+ (-dim(Z_1)+dim(Z_1)) + \dots + dim(B_{r+1})\\
+   &=dim(B_0)+dim(B_{r+1})=0+0=0
+\end{align*}
+
+So the sums are equal, because $dim(B_0)$ is 0 because 0 can only be mapped to 0 in $V_1$ and 
+$dim(B_r)$=0 because $V_r$ is mapped to 0, so their sum is 0.
+
+\pagebreak
+
+\item\ \score{3}%6.
+Two elements $u$ and~$v$ in a vector space~$V$ are \emph{congruent
+modulo} a subspace~$W \subseteq V$, written $u \equiv v \mod W$, if $u
++ W = v + W$.  Show that congruence modulo~$W$ is an \emph{equivalence
+relation} on~$V$, meaning that it is
+\begin{itemize}
+\item
+reflexive: $v \equiv v \mod W$ for all $v \in V$;
+\item
+symmetric: if $u \equiv v \mod W$, then $v \equiv u \mod W$; and
+\item
+transitive: if $u \equiv v \mod W$ and $v \equiv x \mod W$ then $u
+\equiv x \mod W$.
+\end{itemize}
+
+\textbf{Solution}
+\\
+Reflexivity: $v+0=v=v$ and $0\in W$, so $v\equiv v$(mod $W$). \\
+Symmetry: $u\equiv v$(mod $W$)$\rightarrow \exists w$, $w\in W$ such that $u+w=v$ $\rightarrow$ $u=v-w \rightarrow v-w=u \rightarrow v\equiv u$(mod $W$) because $-w \in W$\\
+Transitivity: $u\equiv v$(mod $W$) $\rightarrow \exists w$, such that $u+w_1=v$. Same for $v\equiv x$, there $\exists w_2 \in W$ such that $v+w_2=x$. And since $w_1+w_2 \in W$($W$ is closed under addition), $u+w_1+w_2=v+w_2=x$, so $u\equiv x$(mod $W$).
+
+\pagebreak
+
+\item\ \score{2}%7.
+Give an example of three subspaces $Y_1$, $Y_2$, and $Y_3$ in $\RR^2$
+such that $Y_1 + Y_2 + Y_3 = \RR^2$ and $Y_i \cap Y_j = \{\0\}$ for
+all $i \neq j$, but $\RR^2$ is not the direct sum of $Y_1$, $Y_2$,
+and~$Y_3$.\rmagenta{It's unclear what this means and how it gives you the result.}
+
+\textbf{Solution}
+
+Take $Y_1=span((0,1)) \quad Y_2=span((1,0)) \quad Y_3=span((1,1))$
+The pairwise intersection is $\{0\}$, their sum is $\RR^2$ but their direct sum isn't $\RR^2$, because \magenta{their intersection isn't trivial}.
+
+\pagebreak
+
+% 
+\item\ \score{3}%8.
+Prove that if $V$ is a vector space and $W \subseteq V$ is a subspace,
+then $W$ has a \emph{complement}: a subspace $U \subseteq V$ such that
+$V = W \oplus U$.  Hint: $V/W$ has a basis; lift it back to $V$.
+
+\textbf{Solution}
+Take the basis for $V/W$. Take one element(non-zero) from each basis(coset) and the union of these with the set of the basis for 
+$W$ will be a basis for $V$.
+
+Proof: Everytime you take an elmenent from the cosets, apply gram-schidt(Assume you started with an orthogonal set of basis for $W$) process to it, and then you will end
+up with an orthogonal set of basis. This is because you will never get a zero during this process,
+if you got zero during this process, that would imply that the vector you used is a linear combitionaion 
+of the other ones and therefore couldn't be a basis for $V/W$.
+
+After you have made this set of basis the elements that are not a basis for W, will be a a basis for $U$. Their direct sum will also
+be $V$, since they have no intersection.
+
+
+\pagebreak
+
+
+\item%9.
+For vectors $\xx = (1, 2i, 1+i)$ and $\yy = (i, 2-i, 3)$, compute
+\begin{enumerate}[itemsep=-1ex]
+\item\ \score{3}%
+$\<\xx,\yy\>$, $||\xx||^2$, $||\yy||^2$, and $||\yy||$;
+\item\ \score{3}%
+$\<3\xx,2i\yy\>$ and $\<2\xx,i\xx + 2\yy\>$;
+\item\ \score{3}%
+$||\xx+2\yy||$.  [Use parts (a) and~(b) for this.]
+\end{enumerate}
+
+\textbf{Solution}
+
+\begin{enumerate}
+  \item 
+  $\<\xx,\yy\> = \bar y^{T}x = (-i,2+i,3)^{T} \cdot (1,2i,1+i) = -i + 4i-2+3+3i=1+6i$. 
+  \\ $\norm{\vec{x}}^2=\bar x^{T}x= (1,-2i,1-i)^T \cdot (1,2i,1+i) = 1+4+1-i+i+1=7$\\
+  $\norm{\vec{y}}^2=\bar y^{T}y= (-i,2+i,3)^T \cdot (i,2-i,3) =1+4+1+9 =15$
+  \\
+  $||y|| = \sqrt{15}$
+  \item 
+  $\<3\xx,2i\yy\> = -6i\<\xx,\yy\>=-6i+36$\\
+  $\<2\xx,i\xx + 2\yy\> = 2 \cdot (-i\<\xx,\xx\>+2\<\xx,\yy\>)=2 \cdot (-7i + 2+12i)=10i+4$
+
+  \item 
+  \begin{align*} 
+    ||\mathbf{x} + 2 \mathbf{y} || & = \sqrt{\langle x + 2y, x + 2y \rangle} \\
+                                   & = \sqrt{\langle x, x \rangle + \langle x, 2y \rangle + \langle 2y, x \rangle + \langle 2y, 2y \rangle}\\ 
+                                   & = \sqrt{||x||^2 + ||2y||^2 + 2 \langle x, y \rangle + 2 \langle y, x \rangle } \\
+                                   & = \sqrt{7+ 60 + 4}\\
+                                   & = \sqrt{71}
+  \end{align*} 
+
+  
+   \pagebreak
+\end{enumerate}
+
+\item\ \score{1}%10.
+Prove that for vectors in an inner product space,
+$||\xx\pm\yy||^2 = ||\xx||^2 + ||\yy||^2 \pm 2\mathrm{Re}\<\xx,\yy\>$.
+
+\textbf{Solution} \rmagenta{This can't be right because $(x,y)-\overline{(x,y)}=2\im(x,y)$}
+
+$\<\xx \pm \yy, \xx \pm \yy\> = \<\xx,\xx \pm \yy\> \pm \<\yy,\xx \pm \yy\> = (\<\xx,\xx\> \pm \<\xx,\yy\>) \pm (\<\yy,\xx\> \pm \<\yy,\yy\>)\\\ $
+$||\xx||^2 + ||\yy||^2 \pm \<\xx,\yy\> \pm \overline{\<\xx,\yy\>} \magenta{=} ||\xx||^2 + ||\yy||^2 \pm 2Re(\<\xx,\yy\>)$
+
+\pagebreak
+
+
+
+\item\ \score{3}%11.
+For any $m \times n$ complex matrix~$A$, prove that $\ker(A^* A) =
+\ker(A)$.
+
+\textbf{Solution}
+
+Let $\xx \in F^{n}$ such that  $\xx \in ker(A) \rightarrow A^{*}A\xx =  A^{*}(0) = 0 \rightarrow \xx \in ker(A^{*}A)$\\ 
+Let $\xx \in F^{n}$ such that $A^{*}Ax=0 \rightarrow (\xx^{*}A^{*})A\xx = \<A\xx,A\xx\>  = 0 \rightarrow A\xx  = 0 \rightarrow \xx \in ker(A)$.
+
+\pagebreak
+
+\item\ \score{3}%12.
+Prove that if $P$ is self-ajoint (that is, $P^* = P$) and idempotent
+(that is, $P^2 = P$) then $P$ is the matrix for an orthogonal
+projection.
+
+ \textbf{Solution}
+  Defintion(I was not given any defintion) assumed:- P is orthogonal projection iff $P\xx  \xx \perp P\xx$\\
+ $\<P\xx-\xx, P\xx\> = \<P^{*}(P\xx-\xx),\xx\> = \<(P^{2}\xx-P\xx),\xx\> = \<P\xx-P\xx,\xx\>=\<0,\xx\> = 0$
+ Therefore P is orthogonal projection.
+ 
+\pagebreak
+
+\item\ \score{2}%13.
+If $V$ is a vector space over~$\CC$ of dimension~$n$, then it is also
+a vector space over~$\RR$ of dimension~$2n$.  (If this isn't clear to
+you, then write down a proof.)  Given a Hermitian inner product
+$\<\xx,\yy\>$ on~$V$ as a complex vector space, show that the real
+part $\<\xx,\yy\>_\RR = \mathrm{Re}(\<\xx,\yy\>)$ is an inner product
+on~$V$ as a real vector space.
+
+
+
+\textbf{Solution}
+
+We can basically ask the question, if you only take the real part of the complex Hermitian inner product
+will it give you a valid inner product for the real vector space. So we just need to check 
+if it satisfies the properties of linearity, conjugate symmetry, nonegativity and nondegeneracy.\red{3 and 4 are fine, but you should give a demonstration for 1 and 2.}
+
+1. Linearity \\
+This property is simply true because the linearity is satisfied in complex inner product, and if 
+you take the real part of it, it also has to be linear otherwise it wouldn't be linear in the compolex inner product to begin with, or you 
+could make a map from from the norm to the real numbers, and since the norm is linear and this function is linear, 
+their composition is also linear.\red{Norm is only $\RR$-linear so this second justification doesn't work. And it's not as if this $\RR$ restriction is given by such a composition.}
+
+2.Conjugate Symmetry \\
+Just like Linearity, when you only take the real part, there has to be symmetry otherwise it wouldn't 
+be symmetrical in the complex inner product anyway.
+
+3.Nonnegativity \\
+The product is already real in the complex inner product.
+
+4.Nondegeneracy \\
+The product is already real and nondegenerate in the complex inner product.
+
+\pagebreak
+
+\item\ \score{3}%14.
+Find all possible Jordan forms of linear transformations with
+characteristic polynomial $(t - 1)^2 (t + 2)^2$.
+
+\textbf{Solution}
+
+$\begin{bmatrix}
+  1 & 0 & 0 & 0\\
+  0 & 1 & 0 & 0\\
+  0 & 0 & -2 & 0\\
+  0 & 0 & 0 & -2  
+\end{bmatrix}$
+$\begin{bmatrix}
+  1 & 1 & 0 & 0\\
+  0 & 1 & 0 & 0\\
+  0 & 0 & -2 & 0\\
+  0 & 0 & 0 & -2  
+\end{bmatrix}$
+$\begin{bmatrix}
+  1 & 0 & 0 & 0\\
+  0 & 1 & 0 & 0\\
+  0 & 0 & -2 & 1\\
+  0 & 0 & 0 & -2  
+\end{bmatrix}$
+$\begin{bmatrix}
+  1 & 1 & 0 & 0\\
+  0 & 1 & 0 & 0\\
+  0 & 0 & -2 & 1\\
+  0 & 0 & 0 & -2  
+\end{bmatrix}$
+
+Including permutaions on Jordan blocks.
+
+\pagebreak
+
+\item\ \score{3}%15.
+Find all possible Jordan forms of linear transformations with
+characteristic polynomial $(t - 2)^3 (t + 1)$ and minimal polynomial
+$(t - 2)^2 (t + 1)$.
+
+$\begin{bmatrix}
+  2 & 1 & 0 & 0\\
+  0 & 2 & 0 & 0\\
+  0 & 0 & 2 & 0\\
+  0 & 0 & 0 & -1  
+\end{bmatrix}$
+Up to permutation of the Jordan blocks.
+\pagebreak
+
+\item\ \score{3}%16.
+How many similarity classes are there for $3 \times 3$ matrices whose
+only eigenvalues are $-3$ and~$4$?
+
+\textbf{Solution}
+The answer is 4. There are at least 2 eigenvectors, with eigenvalues
+-3 and 4. The third one can be in either and the geomtric multiplicies of the 
+two eigenvalues can be either 1 or 2 for each, giving a total of 4 equivalence classes.
+
+\pagebreak
+
+\item\ \score{2}%17.
+Prove or disprove: two $n \times n$ matrices are similar if and only
+if they have the same characteristic polynomial and minimal
+polynomial.\red{Your counterexample is flawed because geometric multiplicity $3$ is incompatible with $4,2,2$.}
+
+\textbf{Solution}
+
+Unfortunately, two matrix having the same characteristic and minimal polynomial,
+doesn't gurantee that they are similar, it is a requirement but it is not a suffiecient requirement.
+
+As an example consider a matrix whose eigenvalue has geomtric multiplicity 3, algebraic multiplicty 8(I didn't write the matrix out because it was 128 numbers),
+so that you can get two matrices, such that one has 3 jordan blocks of size 4,2,2 and the other has 3 jordan blocks
+of size 4,3,1. They have the same minimal polynomial and characteristic polynomial, but their jordan blocks are different
+and therefore can't be the similar.
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% Various Emacs customizations:
+%%% Local Variables:
+%%% fill-column: 70
+%%% indent-tabs-mode: t
+%%% TeX-electric-sub-and-superscript: nil
+%%% TeX-brace-indent-level: 0
+%%% LaTeX-indent-level: 0
+%%% LaTeX-item-indent: 0
+%%% TeX-master: t
+%%% End:

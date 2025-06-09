@@ -1,0 +1,27 @@
+# Fdb version 4
+["pdflatex"] 1737046101.72192 "/Users/thomaskidane/Documents/Courses/Math-Notes/Math403/notes2.tex" "notes2.pdf" "notes2" 1737046102.01301 0
+  "/Users/thomaskidane/Documents/Courses/Math-Notes/Math403/notes2.tex" 1737046101.25757 110 0b584fa4b3b2dee43fbe9b3c34b1505e ""
+  "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
+  "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
+  "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1136768653 1288 655e228510b4c2a1abe905c368440826 ""
+  "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1248133631 32080 340ef9bf63678554ee606688e7b5339d ""
+  "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
+  "/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsbsy.sty" 1686341992 2222 499d61426192c39efd8f410ee1a52b9c ""
+  "/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsgen.sty" 1686341992 4173 82ac04dfb1256038fad068287fbb4fe6 ""
+  "/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsmath.sty" 1686341992 88371 d84032c0f422c3d1e282266c01bef237 ""
+  "/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amsopn.sty" 1686341992 4474 b811654f4bf125f11506d13d13647efb ""
+  "/usr/local/texlive/2024/texmf-dist/tex/latex/amsmath/amstext.sty" 1686341992 2444 0d0c1ee65478277e8015d65b86983da2 ""
+  "/usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls" 1705352648 20144 147463a6a579f4597269ef9565205cfe ""
+  "/usr/local/texlive/2024/texmf-dist/tex/latex/base/size10.clo" 1705352648 8448 dbc0dbf4156c0bb9ba01a1c685d3bad0 ""
+  "/usr/local/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def" 1708463273 30006 3d512c0edd558928ddea1690180ef77e ""
+  "/usr/local/texlive/2024/texmf-dist/web2c/texmf.cnf" 1708706663 41649 5d6ae549fbbcb850a863f69aa41f3d10 ""
+  "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1736461814.86977 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
+  "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1736461762 8221438 151473d0a2a0c0a8bacd2e9e1e5b5845 ""
+  "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
+  "notes2.aux" 1737046101.99586 120 782a90b1f6e7eca2b9e227ffa2a7f0d0 "pdflatex"
+  "notes2.tex" 1737046101.25757 110 0b584fa4b3b2dee43fbe9b3c34b1505e ""
+  (generated)
+  "notes2.aux"
+  "notes2.log"
+  "notes2.pdf"
+  (rewritten before read)

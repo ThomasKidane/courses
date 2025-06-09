@@ -1,0 +1,707 @@
+%hw-3.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%            Math 403 Homework \#3, Spring 2025            %%%%%%
+%%%%%%                                                          %%%%%%
+%%%%%%                 Instructor: Ezra Miller                  %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+
+\oddsidemargin=17pt \evensidemargin=17pt
+\headheight=9pt     \topmargin=26pt
+\textheight=564pt   \textwidth=433.8pt
+\parskip=1ex        %voffset=-6ex
+
+\usepackage{tikz,amsmath,amssymb,graphicx,color,enumitem,graphicx}%,setspace,mathrsfs}%,hyperref
+\setlist[enumerate]{parsep=1.5ex plus 4pt,topsep=0ex plus 4pt,itemsep=0ex}
+  \setlist[itemize]{parsep=1.5ex plus 4pt,topsep=-1ex plus 4pt,itemsep=-1.33ex}
+
+\leftmargini=5.5ex
+\leftmarginii=3.5ex
+
+%for \marginpar to fit optimally
+%hoffset=-1.02in
+\setlength\marginparwidth{2.2in}
+\setlength\marginparsep{1mm}
+\newcommand\red[1]{\marginpar{\linespread{.85}\sf%
+		   \vspace{-1.4ex}\footnotesize{\color{red}#1}}}
+\newcommand\score[1]{\marginpar{\vspace{-2ex}\color{blue}{#1/3}}\hspace{-1ex}}
+\newcommand\extra[1]{\marginpar{\color{blue}{#1/1}}\hspace{-1ex}}
+\newcommand\total[2]{\marginpar{\colorbox{yellow}{\huge #1/#2}}}
+\newcommand\collab[1]{\marginpar{\vspace{-11ex}\colorbox{yellow}{#1/3}}\hspace{-1ex}}
+\newcommand\magenta[1]{\colorbox{magenta}{\!\!#1\!\!}}
+\newcommand\yellow[1]{\colorbox{yellow}{\!\!#1\!\!}}
+\newcommand\green[1]{\colorbox{green}{\!\!#1\!\!}}
+\newcommand\cyan[1]{\colorbox{cyan}{\!\!#1\!\!}}
+\newcommand\rmagenta[2][0ex]{\red{\vspace{#1}\magenta{\phantom{:}}\,: #2}}
+\newcommand\ryellow[2][0ex]{\red{\vspace{#1}\yellow{\phantom{:}}\,: #2}}
+\newcommand\rgreen[2][0ex]{\red{\vspace{#1}\green{\phantom{:}}\,: #2}}
+\newcommand\rcyan[2][0ex]{\red{\vspace{#1}\cyan{\phantom{:}}\,: #2}}
+
+%For separated lists with consecutive numbering
+\newcounter{separated}
+
+\newcommand{\excise}[1]{}
+\newcommand{\comment}[1]{{$\star$\sf\textbf{#1}$\star$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                 %
+% TO ENABLE GRADING, DO NOT ALTER ABOVE THIS LINE %
+%                                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%new math symbols taking no arguments
+\newcommand\0{\mathbf{0}}
+\newcommand\CC{\mathbb{C}}
+\newcommand\FF{\mathbb{F}}
+\newcommand\NN{\mathbb{N}}
+\newcommand\QQ{\mathbb{Q}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\bb{\mathbf{b}}
+\newcommand\kk{\Bbbk}
+\newcommand\mm{\mathfrak{m}}
+\newcommand\xx{\mathbf{x}}
+\newcommand\yy{\mathbf{y}}
+\newcommand\GL{\mathit{GL}}
+\newcommand\FL{{\mathcal F}{\ell}_n}
+\newcommand\into{\hookrightarrow}
+\newcommand\minus{\smallsetminus}
+\newcommand\goesto{\rightsquigarrow}
+
+%redefined math symbols taking no arguments
+\newcommand\<{\langle}
+\renewcommand\>{\rangle}
+\renewcommand\iff{\Leftrightarrow}
+\renewcommand\implies{\Rightarrow}
+\renewcommand\aa{\mathbf{a}}
+
+%to explain about LaTeX commands:
+\newcommand\command[1]{\texttt{$\backslash$#1}}
+
+%new math symbols taking arguments
+\newcommand\ol[1]{{\overline{#1}}}
+
+%redefined math symbols taking arguments
+\renewcommand\mod[1]{\ (\mathrm{mod}\ #1)}
+
+%roman font math operators
+\DeclareMathOperator\im{im}
+
+%for easy 2 x 2 matrices
+\newcommand\twobytwo[1]{\left[\begin{array}{@{}cc@{}}#1\end{array}\right]}
+
+%for easy column vectors of size 2
+\newcommand\tworow[1]{\left[\begin{array}{@{}c@{}}#1\end{array}\right]}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{\mbox{}\\[-8ex]Math 403 Homework \#3, Spring 2025\\\normalsize
+	Instructor: Ezra Miller\\[-2.5ex]}
+\author{Solutions by: ...your name...\\[1ex]
+Collaborators: ...list those with whom you worked on this assignment...\\
+(1 point for each of up to 3 collaborators who also list you)}
+\date{Due: 11:59pm Saturday 1 March 2025}
+
+\maketitle
+
+\vspace{-5ex}\collab{}%
+
+\noindent
+\textsc{Reading assignments}\total{}{42}%covers Lectures 13 - 16
+\begin{enumerate}[itemsep=-1ex]\setcounter{enumi}{12}
+\item%13.
+for Thu.~20 February
+  \begin{itemize}
+  \item{}%
+  [Treil, \S 6.3.3--\S 6.3.4] singular value decomposition
+  \item{}%
+  [Lax, Chap.7: \S Norm of a Linear Map, \S Spectral Radius]
+  \item{}%
+  [Lax, Chap.8: \S Norm and Eigenvalues]
+  \item{}%
+  [Treil, \S 6.4] Applications of SVD: spectral radius, operator norm,
+  condition number
+  \end{itemize}
+
+\item%14.
+for Tue.~25 February
+  \begin{itemize}
+  \item{}%
+  [Stewart--Sun, \S II.2.1] matrix norms, consistency
+  \item{}%
+  [Stewart--Sun, \S IV.1 through Thm 1.3] general perturbation theorems
+  \end{itemize}
+
+\item%15.
+for Thu.~27 February
+  \begin{itemize}
+  \item{}%
+  [Stewart--Sun, \S IV.1.2 through Thm 1.6] Bauer--Fike theorem
+  \item{}%
+  [Lax, Appendix 7] Gershgorin's Theorem
+  \item{}%
+  [Stewart--Sun, \S IV.2 through \S IV.2.1] Gerschgorin theory
+  \end{itemize}
+
+\item[16--17.]\addtocounter{enumi}{2}%16. and 17.
+for Tue.~4 March and Thu.~6 March
+  \begin{itemize}
+  \item{}%
+  [Tapp, Chap.5] Lie algebras as tangent spaces to the identity
+  \item{}%
+  [Lax, Chap.9: Matrix-valued Functions, through \S Matrix Exponential]
+  \item{}%
+  [Wikipedia, \emph{Exponential map (Lie theory)}]
+  \end{itemize}
+\end{enumerate}
+
+\noindent
+\textsc{Exercises}% covers Lectures 9-13 + a bit of 14
+
+\begin{enumerate}
+
+\item\ \score{}%1.
+Prove that a subset of a manifold is open if and only if its preimage
+under every chart is an open subset of an affine space.  (Note: This
+can be used to specify the topology on a manifold without
+% appealing to a general notion of topological space
+knowing what a topological space is, since affine spaces have the
+usual
+% topology
+notion of ``open'': what it means for a neighborhood of a point in a
+manifold to be open is well defined independent of which charts are
+used~to~verify~openness.)
+
+\textbf{Solution}
+
+Assume that a subset of the manifold is open but its preimage
+is closed. We can also assume that the preimage is not empty, since the 
+empty set is open. Then this implies that the image of a closed subset is open
+under a homeomorphism, which is false, since homeomorphisms preserve topological strucutre(maps open sets to open sets).
+Therefore the preimage of an open sets under every chart is open, likewise same reasoning implies
+that the image of an open subset is open.
+\item\ \score{}%2.
+Prove that the sphere $S^2 = \big\{\xx \in \RR^3 \,\big|\, ||\xx|| =
+1\big\}$ is a smooth manifold.  Is it a rational algebraic variety
+over the field~$\RR$?
+
+\textbf{Solution}
+
+Chart 1:
+
+\begin{align*}
+  U_{1}&= \RR^2\\
+  \pi_{1}&: U_{1} \hookrightarrow S^2\\
+  \pi_{1}^{-1}&: S^2/{(0,0,1)} \twoheadrightarrow U_{1} \simeq R^2 \\
+  \pi_{1}^{-1} : (x,y,z)&\mapsto (\frac{x}{1-z},\frac{y}{1-z})\\
+  \pi_{1} : (x,y)&\mapsto (\frac{2x}{1+x^2+y^2},\frac{2y}{1+x^2+y^2},\frac{-1+x^2+y^2}{1+x^2+y^2})
+\end{align*}
+
+Chart 2:
+
+\begin{align*}
+  U_{2}&= \RR^2\\
+  \pi_{2}&: U_{2} \hookrightarrow S^2\\
+  \pi_{2}^{-1}&: S^2/{(0,0,-1)} \twoheadrightarrow U_{2} \simeq R^2 \\
+  \pi_{2}^{-1} : (x,y,z)&\mapsto (\frac{x}{1+z},\frac{y}{1+z})\\
+  \pi_{2} : (x,y)&\mapsto (\frac{2x}{1+x^2+y^2},\frac{2y}{1+x^2+y^2},\frac{1-x^2-y^2}{1+x^2+y^2})                
+\end{align*}
+
+The transition functions are $\pi_{1} \circ \pi_{2}^{-1}$ 
+and $\pi_{2} \circ \pi_{1}^{-1}$, This functions are differeniable, so it is 
+a smooth manifold. I don't know what a rational algebraic variety is, but since the 
+transition functions are rational I suppose it is a rational algebraic variety.
+
+\item\ \score{}%3.
+Fix a field~$F$.  Prove that the unipotent lower-triangular matrices
+$U^- \subseteq \GL_n(F)$ map injectively to the set $\FL(F)$ of
+complete flags in~$F^n$ expressed as the set of orbits of the group
+$B^+$ acting on the right of~$\GL_n(F)$; that is, $U^- \into \FL(F) =
+\GL_n(F)/B^+$.
+
+\textbf{Solution}
+
+We need to prove that any lower traingular unipotent matrix corresponds
+to one and only one complete Flag. Let's assume the opposite, then you get
+two matrices $M_{1}$ and $M_{2}, M_{1}\neq M_{2}$, and the complete flags
+induced(Assuming the standdard induciton, where $v_i$ as the span of the union 
+of the left $i$ columns) by the two matrices are the same.
+
+Look at the first column of $M_{1}$, since this has to be a linear mulitple
+of the first column of $M_{2}$, and since the first entries are the same 
+and non-zero(it is 1, because it is lower-triangular and unipotent, therefore
+the eigenvalues 1, are on the diagonal), then the first columns are equal.
+
+Assuming that all previous columns are equal, what about the $l^{th}$ column.
+Since all the columns are linearly independent in both $M_1$ and $M_2$(they are invertible)
+, then you can descirbe $l^{th}$ column as a unique linear combination of the 
+$1^{st}$ to $l^{th}$ column. Since the coordinate of $l^{th}$ column in this basis is just one and everything
+else being 0 in both matrices, and knowing that the subspace spanned being 
+the same, this leads us to conclude that the columns are linear combinations
+of each other, and since they both share the same non-zero entry, then they are the 
+the same column. Therefore contradicitng that two different unitary matrices
+can describe the same complete flag.
+
+\item\ \score{}%4.
+Let $S_n \subseteq \GL_n(F)$ be the set of permutation matrices.
+Prove that $\FL(F)$ is a rational algebraic variety with atlas
+$\{\pi_w: wU^- \to \FL(F) \mid w \in S_n\}$ naturally indexed
+by~$S_n$.  You will need to use that any level set
+% (actually, you should only need the zero level set)
+of a polynomial with coefficients in~$F$ is closed.
+
+\textbf{Solution}
+
+Cliam \#1: Any complete flag can be described as a composition of a lower triangular unipotent matrix 
+and permutation matrix.
+
+Since a complete flag can be represented as a sequence of a vectors that are 
+continiously added to a subspace, take the first vector to be added or the first 
+subspace in the chain. You can scale this vector so that one of its nonzero entries equals 1. Subtract a multiple of the first
+vector from the other vectors in the chain so that all entries of the vectors 
+corresponding to the 1 in the first vector are 0.
+
+Scale the second vector so that a nonzero entry equals 1, and subtract a multiple of
+it, from the other vectors(all vectors other than the first one) so that the entry
+corresponding to 1 in the second vector becomes 0.
+
+Continue this process for all vectors. You can always continue this process because
+if at any point you find a vector that has all entries 0, then that would imply then 
+that vector was in the span of the other vectors, which is a contradiction because
+the vectors are all linearly independent.
+
+Put all the current vectors into a matrix $A$, then make a permutation matrix,
+where the $i^{th}$ column has a one in the $j^{th}$ place if $c_{i}$(the $i^{th}$ column of A), had 1 chosen at the $j^{th}$ entry.
+
+When you multiply A with this permutation matrix you get a lower traingular unipotent matrix,
+since the $1^{s}$ are going to be on the diagonal and anything after that entry will become 0
+from the construction. The inverse of the permutation matrix created will be our chart.
+
+Claim \#2: The transition functions between charts are composition of permutation matrices.
+
+To get the transition function between the charts compsose the matrix with the inverse of the 
+other matrix, which is just another permutation matrix.
+
+Claim \#3: This manifold is a rational algebraic variety.
+
+I don't what rational algebraic varities are, but since you the composition of the 
+matrices is rational, I suppose it is a rational algebraic variety.
+\item\ \score{}%5.
+The \emph{standard complex structure} on $\RR^{2n}$ is the
+block-diagonal $2n \times 2n$ matrix $J_{2n}$ whose diagonal blocks
+are all $\twobytwo{0&\!-1\\1&\ 0}$.  Prove that $A \in \GL_{2n}(\RR)$
+is complex-linear if and only if $A$ commutes with the standard
+complex structure: $AJ_{2n} = J_{2n}A$.
+
+\textbf{Solution}
+
+For $n=1$, assume there exists some matrix A and it is commutative with the standard complex strucutre. Let's what
+conditions it imposes.
+
+$$
+A = \begin{bmatrix}
+  a & c\\
+  d & b
+\end{bmatrix}
+$$
+
+$$
+\begin{bmatrix}
+  0 & -1\\
+  1 & 0
+\end{bmatrix}
+\begin{bmatrix}
+  a & c\\
+  d & b
+\end{bmatrix}=
+\begin{bmatrix}
+  a & c\\
+  d & b
+\end{bmatrix}
+\begin{bmatrix}
+  0 & -1\\
+  1 & 0
+\end{bmatrix}
+$$
+
+$$
+\begin{bmatrix}
+  -d & -b\\
+  a & c
+\end{bmatrix}=
+\begin{bmatrix}
+  c & -a\\
+  b & -d
+\end{bmatrix}
+$$
+So this means commutatitve implies,\\
+\begin{align*}
+a=b\\
+-d=c 
+\end{align*}
+
+Which is the same coniditions for a 2$\times$2 to be complex linear.
+Note this proves both sides of the iff since, commutativity and complex linearity impose the same restrictions.
+
+Assume true for size n, now we will prove that it is true for n+1. We only have
+to check for complex linearity in each 2$\times$2 block in the matrix. So if 
+each 2$\times$2 commutes with the standard complex structure, then the entire 
+matrix is complex linear.
+
+\begin{align*}
+  \begin{bmatrix}
+    0 & -1 & ...\\
+    1 & 0 & ...\\
+    ... & ...& J_{2n}\\
+  \end{bmatrix} A&= 
+  A\begin{bmatrix}
+    0 & -1 & ...\\
+    1 & 0 & ...\\
+    ... & ...& J_{2n}\\
+  \end{bmatrix} \\
+  \begin{bmatrix}
+    0& -1& ... 0\\
+    1& 0& ... 0\\
+    ... 0& 0&... J_{2n}
+  \end{bmatrix}
+  \begin{bmatrix}
+    A_{11} & A_{12}& ... A_{1n}\\
+    A_{21} & A_{n}\\
+    \dots\\
+    A_{1n}
+  \end{bmatrix}&=
+  \begin{bmatrix}
+    A_{11} & A_{12}& ... A_{1n}\\
+    A_{21} & A_{n}\\
+    \dots\\
+    A_{1n}
+  \end{bmatrix}\begin{bmatrix}
+    0& -1& ... 0\\
+    1& 0& ... 0\\
+    ... 0& 0&... J_{2n}
+  \end{bmatrix}\\
+  \begin{bmatrix}
+    A^{\vert}_{11} & A^{\vert}_{12}& ... A^{\vert}_{1n}\\
+    A^{\vert}_{21} & A^{\vert}_{n}\\
+    \dots\\
+    A^{\vert}_{1n}
+  \end{bmatrix}&=
+  \begin{bmatrix}
+    A^{-}_{11} & A^{-}_{12}& ... A^{-}_{1n}\\
+    A^{-}_{21} & A^{-}_{n}\\
+    \dots\\
+    A^{-}_{1n}
+  \end{bmatrix}
+\end{align*}  
+
+Where $A^{\vert}=A^{-}$, implies that the 2$\times$2 matrix is complex linear(from the $n=1$ case).
+We now see that the matrix is commutatitve if and only if every 2$\times$2 is complex linear
+which iff the matrix is complex linear.
+
+
+\item\ \score{}%6.
+Prove that if $\lambda \in \CC$ is an eigenvalue of a unitary matrix
+then $|\lambda| = 1$.
+
+\textbf{Solution}
+
+\begin{align*}
+  U^{*}U=UU^{*}=I\\
+\end{align*}
+
+Let $x \in $ eigen-space($\lambda$).
+\begin{align*}
+  Ux=\lambda x \rightarrow x^{*}U^{*}=x^{*} \overline{\lambda}\\
+  x^{*} U^{*}Ux=(x \overline{\lambda})\lambda x\\
+  x^{*}Ix=\vert\lambda| x^{*}x\\
+  |x|= |\lambda||x|, x\neq0\\
+  1=|\lambda|
+\end{align*}
+
+\item\ \score{}%7.
+Show that the standard Hermitian inner product on $\CC^n$ defines a
+distance $d(\xx,\yy) = ||\xx-\yy||$ on~$\CC^n$.  Give an example of an
+isometry $\varphi$ of~$\CC^n$ such that $\varphi(\0) = \0$ but
+$\varphi$ is not $\CC$-linear.
+
+Properties of distance\\
+1) d(x,x)=0, already satisfied\\
+2) if $x\neq y$, then d(x,y) $>$ 0. Since only 0 has absolute
+value 0, this property is satisfied.
+3) d(x,y)=d(y,x)\\
+$||x-y||$=$\sqrt{(x-y) \cdot (x-y)} = \sqrt{(y-x) \cdot (y-x) } = ||y-x||$\\
+
+4) Triangle Property
+$d(x,y)\leq d(x,z) + d(z,y)$
+Since norms also satisfy the triangle property $|u+v| \leq |u| + |v|$.
+Then let $|u+v|=|x-y| \wedge |u|=|x-z| \wedge |v|=|z-y|$. So the triangle property is fulfilled.
+
+
+\item\ \score{}%8.
+Let $\varphi$ be an orthogonal transformation of a real inner product
+space~$V$.  Assume that $\varphi^2 = -I$.  Show that $\dim V$ is even,
+say~$2n$.  Moreover, prove that there exists a dimension~$n$ subspace
+$W \subset V$ and an
+% orthogonal transformation
+isometry $\psi: W \to W^\perp$ such that, in the decomposition $V = W
+\oplus W^\perp$, the operator $\varphi$ is given by the block matrix
+$$%$$ $
+  \twobytwo{ \0  & -\psi^*
+          \\ \psi &    \0 }
+$$%$$ $
+(N.B. The result means that $\varphi$ can be thought of as
+multiplication by~$i$ on a complex vector space whose real and
+imaginary parts are $W$ and~$W^\perp$.)
+
+\textbf{Solution}
+
+If dimension of V is odd, then after applying the transformation twice,
+the basis can't be left-handed because either the transformation
+changes signs twice or not at all, and in either case the matrix has to have positive
+determinant after applying the transformation twice, so the dimension of V can't be odd.
+
+Now let's prove that the specified subspace exists in the ambient space.
+
+Claim 1: $\varphi (x) \perp x$.
+
+\begin{align*}
+  \varphi^2(x)&=-x,\varphi(-\varphi) = I\\
+  \varphi^{-1}&=-\varphi=\varphi^{T}\\
+  x^{T}(\varphi^{2})^T&=(\varphi^2 x)^T = (-x)^T\\
+  x\cdot&\varphi x\\
+  -\varphi^{2}x&\cdot \varphi x\\
+  x^{T} \varphi^{T}&\cdot -\varphi^{2} x\\
+  x^{T} -\varphi&\cdot -\varphi^{2} x\\
+  x^{T}\varphi^{3}x&\\
+  -x^{T}\varphi x=&x \cdot \varphi x \rightarrow x\varphi x=0
+\end{align*}
+
+The number can only be equal to both its positive and negative iff the number 
+is 0.
+
+Claim 2: We can construct W.\\
+Pick $V_1$ and $\varphi(V_1)=V_1^{'}$.\\
+Pick $V_2 \perp V_1, V_1^{'}$, then $ \varphi(V_2)\perp V_1$ and $V_1^{'}$, since
+ the inner product is conserved under orthogonal transformations. Keep making 
+pairts until you have n pairs, where 2n is the dimension of V. Now take $W$ to be 
+the subspace defined by taking the span of $V_1, V_2, ..., V_n$. Then $\varphi$ takes
+$W$ to $W^{\perp}$, and induces $\psi$, which is just a restriction of the domain 
+to $W$ and restrction of the codomain to $W^{\perp}$. Since the inner product is conserved in $W^{\perp}$,
+the distance between points is also conserved and therefore $\psi$ is also an isometry.
+
+Any $x \in V$ can be decomposed into an element in $W$ and $W^{\perp}$. 
+Therefore we just need to figure out where $\psi$ takes the elments from the $W$.
+Let's take a basis $v \in W$, and its corresponding pair $v^{'}$.
+
+\begin{align*}
+  \psi (v)&= v^{'} \text{\; By Defintion.}\\ 
+  \psi^{*}(v^{'})&=v \text{\; Because }\varphi^{*}=\varphi^{-1}
+\end{align*}
+
+So make the block matrix 
+$$%$$ $
+  \twobytwo{ \0  & -\psi^*
+          \\ \psi &    \0 }
+$$%$$ $
+
+Which takes $x=w+w^{'}$ to $w' - w$, and $w' - w$ to $ -w' - w$, which satisifies
+the original function.
+
+\item\ \score{}%9.
+True or false: the sum of two normal operators is normal.  Justify.
+
+\textbf{Solution}
+
+Take this counterexample. Where A and B, are normal opertors.   
+
+$$
+A=
+\begin{bmatrix}
+  5& 0\\
+  0& 9
+\end{bmatrix}
+$$
+$$
+B=
+\begin{bmatrix}
+  0& -3\\
+  3& 0
+\end{bmatrix}\\
+$$
+$$
+A+B=
+\begin{bmatrix}
+5&-3\\
+3&9
+\end{bmatrix}
+$$
+\begin{align*}
+  (A+B)(A+B)^{*}=
+  \begin{bmatrix}
+    34& -12\\
+    -12& 90
+  \end{bmatrix}\\
+  (A+B)^{*}(A+B)=
+  \begin{bmatrix}
+  34& 12\\
+  12& 90
+\end{bmatrix}    \\
+ (A+B)(A+B)^{*}\neq(A+B)^{*}(A+B)\\
+\end{align*}
+
+So the statement is not true.
+\item\ \score{}%10.
+Show that the space of positive (semi)definite real symmetric
+matrices is convex.  Is the same true with ``complex Hermitian'' in
+place of ``real symmetric''?
+
+\textbf{Solution}
+
+Assume A and B are postive semi definite matrices. Then A and B, satisfy
+
+$$x^T A x \geq 0 \; \forall x$$
+
+Now we want to show that $\alpha$A+$(1-\alpha)$B, also satisfies this property.
+
+$$x^{T}(\alpha A+ (1-\alpha) B)x = \alpha x^T Ax + (1-\alpha) x^T Bx \geq 0 \; \forall x \wedge 0 \leq \alpha \leq 1$$
+
+So the real positive matrices are convex. This proof also works for conjugate transposes too.
+
+
+
+\item\ \score{}%11.
+Orthogonally diagonalize the matrix $A = \twobytwo{3&2\\2&3}$.  Find
+all square roots of~$A$; note that they are all self-adjoint.
+
+\textbf{Solution}
+
+Since the trace of the matrix is 6, $\lambda_1 + \lambda_2 = 6$. If we let
+$\lambda=1$, $(A-I)$, becomes singular. So the other eigen value becomes 5.
+
+The eigen vector in eigen space of 1, is (1,1), and the other eigen vector is (-1,1).
+
+$$
+P=
+\begin{bmatrix}
+  1&-1\\
+  1& 1
+\end{bmatrix}
+$$
+$$
+P^{-1}=
+\begin{bmatrix}
+  -1/2& 1/2\\
+  1/2& 1/2
+\end{bmatrix}
+$$
+$$
+D=
+\begin{bmatrix}
+  5& 0\\
+  0& 1
+\end{bmatrix}
+$$
+
+$$
+\sqrt{D}=
+\begin{bmatrix}
+  \sqrt{5}&0\\
+  0& 1
+\end{bmatrix}
+$$
+
+$$
+\sqrt{A}=P\sqrt{D}P^{-1}
+$$
+
+\item\ \score{}%12.
+Find a singular decomposition of the matrix $A = \twobytwo{2&3\\0&2}$.
+Use it to find $\max_{\Vert\xx\Vert \leq 1} \Vert A\xx\Vert$ and
+$\min_{\Vert\xx\Vert = 1} \Vert A\xx\Vert$, as well as the vectors
+where this maximum and minimum are attained.  Describe geometrically
+the image under $A$ of the closed unit disk in~$\RR^2$.
+
+\textbf{Solution}
+
+$$
+A^{T}A=
+\begin{bmatrix}
+ 2& 0\\
+ 3& 2 
+\end{bmatrix}
+\begin{bmatrix}
+  2&3\\
+  0&2\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+  4&6\\
+  6&13
+\end{bmatrix}
+$$
+
+The eigenvalues of are 16 and 1, therefore the singular values are 
+4 and 1. Therefore the norm operator is 4, and the minimum length of unit vectors
+is 1.
+
+The eigen valeus of $A^{T}A$ are $(1,2)$ and $(-2,1)$ for the singular values 4 and 1 
+respectively. So the vector that achieve the maximum and the minimum are precisely the normalized version of 
+this vectors.
+
+From this we also find $V^{*}$.
+
+$$
+V=\begin{bmatrix}
+  1/\sqrt5 & -2/\sqrt5\\
+  2/\sqrt5& 1/\sqrt{5}
+\end{bmatrix}
+$$
+
+To W we just do $w_[i]=\frac{1}{\sigma_{i}}A v_{i}$.
+
+$$
+W=\begin{bmatrix}
+  2/\sqrt5 & -1/\sqrt5\\
+  -1/\sqrt5 & 2/\sqrt5
+\end{bmatrix}
+$$
+So $A=W \Sigma V^{*}$, where $\Sigma$ is a just an operator is the singular values in the diagonal.
+
+\item\ \score{}%13.
+Prove that the operator norm of a matrix~$A$ coincides with the
+Frobenius norm of~$A$ if and only if $A$ has rank at most~$1$.
+
+\textbf{Solution}
+
+If A has rank 0, there is nothing to prove. The frobenius norm of a matrix is
+the largest singualr value of the matrix(From the notes). If A has rank one, that
+means it only has 1, non-zero singular value, therefore that value has to be the 
+one that has to outputed by the frobenius norm.
+
+If the matrix has rank greater than 1, then the frobenius norm and the 
+operator norm can't be equal since the frobenius norm is the sqaure root of the sum 
+of the squares of the singular values, which is greater than
+the heighest singular value. There the relationship is iff.
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% Various Emacs customizations:
+%%% Local Variables:
+%%% fill-column: 70
+%%% indent-tabs-mode: t
+%%% TeX-electric-sub-and-superscript: nil
+%%% TeX-brace-indent-level: 0
+%%% LaTeX-indent-level: 0
+%%% LaTeX-item-indent: 0
+%%% TeX-master: t
+%%% End:

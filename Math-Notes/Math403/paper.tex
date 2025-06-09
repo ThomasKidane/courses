@@ -1,0 +1,498 @@
+%hw-5.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%            Math 403 Homework \#5, Spring 2025            %%%%%%
+%%%%%%                                                          %%%%%%
+%%%%%%                 Instructor: Ezra Miller                  %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+
+\oddsidemargin=17pt \evensidemargin=17pt
+\headheight=9pt     \topmargin=26pt
+\textheight=564pt   \textwidth=433.8pt
+\parskip=1ex        %voffset=-6ex
+
+\usepackage{amsmath,amssymb,graphicx,color,enumitem}%,setspace%,mathrsfs%,hyperref
+\usepackage{booktabs}
+\usepackage[style=mla,backend=biber]{biblatex}
+\addbibresource{refs.bib}
+
+
+\setlist[enumerate]{parsep=1.5ex plus 4pt,topsep=0ex plus 4pt,itemsep=0ex}
+  \setlist[itemize]{parsep=1.5ex plus 4pt,topsep=-1ex plus 4pt,itemsep=-1.33ex}
+
+\leftmargini=5.5ex
+\leftmarginii=3.5ex
+
+%for \marginpar to fit optimally
+%hoffset=-1.02in
+\setlength\marginparwidth{2.2in}
+\setlength\marginparsep{1mm}
+\newcommand\red[1]{\marginpar{\linespread{.85}\sf%
+		   \vspace{-1.4ex}\footnotesize{\color{red}#1}}}
+\newcommand\score[1]{\marginpar{\vspace{-2ex}\color{blue}{#1/3}}\hspace{-1ex}}
+\newcommand\extra[1]{\marginpar{\color{blue}{#1/1}}\hspace{-1ex}}
+\newcommand\total[2]{\marginpar{\colorbox{yellow}{\huge #1/#2}}}
+\newcommand\collab[1]{\marginpar{\vspace{-11ex}\colorbox{yellow}{#1/3}}\hspace{-1ex}}
+\newcommand\magenta[1]{\colorbox{magenta}{\!\!#1\!\!}}
+\newcommand\yellow[1]{\colorbox{yellow}{\!\!#1\!\!}}
+\newcommand\green[1]{\colorbox{green}{\!\!#1\!\!}}
+\newcommand\cyan[1]{\colorbox{cyan}{\!\!#1\!\!}}
+\newcommand\rmagenta[2][0ex]{\red{\vspace{#1}\magenta{\phantom{:}}\,: #2}}
+\newcommand\ryellow[2][0ex]{\red{\vspace{#1}\yellow{\phantom{:}}\,: #2}}
+\newcommand\rgreen[2][0ex]{\red{\vspace{#1}\green{\phantom{:}}\,: #2}}
+\newcommand\rcyan[2][0ex]{\red{\vspace{#1}\cyan{\phantom{:}}\,: #2}}
+
+%For separated lists with consecutive numbering
+\newcounter{separated}
+
+\newcommand{\excise}[1]{}
+\newcommand{\comment}[1]{{$\star$\sf\textbf{#1}$\star$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                 %
+% TO ENABLE GRADING, DO NOT ALTER ABOVE THIS LINE %
+%                                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%new math symbols taking no arguments
+\newcommand\0{\mathbf{0}}
+\newcommand\CC{\mathbb{C}}
+\newcommand\FF{\mathbb{F}}
+\newcommand\NN{\mathbb{N}}
+\newcommand\QQ{\mathbb{Q}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\bb{\mathbf{b}}
+\newcommand\kk{\Bbbk}
+\newcommand\mm{\mathfrak{m}}
+\newcommand\vv{\mathbf{v}}
+\newcommand\xx{\mathbf{x}}
+\newcommand\yy{\mathbf{y}}
+\newcommand\GL{\mathit{GL}}
+\newcommand\FL{{\mathcal F}{\ell}_n}
+\newcommand\into{\hookrightarrow}
+\newcommand\minus{\smallsetminus}
+\newcommand\goesto{\rightsquigarrow}
+\newcommand\cc{\circledcirc}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\DeclareMathOperator{\median}{median}
+\DeclareMathOperator{\sign}{sign}
+\newcommand{\tucker}{\llbracket}
+
+
+
+%redefined math symbols taking no arguments
+\newcommand\<{\langle}
+\renewcommand\>{\rangle}
+\renewcommand\iff{\Leftrightarrow}
+\renewcommand\implies{\Rightarrow}
+
+%to explain about LaTeX commands:
+\newcommand\command[1]{\texttt{$\backslash$#1}}
+
+%new math symbols taking arguments
+\newcommand\ol[1]{{\overline{#1}}}
+
+%redefined math symbols taking arguments
+\renewcommand\mod[1]{\ (\mathrm{mod}\ #1)}
+
+%roman font math operators
+\DeclareMathOperator\im{im}
+
+%for easy 2 x 2 matrices
+\newcommand\twobytwo[1]{\left[\begin{array}{@{}cc@{}}#1\end{array}\right]}
+
+%for easy column vectors of size 2
+\newcommand\tworow[1]{\left[\begin{array}{@{}c@{}}#1\end{array}\right]}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{\mbox{}\\[-8ex]Computational Methods of Tensor Decomposition (Rough draft)\\\normalsize}
+\author{Written by: \\Tymon Hendershott \& Thomas Kidane\\[1ex]}
+\date{Wednesday, March 26, 2025}
+
+\maketitle
+
+\tableofcontents
+
+\noindent
+\section{Introduction}\\
+Tensors have increasingly become the modern workhorse for a wide rangeo f applications due to their specific properties that we aim to explore in this paper. However, due to hardware limitations in the advent of e, middle grounds must often be found between efficiency and accuracy. Studying tensor decompositions allows us to extract multilinear relationships from a large quanity of data.
+
+
+\subsection{Notation}\\
+
+The concept of the outer product is defined as $X=a\otimes b=ab^T$, producing the matrix X. This can be viewed as a two-dimensional version of the general tensor product:
+$$X=a^{(1)}\otimes a^{(2)}\otimes\cdots\otimes a^{(n)}\text{ with } x_{i_1 i_2 \cdots i_n}=a^{(1)}_{i_1}a^{(2)}_{i_2}\cdots a^{(n)}_{i_n}$$
+
+The rank of a tensor $\mathcal{X}$ is the minimum number of rank-one tensors needed to produce $\mathcal{X}$ as its sum. For a general rank-n tensor, this takes the following form:
+
+$$\mathcal{X}=\sum_{i=1}^n \lambda_n a_i^{(1)} \otimes \cdots \otimes a_i^{(n)}=[[\lambda;A^{(1)},\cdots,A^{(n)}]]$$
+    
+Where $\lambda$ contains all the coefficients.
+
+There are different ways of indexing a tensor, one way which we will use extensively in this paper is by fixing some of the indexes of the tensor and varying the others, creating different subarrays and fields of the tensor. In the simplest case we have fibers, which we get by fixing all but one index, slabs are made by fixing all but 2 indexes.
+
+We define the order of tensor as the number of its dimension, so an order 2 tensor is just a matrix and an order 1 tensor is just a vector. For a 3rd order tensor, we can index its fibers as $\mathcal{X_{\text{:jk}}}$(columns), $\mathcal{X}_{i:k}$(row) and $\mathcal{X}_{ij:}$(tube). In general we refer to the $n$-mode fiber of a tensor by fixing all but the $n^{th}$ index.
+
+\subsection{Tensor Reorderings}
+
+We can turn a tensor into a matrix, and we will use this technique extensively in our algorithms.
+There are many of reordering a tensor into a matrix, but we will only look at the mode-$n$ matricization.
+
+The mode $n$ matricization of a tensor turns $\mathcal{X}\in \RR^{I_1\times I_2 \times \cdots \times I_{N}}$, denoted $\bf{X}_{(n)}\in \RR^{I_{n} \cdot \cdots I_{n-1} \cdot I_{n+1} \cdots I_{N}}$, turns the mode-$n$ fibers into columns.
+
+We can make a mapping between a new matrix and the tensor, through the below formula.
+
+\begin{align*}
+    x_{i_{1},i_{_2},\cdots ,i_N} \mapsto j= 1+ \sum_{\underset{k\neq n}{k=1}}^{N}((i_{k}-1)\Pi_{\underset{m\neq n}{m=1}}^{k-1}I_m)
+\end{align*}
+
+\subsection{Important Matrix/Tensor Products}
+
+Kronecker Product: The Kronecker product between two arbitrarily-sized matrices $A\in \RR^{I\times J}$ and $B \in \RR^{K\times L}$, $A \cc B \in \RR^{(IK)\times (JL)}$, is a generalization of the outer product from vectors to matrices.
+
+\begin{align}
+    A\cc B := 
+    \begin{bmatrix}
+        a_{11}B & a_{12}B& \cdots & a_{1J}B\\
+        a_{21}B & a_{22}B& \cdots & a_{2J}B\\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{I_{1}}B & a_{I2}B & \cdots & a_{IJ}B
+    \end{bmatrix}
+\end{align}
+
+Mode-n Product: For an N-way tensor $\mathcal{A}\in \RR^{I_1 \times \cdots \times I_N},U\in \RR^{J\times I_n} $, the mode-n Product (generally denoted $\times_n$ for some $n \in \QQ_{>0}$) denotes the operation: $$\mathcal{A} \times_n U=\mathcal{B}\in\RR^{I_1\times \cdots \times I_{n-1} \times J\times I_{n+1}\times\cdots\times I_N}$$
+For CPD and Tucker decomposition, U is normally a unitary matrix. The mode-n product has the effect of replacing the length $I_n$ fibers with length J fibers.
+
+
+
+\section{Canonical Polyadic Decomposition (CPD)}\\
+
+The first type of tensor decomposition is rank decomposition, which is essentially expressing 
+a tensor as a finite sum of rank 1 tensors. The most prominent decompositions are canonical decomposition position(CANDECOMP) and parallel factors(PARAFAC) decomposition. These two methods boil down to the same principles, therefore we will refer to them as just CPD.
+
+The 3-way CPD case is as follows.
+
+\begin{align*}
+\underset{\hat{X}}{min} \text{ where } \hat{X} = \sum_{r=1}^{R}a_{r} \otimes b_{r} \otimes c_{r} = [[A,B,C]]
+\end{align*}
+
+If they are the same, $\hat X$ is an exact low rank approximation to X. Which is the same as:
+
+\begin{align*}
+    \hat X_{(1)}=(C \odot B)A^{T}\\
+    \hat X_{(2)}=(C \odot A)B^{T}\\
+    \hat X_{(3)}=(B \odot A)C^{T}\\
+\end{align*}
+
+For the general case we have
+
+\begin{align*}
+\hat X = \sum_{r=1}^{R} \lambda_r a_r^{(1)}\otimes a_r^{(2)} \otimes \cdots a_r^{(n)}
+= [[\lambda; A^{(1)}, A^{(2)},\cdots , A^{(n)}]]
+\end{align*}
+
+\begin{align*}
+\hat X_{(n)} = \Lambda(A^{(N)} \odot \cdots \odot A^{(n+1)} \odot A^{(N-1)} \odot \cdots \odot A^{(1)} )A^{(n)T}
+\end{align*}
+
+Where $\Lambda$ = Diag($\lambda$)
+
+We will look at 1 CPD algorithm called the Alternating Least Squares Algorithm
+
+\subsection{Alternating Least Squares(ALS)}
+
+This decomposition is the most widely used type of decomposition out in the real world, and the key
+idea behind it is just to iteratively fix one matrix and apply least squares algorithm(which is very well understood) to decrease the error while holding all the other matrices fixed, and do this as many times until some halting condition is reached. This algorithm works for a fixed rank, so 
+you have to set the required rank of the tensor to use the algorithm.
+
+In the case of a 3-way tensor, the decomposition would repeat the below steps.
+
+\begin{align*}
+    A\leftarrow arg\;min_{A} || X_{(1)}- (C \otimes B) A^{T}||\\
+    B\leftarrow arg\;min_{B} || X_{(2)}- (C \otimes B) A^{T}||\\
+    C\leftarrow arg\;min_{C} || X_{(3)}- (C \otimes B) A^{T}||
+\end{align*}
+
+Now if you squint your eyes at the equation you will see why it is called alternating least squares, since the solution to these problems is the same as solving the least squares problem for one case and then alternatingly solving it for the other ones. Below is a pseudocode of the canonical algorithm.
+
+\begin{algorithm}
+\begin{algorithmic}
+\Procedure{ALS}{$\mathcal{X}$,R=1}
+\If{$R\;not\;set$}
+    \For{$i \gets 1$ \textbf{to} $\infty$}
+        \State $ALS(\mathcal{X},i)$
+    \EndFor
+    
+\Else
+    \State $initialize \bf A^{(n)} \in \RR^{I_{n}\times R}\;for\;n=1,\cdots, N$
+    \While{not reached stopping condition}
+    \For{$n = 1,\cdots, N $}
+         \State $V \gets A^{(1)T}A^{(1)}*\cdots* A^{(n-1)TA^{}(n-1)}*A^{(n+1)}A^{(n+1)}*\cdots*A^{(N)T}A^{(N)}$
+         \State $A^{(n)}\gets \mathcal{X}_{(n)}(A^{(N)}\otimes \cdots \otimes A^{(n+1)} \otimes A^{(n-1)}\otimes \cdots \otimes A^{(1)})V^{\dagger}$
+    \EndFor
+    \EndWhile
+\EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Uniqueness}
+
+Matrices in general do not have a unique decomposition, but higher-order tensors do. We will 
+use the Kruskal rank to define the conditions for uniqueness.
+
+The Kruskal rank $k$ of a matrix M, denoted $k_{M}$, is the maximum number $k$ such any $k$ columns are linearly independent. A suffient uniqueness condition for CPD is:
+
+\begin{align*}  
+    \sum_{n=1}^{N}k_{A^{(n)}}\geq 2R+(N-1)
+\end{align*}
+
+While the necessary conditions are:
+\begin{align*}
+    min_{1,\cdots,N}\; rank(A^{(1)} \odot \cdots \odot A^{(n-1)} \odot A^{((n+1)} \odot \cdots \odot A^{(n)})=R\\
+    min_{1,\cdots, N}\left( \prod_{m=1,m\neq n}^{N}rank(A^{(m)})\right)\geq R
+\end{align*}
+
+\section{Tucker Decomposition}
+    
+To begin, let us review Singular Value Decomposition (SVD). Tucker Decomposition builds upon the generalized properties of SVD, extending them into higher dimensions. SVD decomposes a vector into 3 matrices: \begin{itemize}
+    \item U, a (generally) singular matrix containing the orthonormal eigenvectors of $AA^T$,
+    \item $\Sigma$, a diagonal matrix of singular values, and
+    \item V, a (generally) singular matrix containing the orthonormal eigenvectors of $A^TA$.
+\end{itemize}
+
+With 2-dimensional Tucker decomposition, or "matrix SVD", generally U and V are not of the forms $m \times 1$ (which would be a vector). This follows intuitively from the fact that most matrices cannot be represented as an outer product of two vectors. This point is emphasized to explain the idea behind the "rank" of decomposed tensors; it is usually not possible to represent a tensor as the decomposition of just one rank-1 tensor. Thus, the crux of Tucker decomposition lies in finding the smallest number of tensors to add together to get our original tensor (or, to approximate it to some controlled degree of error). 
+
+In n dimensions, Tucker decomposition manifests itself as n factor matrices and an n-dimensional hypercube tensor (see below image):
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Screenshot 2025-04-13 at 11.48.25 PM.png}
+    \caption{Tucker Decomposition (from Introduction to Tensor Decompositions and their
+Applications in Machine Learning, Rabanser et al)}
+    \label{fig:enter-label}
+\end{figure}
+In the above figure, $\mathcal{G}$ is the core tensor, where $\mathcal{G}\in \RR^{R_1 \times R_2 \times R_3}$ (note to self, $R_2$ is the purple one), and the factor matrices are: $$U^{(1)}\in \RR^{I\times R_1}, U^{(2)}\in \RR^{J \times R_2}, U^{(3)}\in \RR^{K \times R_3}$$ The core tensor $\mathcal{G}$ dnesly expresses the extent to which (and how) different tensor elements interact with each other. Meanwhile, the factor matrices represent the "parts we are compressing". The aim of Tucker decomposition is to capture latent multi-way relationships between variables while minimizing the memory allocation required.
+
+Naturally, the question arises: where do $R_1, R_2, \text{ and } R_3$ come from? Depending upon our application, the truthful answer is that they depend. When tensors are small, and there are few dimensions (as in the diagram above) we can easily compute the decomposition in full. However, for far larger applications, in which tensors can encompass terabytes of data, and in which the dimension can be far larger than 2 or 3, it becomes necessary to approximate Tucker decomposition to some degree of error in order to be able to meaningfully compute it (more on this later).
+
+For the above 3-dimensional case, Tucker decomposition looks like this:
+$$\min_{\hat{\mathcal{X}}}||X-\hat{\mathcal{X}}||\text{, where } \hat{\mathcal{X}}=\sum_{u_1=1}^{U^{(1)}}\sum_{u_2=1}^{U^{(2)}}\sum_{u_3=1}^{U^{(3)}}\mathcal{g}_{u_1 u_2 u_3}(a^{(1)}_{u_1} \otimes a^{(2)}_{u_1}\otimes a^{(3)}_{u_1})$$
+$$=\mathcal{G}\times_1 A^{(1)}\times_2 A^{(2)}\times_3 A^{(3)}=[[A^{(1)},A^{(2)},A^{(3)}]]$$
+
+More generally, the n-case looks as follows:
+
+$$\min_{\hat{\mathcal{X}}}||X-\hat{\mathcal{X}}||\text{, where } \hat{\mathcal{X}}=\sum_{u_1=1}^{U^{(1)}}\cdots\sum_{u_N=1}^{U^{(N)}}\mathcal{g}_{u_1 \cdots u_N}(a^{(1)}_{i_1 u_1} \otimes \cdots\otimes a^{(N)}_{i_N u_N})$$
+
+$$=\mathcal{G}\times_1 A^{(1)}\times_2 \cdots\times_N A^{(N)}=[[A^{(1)},\cdots,A^{(N)}]]$$
+
+\subsection{Sequentially-Truncated Higher Order Singular Value Decomposition}
+
+In recent years, one of the strongest methods for reducing memory consumption while computing tensor decompositions has been Sequentially-Truncated Higher Order Singular Value Decomposition (ST-HOSVD), which works through the following algorithm:
+
+\begin{algorithm}[H]
+  \caption{ST-HOSVD}
+  \begin{algorithmic}[1]      % “1” → show line numbers
+    \State\textbf{Data:}    Tensor $\mathcal{X}$, accuracy bound $\varepsilon$
+    \State \textbf{Result:}  Tensor core $\mathcal{G}$, factor matrices $\mathcal{F}$
+    \State $\mathcal{G} \gets \mathcal{X}$  /* Initialize $\mathcal{G}$ */
+    \For{$n = 1 : N$}
+      \State $\mathbf{S} \gets G_n\,G_n^{\mathsf T}$ /* Gram matrix */
+      \State $[\boldsymbol{\lambda}, \mathbf{V}] \gets \mathrm{eig}(\mathbf{S})$ /* $R_n$ is smallest value that satisfies $\varepsilon$ */
+      \State $\mathbf{U}_n \gets \mathbf{V}(:,\,1{:}R_n)$
+      \State $\mathcal{G} \gets \mathcal{G} \times_{n} \mathbf{U}_n^{\mathsf T}$ 
+    \EndFor
+    \State $\mathcal{F} \gets \mathbf{U}_1 \dots \mathbf{U}_N$
+    \State \textbf{return} $\mathcal{G}, \mathcal{F}$
+  \end{algorithmic}
+\end{algorithm}
+
+Put into words, this algorithm accomplishes Tucker decomposition through by repeating the following steps after:
+\begin{enumerate}
+    \item Matricize the core tensor $\mathcal{G}$ (which, in its first iteration is just $\mathcal{X}$) along some axis n.
+    \item Multiply $\mathcal{G}$ by its own transpose.
+    \item Compute the eigenvalues of this matrix.
+    \item Add the (sorted descending) eigenvalues until the cumulative sum is $\geq (1-\varepsilon)$. Labeling the number of eigenvalues needed to reach this value $R_n$, let $U_n$ be a tall matrix with the first $R_n$ eigenvectors as its columns.
+    \item Repeat on a different axis until all axes have been iterated through.
+\end{enumerate}
+
+This results in a single densor core tensor $\mathcal{G}$ and a number of factor matrices. The computational cost can be seen to reduce at each step, as we reduce the size of our tensor. However, it can intuitively be understood that this method is unoptimized. ST-HOSVD has a complexity of: $$O(I^2_{max}+\Pi_{r=1}^{N} I_r)$$ Consider the case in which the last axis, $I_N$, is far greater than any other. Our algorithm would "shrink" it last, burdening memory and slowing computation needlessly. Generally, if the size of a tensor is more than $\frac{1}{3}$ of a computer's RAM, ST-HOSVD doesn't work successfully, either being unable to compute, or trashing between the RAM and disk, causing massive performance degradation.
+
+\section{Different applications of Tensor Decomposition}
+Tensor decomposition has become a cornerstone of modern signal processing, offering unparalleled capabilities for analyzing multi-dimensional data. Below we present key applications with technical depth.
+
+    \subsection{EEG/MEG Source Localization Using CPD}
+    \subsubsection{Mathematical Framework}
+    The recorded neural data forms a third-order tensor:
+    
+    \begin{equation}
+    \mathcal{X} \in \mathbb{R}^{I \times J \times K}
+    \end{equation}
+    
+    \begin{itemize}
+        \item \(I\): Number of sensors (e.g., 64 EEG electrodes)
+        \item \(J\): Time samples (e.g., 1000 samples at 1 kHz)
+        \item \(K\): Frequency bins (e.g., 30 bins from 1-30 Hz via wavelet transform)
+    \end{itemize}
+    
+    The Canonical Polyadic Decomposition (CPD) represents:
+    
+    \begin{equation}
+    \mathcal{X} \approx \sum_{r=1}^R \mathbf{a}_r \circ \mathbf{b}_r \circ \mathbf{c}_r = \llbracket \mathbf{A}, \mathbf{B}, \mathbf{C} \rrbracket
+    \end{equation}
+    
+    where:
+    \begin{itemize}
+        \item \(\mathbf{A} = [\mathbf{a}_1 \cdots \mathbf{a}_R] \in \mathbb{R}^{I \times R}\): Spatial loading matrix
+        \item \(\mathbf{B} = [\mathbf{b}_1 \cdots \mathbf{b}_R] \in \mathbb{R}^{J \times R}\): Temporal loading matrix
+        \item \(\mathbf{C} = [\mathbf{c}_1 \cdots \mathbf{c}_R] \in \mathbb{R}^{K \times R}\): Spectral loading matrix
+    \end{itemize}
+    
+    \subsubsection{Alternating Least Squares (ALS) Implementation}
+    The optimization problem:
+    
+    \begin{equation}
+    \min_{\mathbf{A},\mathbf{B},\mathbf{C}} \left\lVert \mathcal{X} - \left( \mathbf{A},\mathbf{B},\mathbf{C} \right) \right\rVert_F^2 + \lambda(\|\mathbf{A}\|_F^2 + \|\mathbf{B}\|_F^2 + \|\mathbf{C}\|_F^2)
+    \end{equation}
+    
+    \begin{algorithm}[H]
+    \caption{CPD-ALS for EEG/MEG}
+    \begin{algorithmic}[1]
+    \State Initialize \(\mathbf{A}^{(0)}, \mathbf{B}^{(0)}, \mathbf{C}^{(0)}\) randomly
+    \For{iteration \(t = 1\) to \(T_{\text{max}}\)}
+        \State Update spatial mode:
+        \[
+        \mathbf{A}^{(t)} = \mathcal{X}_{(1)}(\mathbf{C}^{(t-1)} \odot \mathbf{B}^{(t-1)})(\mathbf{C}^{(t-1)\top}\mathbf{C}^{(t-1)} \ast \mathbf{B}^{(t-1)\top}\mathbf{B}^{(t-1)} + \lambda\mathbf{I})^{-1}
+        \]
+        \State Update temporal mode:
+        \[
+        \mathbf{B}^{(t)} = \mathcal{X}_{(2)}(\mathbf{C}^{(t-1)} \odot \mathbf{A}^{(t)})(\mathbf{C}^{(t-1)\top}\mathbf{C}^{(t-1)} \ast \mathbf{A}^{(t)\top}\mathbf{A}^{(t)} + \lambda\mathbf{I})^{-1}
+        \]
+        \State Update spectral mode:
+        \[
+        \mathbf{C}^{(t)} = \mathcal{X}_{(3)}(\mathbf{B}^{(t)} \odot \mathbf{A}^{(t)})(\mathbf{B}^{(t)\top}\mathbf{B}^{(t)} \ast \mathbf{A}^{(t)\top}\mathbf{A}^{(t)} + \lambda\mathbf{I})^{-1}
+        \]
+        \If{\(\|\mathcal{X} - \left( \mathbf{A}^{(t)},\mathbf{B}^{(t)},\mathbf{C}^{(t)} \right) \|_F^2 < \epsilon\)}
+            \State Break
+        \EndIf
+    \EndFor
+    \end{algorithmic}
+    \end{algorithm}
+    
+    \subsection{MIMO Channel Estimation}
+    \label{subsec:mimo}
+    
+    Massive MIMO (Multiple-Input Multiple-Output) systems in 5G/6G networks utilize tensor decomposition to address the \textbf{curse of dimensionality} in channel estimation. Consider a system with:
+    
+    \begin{itemize}
+        \item \(N_t\): Transmit antennas (e.g., 64)
+        \item \(N_r\): Receive antennas (e.g., 16 UEs)
+        \item \(F\): Subcarriers (e.g., 256 in 5G NR)
+        \item \(T\): Time slots (e.g., 14 OFDM symbols)
+    \end{itemize}
+    
+    The channel tensor \(\mathcal{H} \in \mathbb{C}^{N_t \times N_r \times F \times T}\) admits a \textbf{CPD structure}:
+    
+    \begin{equation}
+        \mathcal{H} = \sum_{p=1}^P \mathbf{t}_p \circ \mathbf{r}_p \circ \mathbf{f}_p \circ \boldsymbol{\tau}_p
+        \label{eq:channel_cpd}
+    \end{equation}
+    
+    \subsubsection{Component Interpretation}
+    Each rank-1 component corresponds to a physical propagation path:
+    
+    \begin{itemize}
+        \item \(\mathbf{t}_p \in \mathbb{C}^{N_t}\): Transmit array response vector for path \(p\)
+        \item \(\mathbf{r}_p \in \mathbb{C}^{N_r}\): Receive array response vector
+        \item \(\mathbf{f}_p \in \mathbb{C}^{F}\): Frequency response across subcarriers
+        \item \(\boldsymbol{\tau}_p \in \mathbb{C}^{T}\): Time-varying delay-Doppler profile
+    \end{itemize}
+    
+    \subsubsection{ALS Estimation Algorithm}
+    The Alternating Least Squares (ALS) implementation solves:
+    
+    \begin{equation}
+        \min_{\{\mathbf{t}_p,\mathbf{r}_p,\mathbf{f}_p,\boldsymbol{\tau}_p\}} \left\| \mathcal{H} - \sum_{p=1}^P \mathbf{t}_p \circ \mathbf{r}_p \circ \mathbf{f}_p \circ \boldsymbol{\tau}_p \right\|_F^2
+    \end{equation}
+    
+    \begin{algorithm}[H]
+    \caption{CPD-ALS for MIMO Channel Estimation}
+    \begin{algorithmic}[1]
+    \State Initialize \(\mathbf{T}^{(0)}, \mathbf{R}^{(0)}, \mathbf{F}^{(0)}, \mathbf{\mathcal{T}}^{(0)}\)
+    \For{iteration \(k = 1\) to \(K_{\text{max}}\)}
+        \State Fix \(\mathbf{R}, \mathbf{F}, \mathbf{\mathcal{T}}\), solve for \(\mathbf{T}\):
+        \[
+        \mathbf{T}^{(k)} = \mathcal{H}_{(1)}(\mathbf{\mathcal{T}}^{(k-1)} \odot \mathbf{F}^{(k-1)} \odot \mathbf{R}^{(k-1)})(\mathbf{\Gamma}^{(k-1)})^\dagger
+        \]
+        where \(\mathbf{\Gamma} = (\mathbf{\mathcal{T}}^\top\mathbf{\mathcal{T}}) \ast (\mathbf{F}^\top\mathbf{F}) \ast (\mathbf{R}^\top\mathbf{R})\)
+        \State Repeat for \(\mathbf{R}, \mathbf{F}, \mathbf{\mathcal{T}}\)
+        \If{\(\|\mathcal{H} - \hat{\mathcal{H}}^{(k)}\|_F^2 < \epsilon\)} \textbf{break}
+    \EndFor
+    \end{algorithmic}
+    \end{algorithm}
+    
+    \subsubsection{Complexity Analysis}
+    The per-iteration complexity is:
+    
+    \begin{equation}
+    \mathcal{O}\left(P(N_t + N_r + F + T)\right)
+    \end{equation}
+    
+    Breaking down:
+    \begin{itemize}
+        \item \(\mathcal{O}(PN_t)\): Transmit array updates
+        \item \(\mathcal{O}(PN_r)\): Receive array updates  
+        \item \(\mathcal{O}(PF)\): Frequency response estimation
+        \item \(\mathcal{O}(PT)\): Delay-Doppler tracking
+    \end{itemize}
+    
+\begin{thebibliography}{99}
+
+\bibitem{cichocki2014tensor}
+Andrzej Cichocki, et al. 
+\textit{“Tensor Decompositions for Signal Processing Applications From Two-way to Multiway Component Analysis”}.
+\textit{ArXiv}, 2014, https://doi.org/10.1109/MSP.2013.2297439. 
+Accessed 20 Apr. 2025.
+
+\bibitem{cobb2022fist}
+Benjamin Cobb, Hemanth Kolla, Eric Phipps, and Umit Catalyurek. 
+\textit{“FIST-HOSVD: Fused In-Place Sequentially Truncated Higher Order Singular Value Decomposition”}.
+Proceedings of the 2022 ACM Conference on Computing Frontiers, 2022, pp. 1–11. 
+DOI: 10.1145/3539781.3539798.
+
+\bibitem{rabanser2017introduction}
+Stephan Rabanser, et al. 
+\textit{“Introduction to Tensor Decompositions and Their Applications in Machine Learning”}.
+\textit{ArXiv}, 2017, https://arxiv.org/abs/1711.10781. 
+Accessed 20 Apr. 2025.
+
+\bibitem{zhang2022tensor}
+Ruoyu Zhang, Lei Cheng, Shuai Wang, Yi Lou, Wen Wu, and Derrick Wing Kwan Ng. 
+\textit{“Tensor Decomposition-Based Channel Estimation for Hybrid mmWave Massive MIMO in High-Mobility Scenarios”}.
+\textit{IEEE Transactions on Communications}, vol. 70, no. 7, 2022, pp. 1–1. 
+DOI: 10.1109/TCOMM.2022.3187780.
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% Various Emacs customizations:
+%%% Local Variables:
+%%% fill-column: 70
+%%% indent-tabs-mode: t
+%%% TeX-electric-sub-and-superscript: nil
+%%% TeX-brace-indent-level: 0
+%%% LaTeX-indent-level: 0
+%%% LaTeX-item-indent: 0
+%%% TeX-master: t
+%%% End:

@@ -1,0 +1,502 @@
+%hw-4.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%            Math 403 Homework \#4, Spring 2025            %%%%%%
+%%%%%%                                                          %%%%%%
+%%%%%%                 Instructor: Ezra Miller                  %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+
+\oddsidemargin=17pt \evensidemargin=17pt
+\headheight=9pt     \topmargin=26pt
+\textheight=564pt   \textwidth=433.8pt
+\parskip=1ex        %voffset=-6ex
+
+\usepackage{amsmath,amssymb,graphicx,color,enumitem}%,setspace%,mathrsfs%,hyperref
+\setlist[enumerate]{parsep=1.5ex plus 4pt,topsep=0ex plus 4pt,itemsep=0ex}
+  \setlist[itemize]{parsep=1.5ex plus 4pt,topsep=-1ex plus 4pt,itemsep=-1.33ex}
+
+\leftmargini=5.5ex
+\leftmarginii=3.5ex
+
+%for \marginpar to fit optimally
+\hoffset=-1.02in
+\setlength\marginparwidth{2.2in}
+\setlength\marginparsep{1mm}
+\newcommand\red[1]{\marginpar{\linespread{.85}\sf%
+		   \vspace{-1.4ex}\footnotesize{\color{red}#1}}}
+\newcommand\score[1]{\marginpar{\vspace{-2ex}\color{blue}{#1/3}}\hspace{-1ex}}
+\newcommand\extra[1]{\marginpar{\color{blue}{#1/1}}\hspace{-1ex}}
+\newcommand\total[2]{\marginpar{\colorbox{yellow}{\huge #1/#2}}}
+\newcommand\collab[1]{\marginpar{\vspace{-11ex}\colorbox{yellow}{#1/3}}\hspace{-1ex}}
+\newcommand\magenta[1]{\colorbox{magenta}{\!\!#1\!\!}}
+\newcommand\yellow[1]{\colorbox{yellow}{\!\!#1\!\!}}
+\newcommand\green[1]{\colorbox{green}{\!\!#1\!\!}}
+\newcommand\cyan[1]{\colorbox{cyan}{\!\!#1\!\!}}
+\newcommand\rmagenta[2][0ex]{\red{\vspace{#1}\magenta{\phantom{:}}\,: #2}}
+\newcommand\ryellow[2][0ex]{\red{\vspace{#1}\yellow{\phantom{:}}\,: #2}}
+\newcommand\rgreen[2][0ex]{\red{\vspace{#1}\green{\phantom{:}}\,: #2}}
+\newcommand\rcyan[2][0ex]{\red{\vspace{#1}\cyan{\phantom{:}}\,: #2}}
+
+%For separated lists with consecutive numbering
+\newcounter{separated}
+
+\newcommand{\excise}[1]{}
+\newcommand{\comment}[1]{{$\star$\sf\textbf{#1}$\star$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                 %
+% TO ENABLE GRADING, DO NOT ALTER ABOVE THIS LINE %
+%                                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%new math symbols taking no arguments
+\newcommand\0{\mathbf{0}}
+\newcommand\CC{\mathbb{C}}
+\newcommand\FF{\mathbb{F}}
+\newcommand\NN{\mathbb{N}}
+\newcommand\QQ{\mathbb{Q}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\bb{\mathbf{b}}
+\newcommand\kk{\Bbbk}
+\newcommand\mm{\mathfrak{m}}
+\newcommand\xx{\mathbf{x}}
+\newcommand\yy{\mathbf{y}}
+\newcommand\GL{\mathit{GL}}
+\newcommand\FL{{\mathcal F}{\ell}_n}
+\newcommand\SO{\mathit{SO}}
+\newcommand\into{\hookrightarrow}
+\newcommand\minus{\smallsetminus}
+\newcommand\goesto{\rightsquigarrow}
+
+%redefined math symbols taking no arguments
+\newcommand\<{\langle}
+\renewcommand\>{\rangle}
+\renewcommand\iff{\Leftrightarrow}
+\renewcommand\implies{\Rightarrow}
+
+%to explain about LaTeX commands:
+\newcommand\command[1]{\texttt{$\backslash$#1}}
+
+%new math symbols taking arguments
+\newcommand\ol[1]{{\overline{#1}}}
+
+%redefined math symbols taking arguments
+\renewcommand\mod[1]{\ (\mathrm{mod}\ #1)}
+
+%roman font math operators
+\DeclareMathOperator\im{im}
+
+%for easy 2 x 2 matrices
+\newcommand\twobytwo[1]{\left[\begin{array}{@{}cc@{}}#1\end{array}\right]}
+
+%for easy column vectors of size 2
+\newcommand\tworow[1]{\left[\begin{array}{@{}c@{}}#1\end{array}\right]}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{\mbox{}\\[-8ex]Math 403 Homework \#4, Spring 2025\\\normalsize
+	Instructor: Ezra Miller\\[-2.5ex]}
+\author{Solutions by: ...your name...\\[1ex]
+Collaborators: Tymon, Holly, Ben Greene\\
+(1 point for each of up to 3 collaborators who also list you)}
+\date{Due: 11:59pm Saturday 22 March 2025}
+
+\maketitle
+
+\vspace{-5ex}\collab{3}%
+
+\noindent
+\textsc{Reading assignments}\total{37}{48}%covers Lectures 16 - 22
+\begin{enumerate}[itemsep=-1ex]\setcounter{enumi}{15}
+\item[16--17.]\addtocounter{enumi}{2}%16. and 17.
+for Tue.~4 March and Thu.~6 March
+  \begin{itemize}
+  \item{}%
+  [Tapp, Chap.5] Lie algebras as tangent spaces to the identity
+  \item{}%
+  [Lax, Chap.9: Matrix-valued Functions, through \S Matrix Exponential]
+  \item{}%
+  [Wikipedia, \emph{Exponential map (Lie theory)}]
+  \end{itemize}
+
+\item%18.
+for Tue.~18 March
+  \begin{itemize}
+  \item{}%
+% [Stewart--Sun, \S IV.2.2] differentiability of simple eigenvalues
+  [Lax, Chapter 16, p.237--240] entrywise positive matrices, Perron's theorem
+  \end{itemize}
+
+\item%19.
+for Thu.~20 March
+  \begin{itemize}
+  \item{}%
+% [Stewart--Sun, \S IV.2.2] differentiability of simple eigenvalues
+  [Lax, Chapter 16, p.240--245] stochastic and nonnegative matrices,
+  Frobenius thm
+  \end{itemize}
+
+\item%20.
+for Tue.~25 March
+  \begin{itemize}
+  \item{}%
+  [Treil, \S 8.5] multilinear algebra, tensor product
+  \item{}%
+  [Wikipedia, \emph{Tensor product}]
+  \end{itemize}
+
+\item[21--22.]\addtocounter{enumi}{2}%21. and 22.
+for Thu.~27 March and Tue.~1 April
+  \begin{itemize}
+  \item{}%
+  [Wikipedia, \emph{Exterior algebra}]
+  \end{itemize}
+\end{enumerate}
+
+\noindent
+\textsc{Exercises}% covers Lectures 14 - 17
+
+\begin{enumerate}
+
+\item\ \score{0}%1.
+Show that $\Vert AB\Vert_2 \leq \Vert A\Vert_2\Vert B\Vert_2$ whenever
+the product $AB$ is defined.
+
+\textbf{Solution}
+
+\[
+\| A \|_2 = \sigma_{\max}(A)
+\]
+
+Since the spectral norm is the max streching factor of the matrix, the product
+can't strecth more than the product of the individual matrices. \magenta{If a more 
+rigorous proof is needed}, assume that it is false, and that there is \rmagenta{A more rigorous proof is indeed needed}
+a vector $x$ such that $|ABx|> ||A||_{2}||B||_{2}x$. \red{$\|A\|\|B\|x\neq\|Ax\|\|Bx\|$}But the $|Bx|$ is bounded by
+$|||B||_{2}x|$, so $ABx$ is bounded by $|||B||_{2}Ax|$,  and $Ax$ itself is bounded by 
+$|||A||_{2}x|$, so we get a contradiction, because $|ABx| \leq|||B||_{2}Ax| \leq |||A||_{2}||B||_{2}x|$.
+
+\item\ \score{2}%2.
+Show that $\lim_{k\to\infty} A^k = 0$ if and only if its spectral
+radius satisfies $\rho(A) < 1$. \red{Part II not quite rigorous}
+
+\textbf{Solution}
+
+\[
+\rho(A) = \max \{ |\lambda| \mid \lambda \text{ is an eigenvalue of } A \}
+\]
+
+Claim($\rightarrow$): $\lim_{k\to\infty} A^k = 0 \rightarrow \rho(A)<1$.
+
+Assume that $A$ has eigen value $\lambda \geq$ 1, and $x \in eigenspace(\lambda)$, then
+$\lim_{k\to \infty}A^{k}x=\lambda^{k}x$, which isn't equal to 0, unless $x$ is the zero vector
+which can't happen because it is an eigenvector.
+
+Claim($\leftarrow$): $\rho(A)<1 \rightarrow \lim_{k\to\infty} A^k = 0$\\
+The generalized eigen vectors of $A$ provide a basis for the entire ambient space. 
+Describe every vector as a linear combination of these generalized eigenvectors. 
+Since $\rho(A) < 1 \rightarrow \lim_{k\to\infty} |A^kx| = 0$, for all vectors x, since
+the generalized eigen vectors all go to 0. Now take the 'Standard' basis and multiply them with 
+$\lim_{k\to\infty}A^k$, they are all 0, which means the columns are 0, therefore the matrix is 0.
+
+\item\ \score{3}%3.
+Show that if $\nu$ is a consistent norm on $\CC^{n\times n}$, then
+$\lim_{k\to\infty} \nu(A^k)^{\frac 1k} = \rho(A)$.
+
+\textbf{Solution}
+
+Let $A^{*}=\frac{A}{\rho(A)+x}$, where $x>0$. Since $\rho(A/k)=|1/k|\rho(A)$,
+$\rho(A^{*})<1$. By the results of the previous question $\lim_{k\rightarrow \infty} (\nu((A^*)^{k}))<1$, since 
+it is submultiplicative.
+
+This also means also $(\nu((A^{*})^{k}))^{1/k}<1$. Decomposing to our original expression,
+$(\rho(A)+x)\nu((A^{k}))^{1/k}<1$, if you take the sequence $x=1/k$, we see that this converges to $\nu(A^{k})^{1/k}=\rho(A)$ since
+$\rho(A^{k})\geq \rho(A)^{k}$, for any consistent norm $\nu$.
+
+\item\ \score{0}%4.
+Prove or disprove, and salvage the statement as best you can in case
+you find it's false:
+%
+If~$\Vert(\tilde\lambda I - A)^{-1}\Vert \geq \eta$ then there is an
+eigenvalue $\lambda$ of~$A \in \CC^{n \times n}$ satisfying
+$$%$$ $
+  |\tilde\lambda - \lambda| \leq 2(\Vert A\Vert + \eta^{-1})\eta^{-\frac1n}.
+$$%$$ $
+
+\textbf{Solution}
+
+
+
+\item\ \score{2}%5.
+For $A \in \CC^{m \times n}$, set $\Vert A\Vert_\infty =
+\displaystyle\max_{\Vert x \Vert_\infty = 1} \Vert Ax\Vert_\infty$.
+Prove that $\Vert A\Vert_\infty = \displaystyle\max_i \sum_j
+|a_{ij}|$. \red{Not quite}
+
+
+\textbf{Solution}
+
+Claim \#1: All the elements of $x$ are conjugates of all the elements in a row.
+
+Assume the largest absolute value entry happens in in the row $j$.
+\begin{align*}
+  \|Ax\|&=\|(Ax)_{j}\|\\
+  (Ax)_{j}&= A_{j}x
+\end{align*}
+
+This is a sum of values where each value is bounded by the absolute values of the 
+numbers being multiplied. If you make the entries of $x$ the conjugates then you 
+get the max value of this expression, and through construction we know that 
+this is the max value that can be achieved since the absolute value is bounded by the 
+product of the absolute values(moduleses), and since the infinity norm of $x$ is 1, then the max the 
+value could be is the absolute value of the entries in each row. Which we have found a 
+valid construction. Each element of $x$ is also normalized to be on the unit circle.
+
+\item\ \score{1}%6.
+Assume that the union of $m$ out of the $n$ Gerschgorin disks
+$\mathcal{G}_i$ is disjoint from the other $n - m$ disks.  Prove that
+the union of $m$ disks contains precisely $m$ of the eigenvalues.
+Hint: how do the eigenvalues move as $A$ proceeds along a straight
+line to~$\widetilde A$? \red{Not rigorous: you need an explicit deformation and an explicit use of continuity. }
+
+\textbf{Solution}
+
+Start off with a matrix that only contains the elements on the diagonal. The elements on the diagionals 
+are the eigenvalues and the union of all the Gerschgorin disks are just the points.
+Since we will take the union of $m$ of the Gerschgorin disks, find the rows from which we will get the radius.
+
+Slowly add multiplies of the these rows subtraced the diagonal to the matrix. So we are slowly 
+'moving' towards A. Since the deformation of the eigenvalues is contininous the eigenvalues can't 'jump' out 
+of the union of the m disks  because if they did, they would have to be in another Gerschgorin disk, but since the 
+$m$ Gerschgorin disks are disjoint from the ones, it would be left in no Gerschgorin disk, which is a contradiction.
+
+So once you finish adding back all the elements in the rows of the Gerschgorin disk, you can start adding the other rows 
+subtracted the diagonal back. By the same reasoning the eigenvalues can't leave the union of the $n-m$ disks, and in the end.
+You get back A with m eigenvalues in the union of $m$ of the Gerschgorin disks and the other $n-m$ in the other disks.
+
+Finer note about 'jumping', the union of the $m$ Gerschgorin disks is closed union of circles/spheres, and the other $n-m$ 
+Gerschgorin disks are just points. Since the eigenvalues move contininously, it would have to first be on the boundary of the union of the 
+$m$ Gerschgorin disks and then move towards a point(Since the other n-m Gerschgorin disks are just points). You will have a nonzero distance
+between these points and the boundary since they are disjoint, so the eigenvalue would have to move this distance to get to the other points. 
+But that would imply that it would be in an area where it isn't in the union of any Gerschgorin disks, which is the contradiction.
+
+\item\ \score{1}%7.
+Let $G(A)$ be the union of the Gerschgorin disks of~$A$.  Show that
+the intersection $\bigcap_S G(S^{-1}AS)$ over all nonsingular
+matrices~$S$ equals the spectrum of~$A$.
+
+\textbf{Solution}
+
+First the eigenvalues will always be in the Gerschgorin disks since change of basis doesn't change the eigen values.
+
+Assume there is some element element except the eigenvalues in the intersection. Take the jordan canonical form of the matrix.
+Since there are eigenvalues on the diagonal, the Gerschgorin disks are centered around the eigenvalues and the radius is at max 1. Since there
+are only 1's in the superdiagonal. Now change the basis of so that the ones become arbigtrarily small, so $x$ can't be arbitrarily close to the \red{You need to explain how to do this}
+eigenvalues, therefore only the eigenvalues are in the intersection.
+
+\item\ \score{3}%8.
+Prove that the spectrum of~$A$ is contained in $G(A) \cap G(A^\top)$.
+Illustrate with the $3 \times 3$ matrix with entries $a_{ij} = i/j$.
+\textbf{Solution}
+
+The characteristic polynomial of A and $A^{T}$ are the same. So the spectrum
+is in the interseciton.
+
+$$
+A=\begin{bmatrix}
+  1 & 1/2 & 1/3\\
+  2 & 1 & 2/3\\
+  3 & 3/2 & 1
+\end{bmatrix}
+$$
+
+The reduced row echelon form of the matrix \( A \) is:
+\[
+\text{rref}(A) =
+\begin{bmatrix}
+1 & 0 & -1 \\
+0 & 1 & 2 \\
+0 & 0 & 0
+\end{bmatrix}
+\]
+
+The reduced row echelon form of the transpose of \( A \) is:
+\[
+\text{rref}(A^\top) =
+\begin{bmatrix}
+1 & 0 & -1 \\
+0 & 1 & 2 \\
+0 & 0 & 0
+\end{bmatrix}
+\]
+
+So the eigen values are the same.
+
+\item%\ \score{}%9.
+Fix the matrix
+  $$%$$ $
+  A =
+  \left[
+  \begin{array}{@{}rrr}
+     7 & -16\ &  8 \\
+   -16 &  7 \ & -8 \\
+     8 & -8 \ & -5 
+  \end{array}
+  \right].
+  $$%$$ $
+\begin{enumerate}%[(i)]%package {enumerate} not compatible with {enumitem}
+  \item\ \score{3}%(a)
+  Use Gerschgorin's Theorem to say as much as you can about the
+  locations of the eigenvalues of and the spectral radius of~$A$.
+
+  \textbf{Solution}
+
+  The eigen values of A are within two cicles, centered around 7 of radius 24 and -5 of radius 16.
+  
+  \item\ \score{3}%(b)%
+  Consider $D^{-1}AD$ for a diagonal matrix~$D$ to see if you can
+  improve your estimates for the eigenvalue locations.
+
+  \textbf{Solution}
+
+  $$
+  \begin{bmatrix}
+    99 & 0 &0\\
+    0 &9 &0\\
+    0 &0 &201
+  \end{bmatrix}  
+  \begin{bmatrix}
+  7 & -16 &8\\
+  -16 &7 &-8\\
+  8 &-8 &-5
+  \end{bmatrix}  
+  \begin{bmatrix}
+  1/99 & 0 &0\\
+  0 &1/9 &0\\
+  0 &0 &1/201
+  \end{bmatrix}
+  =
+\begin{bmatrix}
+  7 & -176 &\frac{264}{67}\\
+  \frac{-16}{11} &7 &\frac{-24}{67}\\      
+  \frac{536}{33} &\frac{-536}{3} &-5
+\end{bmatrix}  
+  $$
+
+  I think so? I don't get a better approximation.
+
+  \item\ \score{3}%(c)%
+  Compute the actual eigenvalues and comment on the quality of your
+  estimates in~(a) and~(b).
+
+  \textbf{Solution}
+
+  The eigenvalues are 27, -9. -9. I guess I should have guessed 
+  that the two of the eigen values are the same because the disks are the same.
+  But I don't have a proof for that. I also see that on eof the eigen values is very far from the center.
+
+  \end{enumerate}
+
+\item\ \score{2}%10.
+Find the Lie algebra $\mathfrak{so}_n$ of the special orthogonal group
+$\SO_n(\RR)$.\red{This is right but it doesn't give the actual Lie algebra unless you also compute the Lie algebra of $O(n)$}
+
+\textbf{Solution}
+
+The Lie algebra of the orthonal group is set of the derivatives of all paths through the origin. Since any 
+path along the origin inside the orthogonal group has to have determinant one(The determinant is contininous and therefore there is no
+discontinious jump between the matrices of determinant 1 and -1, and the determinant of the identity is 1), the Lie algebra of the special orthogonal group is just 
+the Lie algebra of the Orthogonal group, this group is also a subset of the lie algebra of the special linear group since the elements 
+along the diagonal are zero in a skew matrix.
+
+\item\ \score{3}%11.
+Fix a matrix group~$G\subseteq M_n F$ over the field $F\in\{\RR,\CC\}$
+and a matrix $A \in G$.  Show that the tangent space $T_A(G)$ of $G$
+at~$A$ is $A\mathfrak{g}$, and show that this equals~$\mathfrak{g}A$.
+
+\textbf{Solution}
+
+Claim 1: A$\mathfrak{g} \subseteq T_{A}(G)$.
+
+For every element in the Lie algera, there exists a path that crosses through the origin and has that element 
+as a derivative. If you multiply this path by A, then this path crosses through A at 0, and is also in the group, the derivative 
+of this new path is the old derivative times A, so A$\mathfrak{g} \subseteq T_{A}(G)$.
+
+Claim 2: $ T_{A}(G)\subseteq A\mathfrak{g} $
+
+Take a path in $T_{A}{G}$. At 0 the path is A. Since A is in a group it must have an inverse, multiply this path by the inverse, and then you 
+get path that crosses the origin at 0, and this path is in $\mathfrak{g}$. So when you multiply it by A, you get back to the previous path, proving the lemma.
+
+This proof also works for $\mathfrak{g}A$, so they are equal(since $Ag = T_{A}({G}) \wedge gA = T_{A}({G}) \rightarrow gA = Ag$ ).
+
+\item\ \score{3}%12.
+Prove that $\det(e^A) = e^{\mathrm{tr}(A)}$.
+
+\textbf{Solution}
+
+Take the jordan block of A. So $A=P^{-1}JP$.
+
+\begin{align*}
+  det(e^{A})&=det(\sum_{k=0}^{\infty}{\frac{A^{k}}{k!}})=det(P^{-1}\sum_{k=0}^{\infty}{\frac{J^{k}}{k!}}P)\\
+            &det(P)*det(\sum_{k=0}^{\infty}{\frac{J^{k}}{k!}})*det(P^{-1})\\
+\end{align*}
+
+Since J, is upper diagonal $det(\sum_{k=0}^{\infty}{\frac{J^{k}}{k!}})=e^{\lambda_1 + \lambda_2 + \cdots + \lambda_n}$(J upper diagonal $\rightarrow$
+the elements in the diagonal become $e^{\lambda_1},e^{\lambda_2}, \cdots $ and there are no elements in the lower diagonal), which is
+just $e^{tr(A)}$
+
+\item\ \score{2}%13.
+Explain why $\mathfrak{su}_n =\mathfrak{u}_n\cap\mathfrak{sl}_n(\CC)$.
+(You may use the previous exercise.)
+
+\textbf{Solution}
+
+Claim 1: $\mathfrak{su}_{n} \subseteq \mathfrak{u}_{n} \cap \mathfrak{sl}_{n}$
+
+This is trivially true by defintion of the $SU$.
+
+Claim 2: $ \mathfrak{u}_{n} \cap \mathfrak{sl}_{n} \subseteq \mathfrak{su}_{n}$
+
+Take $A \in \mathfrak{u}_{n} \cap \mathfrak{sl}_{n}$.
+
+Take the path realization of A. This path is in both $U_n$ and $SL_{n}$(By lecture 16 and lecture 17) and therefore 
+is also in $SU_{n}$. So $e^{tA}$ is both in $U_n$ and $SL_n$.\red{You've gotta say a little more}
+
+\item\ \score{3}%14.
+Let $\gamma: ( -\varepsilon, \varepsilon ) \to \GL_n(F)$ be a
+differentiable path, where $F \in \{\RR,\CC\}$.  Use Cramer's rule (or
+some other method) to show that the inverse path $t \mapsto
+\gamma(t)^{-1}$ is differentiable.
+
+\textbf{Solution}
+
+\begin{align*}
+  A^{-1}=\frac{1}{det(A)}adj(A)
+\end{align*}
+
+Since the determinant is never zero and the cofactor and determinant are a rational function. The
+derivative is always defined.
+
+\end{enumerate}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% Various Emacs customizations:
+%%% Local Variables:
+%%% fill-column: 70
+%%% indent-tabs-mode: t
+%%% TeX-electric-sub-and-superscript: nil
+%%% TeX-brace-indent-level: 0
+%%% LaTeX-indent-level: 0
+%%% LaTeX-item-indent: 0
+%%% TeX-master: t
+%%% End:

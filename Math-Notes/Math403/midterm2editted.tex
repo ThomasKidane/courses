@@ -1,0 +1,499 @@
+%midterm2.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%            Math 403 Midterm \#2, Spring 2025             %%%%%%
+%%%%%%                                                          %%%%%%
+%%%%%%                 Instructor: Ezra Miller                  %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+
+\oddsidemargin=17pt \evensidemargin=17pt
+\headheight=9pt     \topmargin=26pt
+\textheight=564pt   \textwidth=436.5pt
+\parskip=1ex        %voffset=-6ex
+
+\usepackage{amsmath,amssymb,graphicx,color,enumitem,amsthm}%,setspace%,mathrsfs%,hyperref
+\usepackage{tikz-cd}
+
+% Define theorem environment
+\newtheorem{theorem}{Theorem}
+\setlist[enumerate]{parsep=1.5ex plus 4pt,topsep=0ex plus 4pt,itemsep=0ex}
+  \setlist[itemize]{parsep=1.5ex plus 4pt,topsep=-1ex plus 4pt,itemsep=-1.33ex}
+
+\leftmargini=5.5ex
+\leftmarginii=3.5ex
+
+%for \marginpar to fit optimally
+\hoffset=-1.02in
+\setlength\marginparwidth{2.2in}
+\setlength\marginparsep{1mm}
+\newcommand\red[1]{\marginpar{\linespread{.85}\sf%
+		   \vspace{-1.4ex}\footnotesize{\color{red}#1}}}
+\newcommand\score[1]{\marginpar{\vspace{-2ex}\color{blue}{#1/14}}\hspace{-1ex}}
+\newcommand\extra[1]{\marginpar{\color{blue}{#1/1}}\hspace{-1ex}}
+\newcommand\total[2]{\marginpar{\colorbox{yellow}{\huge #1/#2}}}
+\newcommand\collab[1]{\marginpar{\vspace{-11ex}\colorbox{yellow}{#1/3}}\hspace{-1ex}}
+\newcommand\magenta[1]{\colorbox{magenta}{\!\!#1\!\!}}
+\newcommand\yellow[1]{\colorbox{yellow}{\!\!#1\!\!}}
+\newcommand\green[1]{\colorbox{green}{\!\!#1\!\!}}
+\newcommand\cyan[1]{\colorbox{cyan}{\!\!#1\!\!}}
+\newcommand\rmagenta[2][0ex]{\red{\vspace{#1}\magenta{\phantom{:}}\,: #2}}
+\newcommand\ryellow[2][0ex]{\red{\vspace{#1}\yellow{\phantom{:}}\,: #2}}
+\newcommand\rgreen[2][0ex]{\red{\vspace{#1}\green{\phantom{:}}\,: #2}}
+\newcommand\rcyan[2][0ex]{\red{\vspace{#1}\cyan{\phantom{:}}\,: #2}}
+
+\newcommand\points{\makebox[0pt][r]{[14pts]\ }}
+
+%For separated lists with consecutive numbering
+\newcounter{separated}
+
+\newcommand{\excise}[1]{}
+\newcommand{\comment}[1]{{$\star$\sf\textbf{#1}$\star$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                 %
+% TO ENABLE GRADING, DO NOT ALTER ABOVE THIS LINE %
+%                                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%new math symbols taking no arguments
+\newcommand\0{\mathbf{0}}
+\newcommand\bb{\mathbf{b}}
+\newcommand\ee{\mathbf{e}}
+\newcommand\pp{\mathbf{p}}
+\newcommand\vv{\mathbf{v}}
+\newcommand\ww{\mathbf{w}}
+\newcommand\xx{\mathbf{x}}
+\newcommand\yy{\mathbf{y}}
+\newcommand\zz{\mathbf{z}}
+\newcommand\CC{\mathbb{C}}
+\newcommand\FF{\mathbb{F}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\Cb{\mathbf{C}}
+\newcommand\Nb{\mathbf{N}}
+\newcommand\Ec{\mathcal{E}}
+\newcommand\Mc{\mathcal{M}}
+\newcommand\Pc{\mathcal{P}}
+\newcommand\Vc{\mathcal{V}}
+\newcommand\GL{\mathit{GL}}
+\newcommand\from{\leftarrow}
+\newcommand\ffrom{\longleftarrow}
+\newcommand\goesto{\rightsquigarrow}
+
+%redefined math symbols taking no arguments
+\newcommand\<{\langle}
+\renewcommand\>{\rangle}
+\renewcommand\aa{\mathbf{a}}
+\renewcommand\iff{\Leftrightarrow}
+\renewcommand\implies{\Rightarrow}
+
+%to explain about LaTeX commands:
+\newcommand\command[1]{\texttt{$\backslash$#1}}
+
+%for easy 2 x 2 matrices
+\newcommand\twobytwo[1]{\left[\begin{array}{@{}cc@{}}#1\end{array}\right]}
+
+%for easy column vectors
+\newcommand\colvec[1]{\left[\begin{array}{@{}c@{}}#1\end{array}\right]}
+
+%replaces \atop
+\newcommand{\aoverb}[2]{{\genfrac{}{}{0pt}{1}{#1}{#2}}}
+
+%for overlines
+\def\ol#1{{\overline {#1}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{\mbox{}\\[-8ex]Math 403 Midterm \#2, Spring 2025\\\normalsize
+	Instructor: Ezra Miller\\[-1.5ex]}
+\author{[1pt] Solutions by: Thomas Kidane\\[1ex]
+I verify that I have consulted no electronic or human sources except
+those allowed\\
+and that I have in all other ways complied with Duke's code of
+academic honesty.\hfill\mbox{}\\[1ex]
+\ \ \ [1pt] Signature : I agree}
+\date{Due Date: 11:59pm Thursday 17 April 2025}
+
+\maketitle
+\red{\vspace{-25ex}What you've written generally indicates nuanced
+comprehension of what was being asked.  Your explanations, when they
+are correct---which is most of the time---are logical and readable.
+Work on precision, especially details of mathematical definitions,
+since it might save you from errors.}
+\total{81}{100}
+% 14	9	14	7	11	10	14
+\thispagestyle{empty}%
+
+\vspace{-3ex}%
+\noindent
+\textsc{Problems}
+
+\begin{enumerate}
+\item\ \score{14}%1.
+Fix an $n \times n$ complex matrix~$A$.  Among all of the eigenvalues
+of~$A$, let $\lambda$ be one of maximal absolute value.  If $\sigma$
+is the largest singular value of~$A$, show that $|\lambda| \leq
+\sigma$.
+\red{There's a lot of text before the final two sentences.  Only the
+sentence ``If we show\ldots'' is needed.  The rest should be deleted.}
+
+\textbf{Solution}
+
+It is enough to look at points on the unit circle/sphere/hyper-sphere, since all 
+other vectors are just linear scalings of these vectors. Take the shmidt decomposition of 
+of $A$.
+
+\begin{align*}
+	Ax=\sum_{k=1}^{n}{\sigma_{k}(x,v_{k})w_{k}}
+\end{align*}
+
+Where $n$ is the number of singular values(for the sake of simplicty I also consider singular values that are 0), the $v$'s and $w$'s orthogonal.
+If we show that the norm of $Ax$ for any unit vector $x$ is bounded by $\sigma_{max}$, then 
+any vector vector in any eigenspace is bounded by $\sigma$ and therfore $\lambda$ is also bounded by $\sigma_{max}$.
+
+Take any $x$ in the unit sphere, then it can be decomposed into $v$'s, because the $v$'s are an othonormal basis.
+
+\begin{align*}
+	x=\alpha_{1}v_{1}+\cdots +\alpha_{n}v_{n}\\
+	|x|^{2}=1=\alpha_{1}^{2}|v_{1}|^{2} +\cdots \alpha_{n}^{2}|v_{n}|^{2}\\
+	1=\alpha_{1}^{2} +\cdots \alpha_{n}^{2}
+\end{align*}
+
+There are no mixed terms since the $v$'s are orthogonal.
+
+\begin{align*}
+	|A(\alpha_{1}v_{1}+\cdots+\alpha_{n}v_{n})|^{2}&=|\alpha_{1}w_{1}\sigma_{max}+\cdots +\sigma_{n}\alpha_{n}\sigma_{n}|\\
+	&\alpha_{1}^{2}\sigma_{max}+\cdots +\alpha_{n}^{2}\sigma_{n}\leq \sigma_{max}
+\end{align*}
+
+There are no mixed terms since the $w$'s are orthogonal. Since the magnitude of the unit vectors are 
+bounded by the maximum singular value, assume some $\lambda$ is the max eigenvalue. Then take the unit vector,
+we know that this is bounded by $\sigma_{max}$ after applying $A$ to it,therefore $\lambda\leq \sigma_{max}$.
+
+\item\ \score{9}%2.
+Fix $A \in \CC^{n \times n}$ and $\varepsilon > 0$.  Prove that there
+is a consistent matrix norm $\Vert\cdot\Vert$ such that $\rho(A) \leq
+\Vert A \Vert \leq \rho(A) + \varepsilon$.  Conclude that the spectral
+radius of~$A$ satisfies $\rho(A) = \inf_{\Vert\cdot\Vert}\Vert A
+\Vert$, where the infimum is taken over all consistent matrix norms
+$\Vert\cdot\Vert$.
+\red{This solution is more or less correct in its broad strokes but is
+missing details, contains deductive errors, and has deficient citations.}
+
+\textbf{Solution}
+
+Lemma 1: The infinity norm is a consistent norm. Refer to Matrix
+\red{Be more precise in your citation.  I need to know precisely what
+result you're citing to evaluate whether it says what you think it
+says or need it to say.}
+Perturbation theory, chapter 2.
+
+Lemma 2: $v_{T}(X):=v(TXT^{-1})$ is consistent norm if $v$ is a consistent norm and $T$ is invertible.
+
+Pf: We want $v_{T}(AB)\leq v_{T}(A)v_{T}(B)$, but if we plug in our definition, we 
+
+\begin{align*}
+	v(TABT^{-1}) \leq v(TAT^{-1})v(TBT^{-1})
+\end{align*}
+
+But this is true since $v$ is consistent(Take the matrix being applied
+to as $A=TAT^{-1}$ and $B=TBT^{-1}$).
+
+Now we can take the jordan normal form of $A$, then scale the basis so
+\red{Details required.}
+that the elements on the super diagonal are less than $\epsilon$. Then
+we can make a consistent norm that applies the infinity norm on
+\red{The Jordan form theorem does not claim that the change-of-basis
+matrix can be chosen unitary.}
+this(We can use lemma 2 to get rid of the unitary matrices in the
+jordan normal form decomposition). And we are done, since the maximum
+sum of the absolute values of the elements in the rows are less than
+$\rho(A)+\epsilon$. We can make a sequence of decreasing norms, but
+the lower bound is $\rho(A)$ since for any consistent norm
+$\rho(A)\leq v(A)$, and we can make a norm such that $v(A)<\rho(A)
++\epsilon $ for any $\epsilon >0$.
+
+\item\ \score{14}%3.
+Show that equality in Elsner's theorem happens if and only if $A =
+\omega\Vert A\Vert I$ for some complex number~$\omega$ with $|\omega|
+= 1$ and $\widetilde A$ has $-\omega\Vert \widetilde A\Vert$ as an
+eigenvalue, where $\Vert A\Vert$ is the operator norm of~$A$.
+\red{good, logical, readable}
+
+\textbf{Solution}
+
+For the take of simplicity I have listed the original proof for Elsner's theorem below so that refer to it line by line, credit to G.W. Stewart and Ji-guang Sun for their book.
+
+\begin{theorem}[1.3 (Elsner)]
+For any \( A \) and \( \tilde{A} \),
+
+\[
+\text{hd}(A, \tilde{A}) \leq (\|A\|_2 + \|\tilde{A}\|_2)^{1 - \frac{1}{n}} \|E\|_{2}^{\frac{1}{n}}.
+\]
+\end{theorem}
+
+\begin{proof}
+Since the right-hand side of (1.4) is symmetric in \( A \) and \(
+\tilde{A} \), it is sufficient to prove that it bounds \(
+\text{sv}_A(\tilde{A}) \). Assume the maximum in (1.1) is attained for
+the eigenvalue \( \lambda \) of \( \tilde{A} \), and let \( x_1,
+\ldots, x_n \) be orthonormal vectors with \( \tilde{A}x_1 = \lambda
+x_1 \). Then
+\[
+\begin{aligned}
+\text{sv}_A(\tilde{A})^n &\leq \Pi_i |\lambda_i - \tilde{\lambda}| \\
+&= \det(A - \tilde{\lambda}I) \\
+&\leq \Pi_i \|(A - \tilde{\lambda}I)x_i\|_2 \quad [\text{Hadamard inequality (1.2.2)}] \\
+&= \|(A - \tilde{A})x_1\|_2 \Pi_{i>1} \|(A - \tilde{\lambda}I)x_i\|_2 \\
+&\leq \|E\|_2 (\|A\|_2 + \|\tilde{A}\|_2)^{n-1}.
+\end{aligned}
+\]
+\end{proof}
+
+Suffieciecy($\rightarrow$):
+
+Since the eigenvalues of A are the same we all only need to focus on
+the eigenvalues of $\tilde A$, and since it has the eigenvalue,
+$-\omega \tilde A$ which is in the opposite direciton of $\omega$ the
+biggest difference is between this two eigenvalues, because any other
+eigenvalue can only be closer and not farther since this eigenvalue is
+in the opposite direciton and has the largest magnitude possible.
+\red{\checkmark}
+
+Therefore $sv_{\tilde A}^{n}=( ||\omega A|| + || \omega \tilde A||)^{n} = ( || A|| + || \tilde A||)^{n} $(you can just add the magnitudes to get the difference), we also know that $||E||$ is $ ( || A|| + || \tilde A||)$ from the last line in the 
+proof of Elsner's Theorem. We also know that $||((A - \tilde \lambda I))x_{i}||=|| \omega A|| +  || \omega \tilde A||=( || A|| + || \tilde A||)$. So we have equality.
+
+Necessity($\leftarrow$):
+
+For the first line to become equality we need that all the eigenvalues of $A$ have to be the same, let this value be $\omega ||A||$(The eigenvalue's magnitude will be the operator norm if all the eigenvalues are the same) . For the hadamard inequality to become equality on the third line we need that 
+$||(A-\tilde \lambda)x_{i}||_{2}$ are an orthogonal set(That is when the Hadamard inequality becomes equality). Continuing on the transition from the $4^{th}$ to last line we need to have that,
+$||(A-\tilde \lambda)x_{i}||_{2}=(||A||_{2}+||\tilde A||_{2})$, but for the triangle inequality to become equality, we need that the vectors be parallel.
+So the $x_{i}$'s are an eigenvector of $A$. I couldn't prove that $A$ is diagonal(it would be diagonal if all vectors where in its eigenspace but I can't guarantee such a strong condition, since it depends $\tilde A$), but I can still say that say that $\tilde \lambda$ would have to be 
+$-\omega ||\tilde A||$, since it has to be in the opposite direciton of $\omega ||A||$. Ofcourse $|\omega|$ has to be 1, since the eigenvalues of $|A|$ are all the same.
+And from this we also know that $||E||=||A||+||\tilde A||$. Completing the proof. On a sidenote, $A$ would have to be diagonal, if it was written the basis of the eigenvectors of $\tilde A$, then it would satisfy the property, but I can't guarantee that either.
+
+\item\ \score{7}%4.
+Prove that the coefficients of the characteristic polynomial
+$p_\varphi$ of a linear transformation $\varphi: V \to V$ of a vector
+space $V$ of dimension~$n$ all have (basis-free!)\ interpretations in
+terms of determinants and traces by showing that $p_\varphi(t) =
+\sum_j (-1)^j \mathrm{tr}(\bigwedge^j \varphi)\,t^{n-j}$.
+
+\textbf{Solution}
+
+Assume we are working in basis of eigenvectors. 
+\red{It's okay to treat the diagonalizable case first, I suppose, as
+long as you get to the arbitrary case later.  Alas, I don't see that
+you did that.}
+\begin{align}
+	\varphi(v_{i})&=\lambda_{i}v_{i}\\
+	tr\left( \bigwedge^r \varphi\right)&= \sum_{\sigma \in \binom{[dim V]}{r}}\bigwedge_{i=1}^{r}\varphi(v_{\sigma_{i}})\\
+	tr\left( \bigwedge^r \varphi\right)&= \sum_{\sigma \in \binom{[dim V]}{r}}\prod_{i=1}^{r}\lambda_{\sigma_{i}}\\
+	p_{\varphi}(t)&=(t-\lambda_{1})*\cdots *(t-\lambda_{n})\\
+	p_{\varphi}(t)&=\sum_{i=0}^{dim V}(-1)^{dimV-i}t^{i}\sum_{\sigma \in \binom{[dim V]}{r}}\prod_{i=1}^{r}\lambda_{\sigma_{i}}\\
+	p_{\varphi}(t)&=\sum_{i=0}^{dim V}(-1)^{dimV-i}t^{i}\sum_{\sigma \in \binom{[dim V]}{r}}\bigwedge_{i=1}^{r}\varphi(v_{\sigma_{i}})\\
+	p_{\varphi}(t)&=\sum_{i=0}^{dim V}(-1)^{dimV-i}tr\left( \bigwedge^r \varphi\right)t^{i}\\
+\end{align}
+
+We extend the proof to any basis(basis-free) by noting that $\bigwedge \varphi$ is a linear function, therefore the 
+trace doesn't change since it is a property of the linear transformatiom, not its representation. So the trace is the same in any basis,
+therefore this fact works independent of the basis you working in.
+
+To Extend it to the case of any basis, take the generalized eigenvectors.
+
+\begin{align*}
+	\varphi(v_{1})=\lambda_{1}v_{1}\\
+	\varphi(v_{2})=\lambda_{1}v_{2}+v_{1}
+\end{align*}
+If $v_{2}$ is a generalized eigenvector eigenvalue $\lambda_{1}$. 
+I think the result is the same in the case of the $j=1$, and I want to 
+extend this to all values.
+
+\begin{align*}
+	\wedge^{2} \varphi(v_{2} \wedge v_{1}) = (\lambda_{1} v_{2} + v_{1}) \wedge (\lambda_{1} v_{1})\\
+	(\lambda_{1}^{2} v_{1}) \wedge (v_{2}) + (\lambda_{1} v_{1}) \wedge (v_{2})
+\end{align*}
+
+Ok now I know it works, I just need to generalize this.
+Let there be an arbitrary sequence of basis vectors and I take the wedge product I want to prove that
+the entries on diagonal corresponding to to this sequence after applying the functor is no different than 
+if I had just multiplied the corresponding eigenvalues.
+
+\begin{align*}
+	\wedge^{l} \varphi(v_{1} \wedge v_{2} \wedge \cdots \wedge v_{l}) = \varphi(v_{1}) \wedge \cdots \wedge \varphi(v_{l})
+\end{align*}
+
+Assume without loss of generality that they are arranged in such a way that for basis vectors with the
+same eigenvalue the generalized eigenvectors come first(What happens when the signs change? We will see that it is irrelavant).
+
+When we apply $\varphi$ to a generalized eigenvector we get the generalized eigenvector and the next lower vector in the 
+generalized eigenvector cycle or the eigenvector(That one that actually spans) itself. We can decompose the 
+result by using the properties of the wedge such that we have two terms: one has the generalized eigenvector and the 
+other doesn't. Through this process we eventually decompose the result into the sum of the basis in the wedge space, and 
+since the only one that matches our basis from when we started is the one such that we take the generalized eigenvector, and 
+therefore its coeffient is the product of the eigenvalues of the basis vectors in the wedge product.
+
+Since we only care about the trace, this is not different than if there were no super diagonal elements in th jordan 
+normal form, so we can use the above result to get the same result and generalize this result to the max!
+
+\item\ \score{11}%5.
+Let $A \in \RR^{2 \times 2}$ be a diagonal matrix.  What conditions
+on~$A$ guarantee that the exponential map $\exp_{iA}: \RR \to
+\GL_2(\CC)$ sending $t \mapsto e^{itA}$ is injective?  Set
+\red{The reason you scored so high is that you exhibited complete
+understanding of what was being asked---this is already a big step,
+for the second half---and furthermore explained accurately how the
+proof should go.  It wouldn't take so much to make your reasoning
+completely precise.}
+$G = \exp_{iA}(\RR)$, the image of $\exp_{iA}$.  When $\exp_{iA}$ is
+injective, can it be that for every open interval $I \subseteq \RR$
+there is an open subset $U \subseteq \GL_2(\CC)$ such that
+$\exp_{iA}(I) = U \cap G$?
+
+\textbf{Solution}
+
+Since $A$ is diagonal that means
+\red{\vspace{10ex}\checkmark}
+\begin{align*}
+	A=\begin{bmatrix}
+		a & 0\\
+		0 & b
+	\end{bmatrix}\\
+	e^{itA}=\begin{bmatrix}
+		e^{ita} & 0\\         	
+		0 & e^{itb}
+	\end{bmatrix}
+\end{align*}
+
+For the function to be injective it needs to be the case,
+$exp_{iA}(t_{1}) \neq exp_{iA}(t_{2}) \Longleftrightarrow t_{1}\neq t_{2}$. 
+
+$e^{ita}$ goes in a cycle of period $\frac{2\pi}{a}$, same thing for $e^{itb}$, with period $\frac{2\pi}{b}$.
+
+If $\exists t_{1}$ and $t_{2}$ s.t $t_{1} \neq t_{2}$ and
+$exp_{iA}(t_{1})=exp_{iA}(t_{2})$, then that means the two values must
+\red{The arrow for ``implies'' is ``$\implies$'', not
+``$\rightarrow$''.  It has become distracting enough for me to write
+this comment.}
+have cycled, which means that you can find $x,y\in \ZZ$ s.t
+$\frac{2x\pi}{a}=\frac{2y\pi}{b} \rightarrow xb=ay\rightarrow a/b\in
+\mathbb{Q}$.  So $a/b$ must be irrational for the map to be injective,
+this condition is also sufficient, since for the two values to repeat,
+it must be that case that the ratio of their periods rational
+\red{Again, good logical readable explanation.}
+otherwise you couldnt' find a period in which both the values would
+repeat.
+
+I think the second value is false. Imagine $\RR^8$(very hard I know),
+\red{(meh---you get used to it)}
+this space is close enough(there are some matrices that aren't complex
+linear but this proof lost its
+\red{(not yet\ldots)}
+rigour already) to the space of invertible complex matrices. The
+question is equivalent to asking if I can make an open subset in this
+subspace, s.t its intersection with the image of the function is some
+range. Assume there is some open set you can make such that this is
+true. I argue, that there is a point in that subspace that is not in
+your range, my justification is that I can make an arbitrarily close
+approximation of any value in your range, but its inverse will be
+\red{So far, so good: this is absolutely what happens.}
+arbitrarily far.
+
+Let's take a concrete example, say $a=1$ and $b=\sqrt{2}$. Assume you
+made some open subset in $\GL_2(\CC)$, such the intersection of this
+subspace with the image corresponded to the interval
+(-1,1). Obviously, $\GL_2(\CC)$ has a norm, you can view it as a space
+that is isomorphic to $\RR^{8}$ and do the normal euclidean norm. I
+argue I can find a matrix in the image, that is arbitrarily close to
+$I$ in euclidean distance terms, but not in the interval because I can
+find some arbitrarily large value of $x$ such that
+$|I-exp_{iA}(x)|<\epsilon$, for any $\epsilon>0$. Why? assume I fix
+$\epsilon$, then I keep increasing $x$, the values of $e^{ita}$ and
+$e^{itb}$ keep looping, but they are never in sync, everytime there is
+some g\cyan{r}ap\rcyan{gap} between their positions, this gap never
+goes to zero, but it doesn't diverge either, it keeps oscillating, and
+at some point with probabilty $1^{*}$, it gets close enough to 0,
+arbitrarily closely(therefore arbitrarily close to $I$).
+
+The basic idea of my proof is that, the image is too dense, any level
+of precision is insuffient since there are infinitely many ranges in a
+nonzero amount of volume(you have fit the whole number line in the
+small hypercube).
+
+\item\ \score{10}%6.
+Fix $A \geq 0$ in $\RR^{n \times n}$.  Let $a^{(k)}_{ij}$ be the $ij$
+entry of $A^k$.  Assume for each $i$ and~$j$ that~$a^{(k)}_{ij} \neq
+0$ for some $k \in \ZZ_{> 0}$ that may depend on~$i$ and~$j$.  Prove
+that $(I_n + A)^{n-1} > 0$.
+
+\textbf{Solution}
+
+The exact magnitudes of the entries in the $A$ don't matter, replace
+\red{While this is true, you can't just say so at the start.  It needs
+to be justified, and by the time you've said enough to justify it,
+there's little benefit to the assumption.  Even as things stand,
+you've had to include extra sentences related to the assumption.  Just
+think of the positive entries as distances; no need to comment further.}
+all positve entries with 1 from now on.  Imagine $n$ cities, let there
+be a one directional road from city $i$ to city $j$, if $a_{ij}=1$(We
+replaced the positive entries of $A$ with 1, so this is equivalent to
+saying that the original entry had a positive value).
+
+Taking the powers of $A$ is equivalent to taking walkes along this city(graph), more specifically
+$a_{ij}^{(k)}>0$ tells you whether there is a path that consists of $k$ roads from city $i$ to city $j$. 
+Therefore, saying that $a_{ij}^{(k)}>0$ for some $k$ is equivalent to saying that a path exists from city $i$ to city
+$j$ which consists of $k$ roads for some $k$.
+\red{Justify use of binomial theorem.}
+\begin{align*}
+	(I+A)^{n-1}&=\sum_{i=0}^{n-1}\binom{n-1}{i} I^{i}A^{n-1-i}\\
+	&= I + (n-1)A + \cdots + A^{n-1}
+\end{align*}
+
+For an entry in $(I+A)^{n-1}$ to be zero it must mean that there is no
+path between some two cities that containts any number of roads
+between 0 to $n-1$ roads, but that is
+\red{OK, now we've become too informal.}
+just nonsense because we know that there is a path between any two
+citeis and no path between any two cities need not be longer that
+$n-1$(if you start at one city and can get to another city, then the
+shortest path between the city you are in and the other city, can't be
+longer than $n-1$, otherwise you had to revist one city).
+$(I+A)^{n-1}$ effectively takes a snapshot of all paths between any
+\red{Instead of talking about snapshots, talk about summing
+nonnegative numbers and getting $0$ if and only if all are~$0$---or
+something like that.  In summary, be precise.}
+two cities, and since we said that you can get from one city to any
+other city after some number of walks, all the entries in
+$(I+A)^{n-1}$ must be strictly positive.
+
+\item\ \score{14}%7.
+Suppose that $U$ is a normal operator whose eigenvalues all lie on the
+unit circle in~$\CC$.  Must $U$ be unitary?  Give a proof or
+counterexample.
+
+\textbf{Solution}
+
+From Theorem 2.4 in Chapter 6 Lax, we know that any normal operator $U$ in a complex vector space has an orthonormal basis of 
+eigenvectors. Take the decomposition of $U$ to be $PDP^{*}$, where $P$ is unitary and $D$ diagonal. If we  multiply this by its conjuguate transpose. $PDP^{*}PD^{*}P^{*}=PD^{*}DP^{*}=PDD^{*}P^{*}\rightarrow DD^{*}=D^{*}D\rightarrow I$,
+since the values on the diagonal have absolute value 1, and multiplying a complex number by its conjugate gets you its magnitude. Therefore $N^{*}$ is the inverse of $N$, since $PIP^{*}=I$, since $P$ is 
+unitary, which means $N$ is unitary.
+
+
+
+\end{enumerate}
+\end{document}
+
+
+%%% Various Emacs customizations:
+%%% Local Variables:
+%%% fill-column: 70
+%%% indent-tabs-mode: t
+%%% TeX-electric-sub-and-superscript: nil
+%%% TeX-brace-indent-level: 0
+%%% LaTeX-indent-level: 0
+%%% LaTeX-item-indent: 0
+%%% End:

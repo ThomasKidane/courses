@@ -1,0 +1,42 @@
+\documentclass{article}
+
+\title{HW7}
+\author{Thomas Kidane}
+\date{\today}
+\usepackage{amsmath,amssymb,graphicx,color,enumitem,tikz}
+\begin{document}
+
+\maketitle
+
+\subsection*{Definition 5.5.6}
+The random variables $X$ and $Y$, defined on the same sample space, are said to be independent if for all $x$ and $y$,
+\[
+P(X \leq x, Y \leq y) = P(X \leq x)P(Y \leq y).
+\]
+
+\subsection*{Lemma 5.5.9}
+The continuous random variables $X$ and $Y$ are independent if and only if they have a joint density $f(x, y)$ which can be written as a product $f(x, y) = g(x)h(y)$ of a function of $x$ alone and a function of $y$ alone. (We say, as before, that $f$ factorises.)
+
+\subsection*{Exercise 5.5.10}
+Prove this lemma. You may want to look at the proof of Theorem 2.4.8.
+
+Claim 1($\rightarrow$):
+If $f(x,y)$ can be described as a function of $x$ and $y$, then we can get set the distribution function of the two variables as such.
+
+\begin{align*}
+  \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(x,y)dxdy=1 \rightarrow \int_{-\infty}^{\infty}g(x)dx=1, \int_{-\infty}^{\infty}h(y)dy=1\\
+  P(X\leq x)= \int_{-\infty}^{x}g(l)\int_{-\infty}^{\infty}h(y)dydl=\int_{-\infty}^{x}g(l)dl\int_{-\infty}^{\infty}h(y)dy=\int_{-\infty}^{x}g(x)dx\\
+  P(Y\leq y)= \int_{-\infty}^{y}h(l)\int_{-\infty}^{\infty}g(x)dxdl=\int_{-\infty}^{y}h(l)dl\int_{-\infty}^{\infty}g(x)dx=\int_{-\infty}^{y}h(y)dy
+\end{align*}
+
+But $P(X\leq x, Y\leq y)=\int_{-\infty}^{x}\int_{-\infty}^{y}f(x,y)dxdy=\int_{-\infty}^{x}g(l)dl\int_{-\infty}^{y}h(k)dk=P(X\leq x)P(Y\leq y)$, 
+therefore $X$ and $Y$ are independent.
+
+Claim 2($\leftarrow$):
+
+If $X$ and $Y$ are independent then $P(X\leq x,Y\leq y)=P(X\leq x)P(Y\leq y)$. So 
+we can make a function $g^{'}(x)=P(X\leq x) \rightarrow g(x)=\frac{d}{dx}P(X\leq x)$, and same definition for $h(y)$.
+
+
+
+\end{document}

@@ -1,0 +1,271 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{calc} % Needed for coordinate calculations
+
+
+\title{Problem Solving Strategies - Chapter 3}
+\author{Thomas Kidane}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}
+This might actually be one of the most important sections. I didn't fully understand the examples but hope that the 
+problems will atleast teach me something.
+
+\section{Problems}
+
+\subsection{Problem 1}
+
+Prove that there are at least $(2n-2)/3$ triangles among the $p_{n}$ parts of the plane in
+Example \#1.
+
+\textbf{Solution}
+
+The first example is 
+
+(a) Into how many parts at most is a plane cut by n lines? (b) Into how many
+parts is space divided by n planes in general position?
+
+$p_{n}$ is the max number of lines. $p_{n}=\binom{n}{0}+\binom{n}{1}+\binom{n}{2}$.
+
+How can I uniquely determine a triangle? Could I determine it by the highest point at the top? Probably,
+I could always reorient the plane enough so that there is only one point. 
+
+What is needed to determine this max point? I would atleast 2 lines?
+
+Wait, wait? What if I try to add interpretation to the equation? It seems like it is telling me that there are 
+about $2n-2$ edge point(vetices, or corners) and that only a 3 make up the triangle?
+
+Well are there really $2n-2$ intersection points? There should be about $\binom{n}{2}$ intersection points. Which 
+comes out to be $n*(n-1)/2$ points. I guess this is 
+
+
+Wait, this specifically specifies trianlges? I counted just inerseciton points, it could the case that there are 
+lots of quadrilaterals. But how do I guarantee that I get the triangels?
+
+Which set of lines could make a triangle? I neeed an extremal property? 
+
+Actually let's make this interpretation, on each the lines there are 2 triangles, except one special line. 
+Each traingle is counted 3 times, so we must divide by 3. 
+
+Now how do I show that 2 triangles rest on each line, pick a side, then choose the intersection 
+point that is closest to the lines. This must make a triangle, because there is no intersection point that is closer.
+
+So now I need to prove that there are max 2 lines that don't have an intersection on one side. It should be the case that 
+if there are more than 2 then I can turn that into a triangle. 
+
+Lowk, am I cooked? I think I need to use an argument that it would violate the number of areas or somethigng but I don't know. 
+
+And the book doesn't say anything else. Guess I am cooked. 
+
+\subsection{Problem 2}
+
+In the plane, $n$ lines are given ($n\geq 3$), no two of them parallel. Through every
+intersection of two lines there passes at least an additional line. Prove that all lines
+pass through one point.
+
+\textbf{Solution}
+
+Assume that there it isn't the case that there is only one point of intersection. Then take the furthest
+intersection point to the left and then to the bottom. 
+
+
+\subsection{Problem 5}
+
+Does there exist a tetrahedron, so that every edge is the side of an obtuse angle of a face? 
+
+\textbf{Solution}
+
+I couldn't solve this one, but after taking a look at the answer it was so simple(just like all the problems).
+
+So basically you take the longest edge in the tetrahedron, and you look at the look triangles it is a part of, there are 2.
+Since it is the longest, the side opposite the edge must be the greatest angle, therefore it can't be the case that this edge is an edge for
+an obtuse angle.
+
+\subsection{Problem 6}
+
+Prove that every convex polyhedron has at least two faces with the same number of sides. 
+
+\textbf{Solution}
+
+This is just an application of pigeohole principle, where you take the face with the maximal number of edges, call this number n. 
+All the other faces must have between $[3,n]$. Since there atleast $n$ other faces there must atleast be one 1 repetition.
+
+\subsection{Problem 7}
+
+$(2n + 1)$ persons are placed in the plane so that their mutual distances are different. 
+Then everybody shoots his nearest neighbor. 
+
+Prove that
+
+(a) at least one person survives;\\
+(b) nobody is hit by more then five bullets;\\ (c) the paths of the bullets do not cross;\\
+d) the set of segments formed by the bullet paths does not contain a closed polygon.\\
+
+\textbf{Solution}
+
+a) Take the two people, that are closest to each other, this people are point their guns at each other.
+
+Then take the set of people that are not this, they can be grouped on whether they are pointing at one of this people. 
+
+Make $S$ where S contains this two people that are point to each other, and the other people that are point to the 2 people. 
+Define $f : S \mapsto S^{*}$, where $S^{*}=S \cup $\{ people point their guns at people in S\}. Continually apply $f$ to itself until the result stops growing.
+The last person added to this set will survive. Since now one is point their guns at him/her.
+
+b) Take person who is hit by the most number of bullets. Then that means he is the person that is 
+closest to the most number of people at the same time.
+
+Take the person that is closest to him. Wait lowk, I think this is six bullets, since I can inscribe a perfect hexagon in a circle and everbody will have equal distance to each other.
+Actually after reading the mutual distance condition, then it is right. Also the book has a good angle argument, which I should have refined.
+
+c) Yes, they don't cross because of the traingle inequality.
+
+d) It can't because it can't contain a cycle. Should have explicitly shown the inequality.
+
+
+My proof have no substance behind them. Fuck. Wait let there exist a closed polygon. Take the two closest people in this polygog, they are point their guns at each other. 
+So now you have a chain, but it can't go back on itself. 
+
+\subsection{Problem 8}
+
+Rooks are placed on the $n \times n$ chessboard satisfying the following condition:
+
+If the square (i, j) is free, then at least n rooks are on the $i^{th}$ row and $j^{th}$ column together.
+
+Show that there are at least $n^2$/2 rooks on the board. 
+
+\textbf{Solution}
+
+Take the row/column that has the least number of rooks. Let this number be $x$, then there are atleast $max(n*x,n*(n-x))$, and the 
+minimum of this expression is when $x=n/2$, therefore the minimum is $n^2/2$.
+
+\subsection{Problem 9}
+
+All plane sections of a solid are circles. Prove that the solid is a ball.
+
+
+\textbf{Solution}
+
+I don't know.
+
+The shortest proof runs as follows. Consider the largest chord of the solid. Any
+section through this chord is a circle whose diameter is the chord. Otherwise the
+circle and the solid would have a larger chord. Thus the solid is a ball and one of its
+diameters is the selected chord.
+This proof is not complete. We did not prove that a longest chord exists. In fact, if
+the surface of the solid did not belong to the solid, a longest chord would not exist.
+So we assume that the solid is a closed and bounded set. Then we can apply the
+theorem of Weierstrab: A continuous function defined on a closed and bounded set
+always assumes its global maximum and minimum.
+This theorem belongs to higher mathematics, but at the IMO you can use it. The proof
+is not considered to have a gap if you cite the theorem. There are also elementary
+proofs which are slightly longer (see HMO 1954).
+
+\subsection{Problem 10}
+
+A closed and bounded figure $\phi$ with the following property is given in a plane: Any
+two points of $\phi$ can be connected by a half circle lying completely in $\phi$ . Find the
+figure $\phi$ (West German proposal for IMO 1977).
+
+\textbf{Solution}
+
+I don't know but after looking at the solution from the book, I realize it is maybe to 
+geometry flavour for me, so I have listed the full solution for the sake of completeness below.
+
+Too lazy ;(
+
+\begin{tikzpicture}
+  % Define points
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (5,0);
+
+  % Draw the longest segment AB
+  \draw[thick] (A) -- (B) node[midway, below] {$AB$};
+
+  % Draw the semicircle s with diameter AB
+  % Calculate the center of AB
+  \coordinate (MidAB) at ($ (A)!0.5!(B) $);
+  % Calculate the radius of the semicircle on AB
+  \pgfmathsetmacro{\radiusAB}{0.5 * veclen(5,0)} % Distance from A to B is 5, radius is 2.5
+  \draw (A) arc (180:0:\radiusAB);
+
+  % Label the semicircle s
+  \node at (MidAB) [above=0.5cm] {$s$}; % Position relative to MidAB
+
+  % --- Option 1: Point C INSIDE semicircle s ---
+  \coordinate (C) at (2,1); % C chosen to be inside the semicircle s
+  \draw[fill=red] (C) circle (0.05) node[above right] {$C$};
+
+  % Draw AC and BC for point C
+  \draw[dashed] (A) -- (C);
+  \draw[dashed] (B) -- (C);
+
+  % Draw semicircle with diameter AC
+  \coordinate (MidAC) at ($ (A)!0.5!(C) $);
+  \pgfmathsetmacro{\radiusAC}{0.5 * veclen(C.x - A.x, C.y - A.y)}
+  \draw[blue, dashed] (MidAC) arc (180:0:\radiusAC); % Arc from left to right
+
+  % Draw semicircle with diameter BC
+  \coordinate (MidBC) at ($ (B)!0.5!(C) $);
+  \pgfmathsetmacro{\radiusBC}{0.5 * veclen(B.x - C.x, B.y - C.y)}
+  \draw[green, dashed] (MidBC) arc (0:180:\radiusBC); % Arc from right to left
+
+
+  % --- Option 2: Point C OUTSIDE semicircle s (uncomment to see this) ---
+  % If you want to show C outside, comment out Option 1 and uncomment this:
+  % \coordinate (C_out) at (6,2); % C chosen to be outside the semicircle s
+  % \draw[fill=red] (C_out) circle (0.05) node[above right] {$C$};
+  %
+  % % Draw AC and BC for point C_out
+  % \draw[dashed] (A) -- (C_out);
+  % \draw[dashed] (B) -- (C_out);
+  %
+  % % Draw semicircle with diameter AC_out
+  % \coordinate (MidAC_out) at ($ (A)!0.5!(C_out) $);
+  % \pgfmathsetmacro{\radiusAC_out}{0.5 * veclen(C_out.x - A.x, C_out.y - A.y)}
+  % \draw[blue, dashed] (MidAC_out) arc (180:0:\radiusAC_out);
+  %
+  % % Draw semicircle with diameter BC_out
+  % \coordinate (MidBC_out) at ($ (B)!0.5!(C_out) $);
+  % \pgfmathsetmacro{\radiusBC_out}{0.5 * veclen(B.x - C_out.x, B.y - C_out.y)}
+  % \draw[green, dashed] (MidBC_out) arc (0:180:\radiusBC_out);
+
+\end{tikzpicture}
+
+\subsection{Problem 11}
+Of $n$ points in space, no four lie in a plane. Some of the points are connected by
+lines. We get a graph $G$ with $k$ edges.
+\begin{enumerate}
+    \item[(a)] If $G$ does not contain a triangle, then $k \leq \lfloor n^2/4 \rfloor$.
+    \item[(b)] If $G$ does not contain a tetrahedron, then $k \leq \lfloor n^2/3 \rfloor$.
+\end{enumerate}
+
+
+\textbf{Solution}
+
+Where do I even start? What does Triangle have to with edges? What does the 4 points not in a plane thing have to do with anything?
+Well if there are 4 points in a plane, then There are 6 edges between them? What if they not in a plane then?
+Actually you can always make a triangle with 3 or more points, so the condition is basically saying that the points are not coplanar.
+
+What do I do with this information? How does this affect anyting though? What is the natural upper bound on the number of distinct edges?
+Well that would be $\binom{n}{2}$. 
+
+Holly shit, I reread the quesiton, I choose some subset of edges from the $\binom{n}{2}$, edges, and I call that Graph $G$. 
+Now this graph doesn't have a triangel? So that are not cycles of length 3. That is what is it saying?
+
+So what is the maximum of $E(G)$ for a graph $G$ with n nodes such that it doesn't have a cycle of length 3. 
+
+
+
+
+\end{document}

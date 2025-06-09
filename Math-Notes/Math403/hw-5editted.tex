@@ -1,0 +1,499 @@
+%hw-5.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%            Math 403 Homework \#5, Spring 2025            %%%%%%
+%%%%%%                                                          %%%%%%
+%%%%%%                 Instructor: Ezra Miller                  %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt]{article}
+
+\oddsidemargin=17pt \evensidemargin=17pt
+\headheight=9pt     \topmargin=26pt
+\textheight=564pt   \textwidth=433.8pt
+\parskip=1ex        %voffset=-6ex
+
+\usepackage{amsmath,amssymb,graphicx,color,enumitem}%,setspace%,mathrsfs%,hyperref
+\usepackage{tikz-cd}
+\setlist[enumerate]{parsep=1.5ex plus 4pt,topsep=0ex plus 4pt,itemsep=0ex}
+  \setlist[itemize]{parsep=1.5ex plus 4pt,topsep=-1ex plus 4pt,itemsep=-1.33ex}
+
+\leftmargini=5.5ex
+\leftmarginii=3.5ex
+
+%for \marginpar to fit optimally
+\hoffset=-1.02in
+\setlength\marginparwidth{2.2in}
+\setlength\marginparsep{1mm}
+\newcommand\red[1]{\marginpar{\linespread{.85}\sf%
+		   \vspace{-1.4ex}\footnotesize{\color{red}#1}}}
+\newcommand\score[1]{\marginpar{\vspace{-2ex}\color{blue}{#1/3}}\hspace{-1ex}}
+\newcommand\extra[1]{\marginpar{\color{blue}{#1/1}}\hspace{-1ex}}
+\newcommand\total[2]{\marginpar{\colorbox{yellow}{\huge #1/#2}}}
+\newcommand\collab[1]{\marginpar{\vspace{-11ex}\colorbox{yellow}{#1/3}}\hspace{-1ex}}
+\newcommand\magenta[1]{\colorbox{magenta}{\!\!#1\!\!}}
+\newcommand\yellow[1]{\colorbox{yellow}{\!\!#1\!\!}}
+\newcommand\green[1]{\colorbox{green}{\!\!#1\!\!}}
+\newcommand\cyan[1]{\colorbox{cyan}{\!\!#1\!\!}}
+\newcommand\rmagenta[2][0ex]{\red{\vspace{#1}\magenta{\phantom{:}}\,: #2}}
+\newcommand\ryellow[2][0ex]{\red{\vspace{#1}\yellow{\phantom{:}}\,: #2}}
+\newcommand\rgreen[2][0ex]{\red{\vspace{#1}\green{\phantom{:}}\,: #2}}
+\newcommand\rcyan[2][0ex]{\red{\vspace{#1}\cyan{\phantom{:}}\,: #2}}
+
+%For separated lists with consecutive numbering
+\newcounter{separated}
+
+\newcommand{\excise}[1]{}
+\newcommand{\comment}[1]{{$\star$\sf\textbf{#1}$\star$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                 %
+% TO ENABLE GRADING, DO NOT ALTER ABOVE THIS LINE %
+%                                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%new math symbols taking no arguments
+\newcommand\0{\mathbf{0}}
+\newcommand\CC{\mathbb{C}}
+\newcommand\FF{\mathbb{F}}
+\newcommand\NN{\mathbb{N}}
+\newcommand\QQ{\mathbb{Q}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\bb{\mathbf{b}}
+\newcommand\kk{\Bbbk}
+\newcommand\mm{\mathfrak{m}}
+\newcommand\vv{\mathbf{v}}
+\newcommand\xx{\mathbf{x}}
+\newcommand\yy{\mathbf{y}}
+\newcommand\GL{\mathit{GL}}
+\newcommand\FL{{\mathcal F}{\ell}_n}
+\newcommand\into{\hookrightarrow}
+\newcommand\minus{\smallsetminus}
+\newcommand\goesto{\rightsquigarrow}
+
+%redefined math symbols taking no arguments
+\newcommand\<{\langle}
+\renewcommand\>{\rangle}
+\renewcommand\iff{\Leftrightarrow}
+\renewcommand\implies{\Rightarrow}
+
+%to explain about LaTeX commands:
+\newcommand\command[1]{\texttt{$\backslash$#1}}
+
+%new math symbols taking arguments
+\newcommand\ol[1]{{\overline{#1}}}
+
+%redefined math symbols taking arguments
+\renewcommand\mod[1]{\ (\mathrm{mod}\ #1)}
+
+%roman font math operators
+\DeclareMathOperator\im{im}
+
+%for easy 2 x 2 matrices
+\newcommand\twobytwo[1]{\left[\begin{array}{@{}cc@{}}#1\end{array}\right]}
+
+%for easy column vectors of size 2
+\newcommand\tworow[1]{\left[\begin{array}{@{}c@{}}#1\end{array}\right]}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{\mbox{}\\[-8ex]Math 403 Homework \#5, Spring 2025\\\normalsize
+	Instructor: Ezra Miller\\[-2.5ex]}
+\author{Solutions by: Thomas Kidane\\[1ex]
+Collaborators: Tymon Hendershott, Benjamin Greene, Ricardo Prado,Holly Keagan\\
+(1 point for each of up to 3 collaborators who also list you)}
+\date{Due: 11:59pm Tuesday 8 April 2025}
+
+\maketitle
+
+\vspace{-5ex}\collab{3}%
+
+\noindent
+\textsc{Reading assignments}\total{27}{36}%covers Lectures 20 - 22
+\begin{enumerate}[itemsep=-1ex]\setcounter{enumi}{19}
+\item%20.
+for Tue.~25 March
+  \begin{itemize}
+  \item{}%
+  [Treil, \S 8.5] multilinear algebra, tensor product
+  \item{}%
+  [Wikipedia, \emph{Tensor product}]
+  \end{itemize}
+
+\item[21--22.]\addtocounter{enumi}{2}%21. and 22.
+for Thu.~27 March and Tue.~1 April
+  \begin{itemize}
+  \item{}%
+  [Wikipedia, \emph{Exterior algebra}]
+  \end{itemize}
+\end{enumerate}
+
+\noindent
+\textsc{Exercises}% covers Lectures 18 - 22
+
+\begin{enumerate}
+\item\ \score{3}%1.
+For $P \in \RR^{n \times n}$ with $P > 0$, set $\Gamma(P) = \{\lambda
+\in \RR_{\geq 0} \mid P\xx \leq \lambda\xx \text{ for some nonzero }
+\xx \geq \0\}$.  Show that the dominant eigenvalue $\lambda(P)$
+satisfies $\lambda(P) = \min_{\lambda\in\Gamma(P)} \lambda$.
+,
+
+\textbf{Solution}
+
+We know that $\Gamma(P)$ is bounded from below by 0. 
+So we will go on to prove that the lower bound has to be an eigenvalue. 
+
+Assume that $\lambda \in \Gamma(P)$ such that $\lambda$ isn't an eigenvalue.
+So $Px\leq \lambda x$ for some nonzero $x$. Then $Px\neq \lambda x$ since $\lambda$ isn't an eigenvalue.
+
+For $\varepsilon \leq \frac{1}{\epsilon}$
+\begin{align*}
+  \lambda x- Px = w, w\succ 0\\
+  P(x - \varepsilon w) = Px-\varepsilon P w \\
+  <  Px = \lambda x - w \leq \lambda x - \varepsilon \lambda w = \lambda (x- \varepsilon w)
+\end{align*}
+
+Define $y=x-\varepsilon w$.
+
+\begin{align*}
+Py < \lambda y\\
+Py\leq \tilde{\lambda y}\\
+\tilde{\lambda } \in \Gamma(P), \text{for } \tilde{\lambda} < \lambda
+\end{align*}
+
+Therefore $\lambda$ can't be the minimum of $\Gamma(P)$ and it has to be an eigenvalue, and since $x \succ 0$, the minimum value 
+has to be the domninant eigenvalue since all the eigenvectors of all the other eigenvalues have entries that are both stricly positive and negative 
+by the perron frobenius theorem.
+\item\ \score{3}%2.
+In class, we stated the theorem that for $P > 0$ a stochastic $n
+\times n$ matrix with dominant eigenvector~$\vv$, and $\xx \geq 0$ any
+nonzero vector, $P^k\xx \to \alpha\vv$ as $k\to\infty$ for some real
+$\alpha > 0$.  But we only proved it when $P$ is diagonalizable.
+Complete the proof.
+
+\textbf{Solution}
+
+Describe $x$ as the some of eigenvectors and generalized eigenvectors. From 
+class we know that the dominant eigenvalue of a stochastic matrix is 1, and that 
+all the other eigenvalues have absolute value less than one. Then it is obvious that 
+$\lim_{k\rightarrow \infty} y^{k}=0$ for $|y|<1$, and since the set of all eigenvectors 
+and generalized eigenvectors spans the entire space, all vectors can be described as 
+linear combination of these vectors and all of them go to the zero when $\lim_{k\rightarrow \infty}P^{k}$ is applied to 
+them except the dominant eigenvector.
+
+\item\ \score{3}%3.
+Prove that $P$ has a dominant positive eigenvalue if $P \geq 0$ and
+$P^k > 0$ for some $k > 0$. \red{Slick}
+
+\textbf{Solution}
+
+Take the jordan form of $P^{k}=BJ^{k}B^{-1}$. Since $J$ is an upper triangular matrix, 
+the values on the diagonals of its powers are just powers of its diagonal. Since the
+dominant eigenvalue is striclty greater than the absolute value of all the other eigenvalues, then taking 
+the $k^{th}$ root of the eigenvalues also implies that the dominant eigenvalue is still dominant. 
+
+\item\ \score{3}%4.
+Prove or disprove: the set of stochastic $n \times n$ matrices is
+compact and convex.
+
+\textbf{Solution}
+
+Take $A$ and $B$ to be any two stochastic matrices in the space of $M^{n\times n}$.
+Take $\upsilon^{T} = [1,1,\cdots , 1] \in \RR^{n}$. I will use the notation $M_{i}$ to 
+refer to the $i^{th}$ column of the matrix $M$. Since A is stochatic $\upsilon^{T}A_{i}=1$ for all $i$. Let $(A-B)=C$.
+
+The space of stochastic matrices is convex if and only if $B+\alpha C$ is stochastic 
+for $0 < \alpha < 1$. Since $\upsilon^{T} A = \upsilon^{T} B \rightarrow \upsilon^{T}(A_{i}-B_{i})=0 \rightarrow \upsilon^{T}(C_{i})=0$.
+
+\begin{align*}
+  \upsilon(B+\alpha C)_{i}=\upsilon B_{i}+\upsilon \alpha C_{1}\\
+  \upsilon(B+\alpha C)_{i}=\upsilon B_{i}=1
+\end{align*}
+
+Therefore the sum of the columns are 1, and since the entries are nonnegative in A and B, then
+in the path between them the entries are also nonnegative, therefore the space of stochastic matrices
+is convex. 
+
+To prove that it is compact we will show that it is bounded and closed. To prove that it 
+is bounded, it is enough to mention that the entries of the matrix are bounded 
+from below by 0, and from above by 1.
+
+To prove that it is closed, it is enough to show that every limit point is a stochastic matrice, therefore take some sequence 
+$M_{1},M_{2}, \cdots \rightarrow M$, such that $M_{i}$ are stochastic matrices.
+Since the sum of the columns of $M_{i}$ are all 1 then the sum of the colums of $M$ are also 1. 
+Since each entry was also nonnegative then each entry of $M$ is also nonnegative.
+
+Therefore the space of stochastic matrices is bounded and closed, and since the vector space is $\RR^{n\times n}$, this implies
+that the space is compact.
+
+\item\ \score{2}%5.
+Use the universal property of tensor products to prove commutativity:
+there is a unique isomorphism $V \otimes W \to W \otimes V$ such that
+$v \otimes w \mapsto w \otimes v$ for all $v \in V$ and~$w \in W$.\red{You should explain it a little more}
+
+\textbf{Solution}
+
+\begin{tikzcd}
+	{V\times W} &&& {V\otimes W} \\
+	\\
+	\\
+	{W\times V} &&& {W\otimes V}
+	\arrow["{t_{1}}", from=1-1, to=1-4]
+	\arrow["g"', hook, two heads, from=1-1, to=4-1]
+	\arrow["{f_1}"{pos=0.3}, from=1-1, to=4-4]
+	\arrow["{\exists !\tilde f_1}", dashed, from=1-4, to=4-4]
+	\arrow["{f_2}"{pos=0.3}, from=4-1, to=1-4]
+	\arrow["{t_2}"', from=4-1, to=4-4]
+	\arrow["{\exists! \tilde{f}_2}", shift left=3, dashed, from=4-4, to=1-4]
+\end{tikzcd}
+
+Since $g: (v,w) \rightarrow (w,v)$ and its inverse exist, then by the universal property 
+of the tensor product, there must exist a linear map between $V\otimes W$ and $W\otimes V$, futhermore 
+since this map has an inverse in both directions, then the linear map is an isomorphism.
+
+\item\ \score{2}%6.
+Use the universal property of tensor products to prove associativity:
+there is a unique isomorphism $(U \otimes V) \otimes W \to U \otimes
+(V \otimes W)$ such that $(u \otimes v) \otimes w \mapsto u \otimes (v
+\otimes w)$ for all $u \in U$, $v \in V$, and $w \in W$.  Hint: You
+can either use the universal property to produce the map or check that
+the two parenthesizations have the same universal property regarding
+bilinear maps on $(U \times V) \times W = U \times (V \times W)$ and
+appeal to ``abstract nonsense'': universal constructions are unique up
+to unique isomorphism.\red{More detail needed}
+
+
+\textbf{Solution}
+
+We can show that there is a unique linear map between $V\times W$, by first picking some $u$ then 
+just mapping $(v,w)$ to $(u\otimes v)\times w$, and by the universal property of the tensor, there is a unique linear map 
+between $V\otimes W$ to $(U\otimes V)\otimes W$. Since we did this for only one $u$ we can make a new function that 
+maps $(u,(v\otimes w))$ to $(u\otimes v)\otimes w$, using the previous funcitons but instead using the inputed $u$.
+
+So we have a function that maps $u\times(v\otimes w)$ to $(u\otimes v)\otimes w$. Since the previous functions we used were 
+multilinear then this function itself is multilinear and again we can use the universal property to get a unique mapping 
+from $U\otimes (V\otimes W)$ to $(U\otimes V)\otimes W$. Since starting off with $u$ was arbitrary we can reuse the previous steps to 
+also make a unique linear mapping in the reverse and therefore the mapping admits an inverse and so there is an isomorphism between them.
+
+\item\ \score{2}%7.
+Prove that homomorphisms $\varphi: V \to V'$ and $\psi: W \to W'$
+result in a canonical homomorphism $\varphi \otimes \psi: V \otimes W
+\to V' \otimes W'$.  Given matrices for $\varphi$ and $\psi$, write
+down a matrix for $\varphi \otimes \psi$.  Note: your answer will
+depend on how you order the basis of~$V \otimes W$.\red{Your matrix makes no sense, but you're right that you should get the kronecker product}
+
+\textbf{Solution}
+
+\begin{tikzcd}
+	{V\otimes W} && {V\times W} \\
+	\\
+	{V^{'}\otimes W^{'}}
+  \arrow["{\exists! f}"{description}, dashed, from=1-1, to=3-1]
+	\arrow["{t_{2}}"', from=1-3, to=1-1]
+	\arrow["g"{description}, from=1-3, to=3-1]
+\end{tikzcd}
+
+Let $g: (v,w) \rightarrow \varphi(v) \otimes \psi(w)$.
+
+\begin{align*}
+  g(\alpha v_{1}+v{2},w)&= \varphi((\alpha v_{1})+v_{2})\otimes \psi (w)\\
+  &= \alpha \varphi(v_{1})\otimes \psi(w) + \varphi(v_{2})\otimes \psi(w)
+\end{align*}
+
+Therefore $g$ is linear in $V$ and by the same argument it is linear $W$. So by 
+the universal property there is unique homomorphism between $V\otimes W$ to 
+$V^{'} \otimes W^{'}$.
+
+The matrix form of $\varphi \otimes \psi$ has dimensions $(n \times m) \times (n^{'} \times m^{'})$ 
+where $n$ is the dimension of $V$, $m$ of $W$, $n^{'}$ of $V^{'}$, $m^{'}$ of $W^{'}$.
+
+We will also define $\alpha_{ij}$ which is the coefficent of the $j^{th}$ basis vector 
+in $V^{'}$ after applyig $\varphi$ to $v_{i}$, where $v_{i}$ is the $i^{th}$ basis 
+vector in $V$. Like wise equivalent definition for $\beta_{ij}$ but with $W$ and $W^{'}$ instead.
+
+Then $\varphi \otimes \psi$ can be represented as.\\
+
+\begin{align*}
+\begin{bmatrix}
+  \alpha_{11}\beta_{11} & \cdots & \alpha_{n1} \beta_{m1}\\
+  \cdots& \cdots& \cdots\\
+  \alpha_{1n^{'}}\beta_{1m^{'}}& \cdots & \alpha_{nn^{'}}\beta_{mm^{'}}
+\end{bmatrix}
+\end{align*}
+
+This is matrix is awfully similar to the Kronecker product.
+
+\item\ \score{2}%8.
+Prove that a homomorphism $\varphi: V \to W$ results in a canonical
+homomorphism $\bigwedge^r \varphi: \bigwedge^r V \to \bigwedge^r W$.
+Given a matrix for~$\varphi$, write down a matrix for $\bigwedge^r
+\varphi$.  Note: make no attempt to draw a matrix; just describe its
+entries as labeled by pairs of basis vectors.\red{You've gotta show how you got that matrix}
+
+\textbf{Solution}
+
+\[\begin{tikzcd}
+	{\bigwedge^{r} V} && {V^{\times r}} \\
+	\\
+	{\bigwedge^{r} W}
+  \arrow["{\exists! f}"{description}, dashed, from=1-1, to=3-1]
+	\arrow[from=1-3, to=1-1]
+	\arrow["g"{description}, from=1-3, to=3-1]
+\end{tikzcd}\]
+
+Let $g: (v_{1},\cdots , v_{r}) \rightarrow \varphi(v_{1}) \wedge \cdots \wedge \varphi(v_{r})$. 
+Since $g$ is an alternating operator there exists an alternating operator from the $r^{th}$ exterior 
+power of $V$ to the $r^{th}$ exterior product of $W$.
+
+Let $ \sigma \in \binom{[n]}{r}$ and $\delta \in \binom{[m]}{r}$ where n and m are the dimensions of
+$V$ and $W$ respectively. Then the matrix $\bigwedge \varphi$ is a matrix of the form $\binom{m}{r} \times \binom{n}{r}$.
+
+Then the entries of the matrix are of the form $det [\varphi]^{\sigma}_{\delta}$, which means
+the matrix whose columns are indexed by $\sigma$ and whose rows are indexed by $\delta$. Then for every 
+element of $\bigwedge^{r} V$ you will sum up over all $\delta$'s.
+
+
+
+\item\ \score{2}%9.
+Prove that tensor products commute with direct sums: if $I$ is any
+(finite or infinite) index set and $V = \bigoplus_{i \in I} V_i$,
+then there is a natural isomorphism $V \otimes W \to\bigoplus_{i\in I}
+V_i \otimes W$.\red{Lacking in detail/rigor}
+
+\textbf{Solution}
+
+\[\begin{tikzcd}
+	{V\times W} && {V\otimes W} \\
+	\\
+	&& {\bigoplus_{i\in I}V_{i}\otimes W }
+	\arrow["t"{description}, from=1-1, to=1-3]
+	\arrow["f"{description}, from=1-1, to=3-3]
+	\arrow["{\exists ! \tilde{f}}"{description}, from=1-3, to=3-3]
+\end{tikzcd}\]
+
+The property of the direct sum is that it endows $V\times W$ with the following properties.
+
+\begin{align*}
+  (v_1, w_1) + (v_2, w_2) &= (v_1 + v_2, w_1 + w_2), \\
+  \alpha (v, w) &= (\alpha v, \alpha w).
+\end{align*}
+
+If we define $f(v,w) \mapsto \bigoplus_{i\in I}(v_{i}\times w)$, then we can see that this is 
+bilinear since 
+
+\begin{align*}
+(\alpha v)\otimes w \rightarrow (\alpha v_{i_1} \otimes w)\oplus \cdots (\alpha v_{i_{n}} \otimes w) = \alpha ((v_{1}\otimes w) \oplus \cdots \oplus (v_{n}\otimes w)) = \alpha f(v,w) \\
+(v^{1} + v^{2})\otimes w \rightarrow ( (v^{1}_{i_1} + v^{2}_{i_1})\otimes w)\oplus \cdots ( (v^{1}_{i_{n}} + v^{2}_{i_{n}}) \otimes w) = f(v^{1},w) + f(v^{2},w) \\
+\end{align*}
+
+Same argument works symmetrically for $w$ and therefore there must exist a unique map $\tilde{f}$ from $V\otimes W$ to $\bigoplus_{i\in I}
+V_i \otimes W$.
+
+Using the inclusion funciton we can make a multilinear funciton from $V_{i}\otimes W$ to $V\otimes W$ and with a collection of these 
+funcitons we can use the universal property of the direct sum to get a unique linear map such that its restriction to each compoent is 
+the same as the functions we defined. Applying the universal property of the tensor product to this function we get a 
+unique linear map from $\bigoplus_{i\in I}V_{i}\otimes W$ to $V\otimes W$. So we have an isomorphism.
+
+
+\item\ \score{1}%10.
+Construct a natural map $V^* \otimes W^* \to (V \otimes W)^*$.  Show
+that it is injective.  If one of $V$ and $W$ has finite dimension,
+show that the map is an isomorphism.\red{Missing isomorphism showing. Your construction of the map is really unclear.}
+
+\textbf{Solution}
+
+\[\begin{tikzcd}
+	{V^{*}\times W^{*}} && {V^{*}\otimes W^{*}} \\
+	\\
+	&& {(V\otimes W)^{*}}
+	\arrow["t"{description}, from=1-1, to=1-3]
+	\arrow["f"{description}, from=1-1, to=3-3]
+	\arrow["{\exists ! \tilde{f}}"{description}, from=1-3, to=3-3]
+\end{tikzcd}\]
+
+Define $f(\varphi,\psi) \mapsto \tilde{g}_{\varphi,\psi}$. Where $\tilde{g}$ is the funciton 
+obtained by applying the universal theorem to $g_{\varphi,\psi}$, where $g_{\varphi,\psi}$ is a function
+that takes $(v,w)$ and returns $\varphi(v)\cdot \psi(w)$, and since this function is multilinear, then there must exist 
+a map from $V\otimes W$ to $F$. 
+
+\[\begin{tikzcd}
+	{V\times W} && {V\otimes W} \\
+	\\
+	&& F
+	\arrow["t"{description}, from=1-1, to=1-3]
+	\arrow["g"{description}, from=1-1, to=3-3]
+	\arrow["{\exists ! \tilde{g}}"{description}, from=1-3, to=3-3]
+\end{tikzcd}\]
+
+Then this funciton $\tilde{g}$ returned by $f$ is a dual of $V\otimes W$. 
+
+\textit{Note:- f is multilinear because changing the dual in the funciton changes the results for g, f($\alpha \varphi_{1} + \varphi_{2},\psi$)} $\rightarrow g(v,w)=\alpha * \varphi(v)_{1} * \psi(w) +  \varphi(v)_{2} * \psi(w)$, similar argument also shows that it is linear in 
+$\psi$ as well.
+
+To prove injectivity, it is enough to note that the kernel of $f$ is $(0, -) \cup (-, 0)$, where $-$ is any 
+dual and $0$ is the zero vector, this dual also matches the kernel of $V\otimes W$
+
+
+\item\ \score{1}%11.
+Prove the existence of a bilinear map $\bigwedge^r V \times
+\bigwedge^s V \to \bigwedge^{r+s} V$ taking%
+$$%$$ $
+  (v_1\wedge \cdots\wedge v_r, v'_1\wedge \cdots\wedge v'_s) \mapsto
+  v_1 \wedge \cdots\wedge v_r\wedge v'_1\wedge \cdots\wedge v'_s.
+$$%$$ $
+Write $\omega = v_1\wedge \cdots\wedge v_r$ and $\omega' = v'_1\wedge
+\cdots \wedge v'_r$, so $\omega \wedge \omega' = v_1 \wedge
+\cdots\wedge v_r\wedge v'_1\wedge \cdots\wedge v'_s$.  Show that
+$\omega' \wedge \omega = (-1)^{rs} \omega \wedge \omega'$. \red{It's unclear what you're doing for the first part}
+
+\textbf{Solution}
+
+Define $\wedge_{[\perp]}(\sigma_{r},\sigma_{s})=[\sigma_{r} \perp \sigma_{s}](-1)^{inv(\sigma_{r},\sigma_{s})mod 2} \sigma_{r}\wedge \sigma_{s}$.
+This function evalues to zero if the two inputs are dependent(in this case it checks if there are two of the same basis vectors using the Iverson bracket), it also accounts for 
+the sign of the parity of the ordering.
+
+Define $f$ as $(v^{r},v^{s}) \mapsto ((a_{1}\sigma^{r}_{1})+\cdots+(a_{\binom{[n]}{r}} \sigma^{r}_{\binom{[n]}{r}})) \wedge_{[\perp]} ((a_{1}\sigma^{s}_{1})+\cdots+(a_{\binom{[n]}{s}} \sigma^{r}_{\binom{[n]}{s}}))$, where $n$ is the dimension of $V$.
+
+$f$ is bilinear since the the wedge itself is a bilinear operator.
+
+$\omega' \wedge \omega = (-1)^{rs} \omega \wedge \omega'$ because $rs$ is the total change in the number of inversions, 
+and since we only care about the parity, $x-y\equiv x+y$ therefore we only need to care about the aboslute value of inversions that were both 
+created and destroyed, this value is $rs$ because for every vector in $\omega$ it has swapped orientation with every vector in $\omega^{'}$, therefore there are 
+a total of $rs$ changes in orientaiton.
+
+\item\ \score{0}%12.
+Show how to recover the atlas for $G_k(F^n)$ in Lecture~9 (lecture
+notes p.19) from the Pl\"ucker coordinates in Lecture~22 (lecture
+notes, p.46).
+
+\textbf{Solution}
+
+Every subspace is the exterior products of its basis.
+If you look at all the plucker corrdinate in the
+
+The plucker coordinates of some of the 
+What is the coefficent on $e_{\sigma}$. So the plucker is the entry you 
+replaced with the k
+
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% Various Emacs customizations:
+%%% Local Variables:
+%%% fill-column: 70
+%%% indent-tabs-mode: t
+%%% TeX-electric-sub-and-superscript: nil
+%%% TeX-brace-indent-level: 0
+%%% LaTeX-indent-level: 0
+%%% LaTeX-item-indent: 0
+%%% TeX-master: t
+%%% End:
